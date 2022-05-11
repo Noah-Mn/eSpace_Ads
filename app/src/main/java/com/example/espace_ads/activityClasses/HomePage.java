@@ -16,42 +16,46 @@ import android.widget.FrameLayout;
 import com.example.espace_ads.R;
 import com.example.espace_ads.databinding.ActivityHomePageBinding;
 import com.example.espace_ads.flagments.HomeFlag;
+import com.example.espace_ads.flagments.Menu;
+import com.example.espace_ads.flagments.Notifications;
+import com.example.espace_ads.flagments.Statistics;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePage extends AppCompatActivity {
 
-//    private ActivityHomePageBinding binding;
+    private ActivityHomePageBinding binding;
     private FragmentManager fragmentManager;
     public FragmentTransaction fragmentTransaction;
-    BottomNavigationView bottomNavigationView;
-    FrameLayout layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        binding = ActivityHomePageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-//        layout = findViewById(R.id.fragment_container);
-        bottomNavigationView = findViewById(R.id.bottom_nav_view);
 
 //        underline the home
-//        underLineMenuItem(binding.bottomNavView.getMenu().getItem(0));
+        underLineMenuItem(binding.bottomNavView.getMenu().getItem(0));
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        binding.bottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                removeItemUnderLine(bottomNavigationView);
+                removeItemUnderLine(binding.bottomNavView);
                 underLineMenuItem(item);
 
                 switch (item.getItemId()){
                     case R.id.home:
-//                        replaceFragments(new HomeFlag());
+                        replaceFragments(new HomeFlag());
                         break;
                     case R.id.statistics:
+                        replaceFragments(new Statistics());
                         break;
                     case R.id.notifications:
+                        replaceFragments(new Notifications());
                         break;
                     case R.id.menu:
+                        replaceFragments(new Menu());
                         break;
                 }
                 return true;
@@ -71,13 +75,13 @@ public class HomePage extends AppCompatActivity {
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         item.setTitle(content);
     }
-//    private void replaceFragments(Fragment fragment){
-//        layout.setVisibility(View.VISIBLE);
-//        fragmentManager = getSupportFragmentManager();
-//        fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-//        fragmentTransaction.replace(R.id.fragment_container, fragment);
-//        fragmentTransaction.commit();
-//
-//    }
+    private void replaceFragments(Fragment fragment){
+        binding.container.setVisibility(View.VISIBLE);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
+
+    }
 }
