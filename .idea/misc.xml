@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/activity_home_page.xml" value="0.23232323232323232" />
+        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_notifications.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_statistics.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/menu/bottom_nav.xml" value="0.2222222222222222" />
       </map>
     </option>

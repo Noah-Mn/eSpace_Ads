@@ -6,25 +6,24 @@
         android:title="Home"
         android:id="@+id/home"
         android:enabled="true"
-        android:icon="@drawable/home"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/home"/>
     <item
         android:title="Statistics"
         android:id="@+id/statistics"
         android:enabled="true"
-        android:icon="@drawable/analytics"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/analytics"/>
+    <item
+        android:id="@+id/place_holder"
+        android:title=""/>
     <item
         android:title="Notifications"
         android:id="@+id/notifications"
         android:enabled="true"
-        android:icon="@drawable/notification"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/notification"/>
     <item
         android:title="Menu"
         android:id="@+id/menu"
         android:enabled="true"
-        android:icon="@drawable/menu_24"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/menu_24"/>
 
 </menu>
