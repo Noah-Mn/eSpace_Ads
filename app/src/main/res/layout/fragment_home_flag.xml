@@ -1,14 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".flagments.HomeFlag">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#E6151414"
+    tools:context=".fragments.HomeFlag">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="2dp"
+          android:layout_marginStart="2dp">
+
+         <androidx.appcompat.widget.AppCompatImageView
+             android:id="@+id/search"
+             android:layout_width="35dp"
+             android:layout_height="35dp"
+             android:layout_marginEnd="20dp"
+             android:layout_marginTop="15dp"
+             android:background="@drawable/backgroundsmall"
+             android:padding="6dp"
+             android:tint="@color/white"
+             android:src="@drawable/search_magn"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent"/>
+
+         <com.google.android.material.textview.MaterialTextView
+          android:id="@+id/text_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="20dp"
+          android:layout_marginEnd="10dp"
+          android:ellipsize="end"
+          android:gravity="center"
+          android:maxLines="1"
+          android:textColor="@color/white"
+          android:textSize="19sp"
+          android:textStyle="bold"
+          android:text="Noah ikefouuibfehilb"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintBottom_toBottomOf="@id/search"
+          app:layout_constraintTop_toTopOf="@id/search"
+          app:layout_constraintEnd_toStartOf="@id/spinner"/>
+
+         <Spinner
+             android:id="@+id/spinner"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:backgroundTint="@color/white"
+             app:layout_constraintBottom_toBottomOf="@id/text_name"
+             app:layout_constraintStart_toEndOf="@id/text_name"/>
+
+         <ImageView
+             android:id="@+id/grow_your_business"
+             android:layout_width="match_parent"
+             android:layout_height="240dp"
+             android:background="@drawable/background_image"
+             android:layout_marginTop="30dp"
+             android:scaleType="centerCrop"
+             android:layout_marginStart="20dp"
+             android:layout_marginEnd="20dp"
+             app:layout_constraintTop_toBottomOf="@id/text_name"
+             android:src="@drawable/grow_your_business"/>
+
+         <com.google.android.material.textview.MaterialTextView
+             android:id="@+id/text_grow_your_business"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             app:layout_constraintTop_toBottomOf="@id/grow_your_business"
+             app:layout_constraintStart_toStartOf="parent"
+             android:layout_marginStart="20dp"
+             android:text="Live Campaigns"
+             android:textStyle="bold"
+
+             android:textSize="16sp"
+             android:textColor="@color/white"
+             android:layout_marginTop="30dp"/>
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/live_campaigns"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/text_grow_your_business"/>
+
+         <com.google.android.material.textview.MaterialTextView
+             android:id="@+id/testimonials"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             app:layout_constraintTop_toBottomOf="@id/live_campaigns"
+             app:layout_constraintStart_toStartOf="parent"
+             android:layout_marginStart="20dp"
+             android:text="Testimonials"
+             android:textStyle="bold"
+             android:textSize="16sp"
+             android:textColor="@color/white"
+             android:layout_marginTop="30dp"/>
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/testimonials_list"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/testimonials"/>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+   </ScrollView>
 </FrameLayout>

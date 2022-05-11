@@ -2,7 +2,6 @@ package com.example.espace_ads.activityClasses;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,14 +11,13 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.databinding.ActivityHomePageBinding;
-import com.example.espace_ads.flagments.HomeFlag;
-import com.example.espace_ads.flagments.Menu;
-import com.example.espace_ads.flagments.Notifications;
-import com.example.espace_ads.flagments.Statistics;
+import com.example.espace_ads.fragments.HomeFlag;
+import com.example.espace_ads.fragments.Menu;
+import com.example.espace_ads.fragments.Notifications;
+import com.example.espace_ads.fragments.Statistics;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePage extends AppCompatActivity {
