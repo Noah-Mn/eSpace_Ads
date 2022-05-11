@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBackground"
+    android:background="#E6151414"
     tools:context=".activityClasses.HomePage">
 
         <FrameLayout
@@ -19,8 +19,9 @@
             android:layout_height="wrap_content"
             app:fabCradleMargin="10dp"
             app:fabCradleRoundedCornerRadius="10dp"
-            android:backgroundTint="#57000000"
+            android:backgroundTint="#474747"
             app:fabCradleVerticalOffset="10dp"
+            android:theme="@style/BottomAppBarOverlay"
             android:layout_gravity="bottom">
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,6 +30,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="16dp"
                     android:background="@android:color/transparent"
+                    app:labelVisibilityMode="unlabeled"
+                    app:itemIconTint="@color/white"
                     app:menu="@menu/bottom_nav"/>
 
         </com.google.android.material.bottomappbar.BottomAppBar>
