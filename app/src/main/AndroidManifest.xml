@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ESpace_Ads">
         <activity
-            android:name=".HomePage"
+            android:name=".activityClasses.HomePage"
             android:exported="false" />
         <activity
             android:name=".activityClasses.MainActivity"
