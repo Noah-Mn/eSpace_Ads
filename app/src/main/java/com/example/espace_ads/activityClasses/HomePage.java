@@ -34,6 +34,8 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.bottomNavView.setBackground(null);
+        binding.bottomNavView.getMenu().getItem(2).setEnabled(false);
 
 
 //        underline the home
