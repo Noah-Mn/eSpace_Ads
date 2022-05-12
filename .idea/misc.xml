@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/fragment_duplicates.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
-        <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.25" />
       </map>
     </option>
   </component>
