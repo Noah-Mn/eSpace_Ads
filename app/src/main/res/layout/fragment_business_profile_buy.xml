@@ -127,7 +127,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="#37FFFFFF"
+                android:backgroundTint="#3BFFFFFF"
                 app:cardCornerRadius="9dp">
 
                 <com.google.android.material.textview.MaterialTextView

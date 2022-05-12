@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/layout/fragment_business_profile_store.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.31867057673509286" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
       </map>
     </option>
   </component>
