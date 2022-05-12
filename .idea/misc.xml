@@ -9,9 +9,10 @@
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_statistics.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/menu/bottom_nav.xml" value="0.2222222222222222" />
         <entry key="app/src/main/res/drawable/background_image.xml" value="0.1525" />
+        <entry key="app/src/main/res/drawable/background_rounded.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable/backgroundsmall.xml" value="0.1525" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.16979166666666667" />
-        <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.43466666666666665" />
+        <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
       </map>
     </option>
