@@ -7,6 +7,327 @@
     android:background="#E6151414"
     tools:context=".fragments.Statistics">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/statistics"
+                android:textColor="@color/white"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/people_reached"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#1DFFFFFF"
+                android:scaleType="centerCrop"
+                android:src="@drawable/grow_your_business"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@id/text_name">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/image_people"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="35dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/background_rounded"
+                        android:elevation="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/orzora_black"
+                        app:riv_oval="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="People reached"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                        app:layout_constraintStart_toEndOf="@id/image_people"
+                        app:layout_constraintTop_toTopOf="@id/image_people"
+                        app:layout_constraintBottom_toBottomOf="@id/image_people"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:layout_marginTop="7dp"
+                        android:tint="#68000000"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="7dp"
+                        android:src="@drawable/ic_outline_info_24"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/number_people"
+                        app:layout_constraintTop_toBottomOf="@id/image_people"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                        android:text="29,000"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintStart_toStartOf="@id/image_people"
+                        android:textColor="@color/white"
+                        />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:dividerColor="#9CFFFFFF"
+                        app:layout_constraintTop_toBottomOf="@id/number_people"
+                        />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:text="Reaching people helps you build brand awareness"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/post_engagements"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#1DFFFFFF"
+                android:scaleType="centerCrop"
+                android:src="@drawable/grow_your_business"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@id/people_reached">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/image_engagements"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="35dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/background_rounded"
+                        android:elevation="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/orzora_black"
+                        app:riv_oval="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="People reached"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                        app:layout_constraintStart_toEndOf="@id/image_engagements"
+                        app:layout_constraintTop_toTopOf="@id/image_engagements"
+                        app:layout_constraintBottom_toBottomOf="@id/image_engagements"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:layout_marginTop="7dp"
+                        android:tint="#68000000"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="7dp"
+                        android:src="@drawable/ic_outline_info_24"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/number_engagements"
+                        app:layout_constraintTop_toBottomOf="@id/image_engagements"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                        android:text="29,000"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintStart_toStartOf="@id/image_engagements"
+                        android:textColor="@color/white"
+                        />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:dividerColor="#9CFFFFFF"
+                        app:layout_constraintTop_toBottomOf="@id/number_engagements"
+                        />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider1"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:text="Reaching people helps you build brand awareness"
+                        />
 
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/link_clicks"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#1DFFFFFF"
+                android:scaleType="centerCrop"
+                android:src="@drawable/grow_your_business"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@id/post_engagements">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/image_clicks"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="35dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/background_rounded"
+                        android:elevation="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/orzora_black"
+                        app:riv_oval="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="People reached"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                        app:layout_constraintStart_toEndOf="@id/image_clicks"
+                        app:layout_constraintTop_toTopOf="@id/image_clicks"
+                        app:layout_constraintBottom_toBottomOf="@id/image_clicks"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:layout_marginTop="7dp"
+                        android:tint="#68000000"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="7dp"
+                        android:src="@drawable/ic_outline_info_24"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/number_clicks"
+                        app:layout_constraintTop_toBottomOf="@id/image_clicks"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                        android:text="29,000"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintStart_toStartOf="@id/image_clicks"
+                        android:textColor="@color/white"
+                        />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:dividerColor="#9CFFFFFF"
+                        app:layout_constraintTop_toBottomOf="@id/number_clicks"
+                        />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider2"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:text="@string/brand_awareness"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>
