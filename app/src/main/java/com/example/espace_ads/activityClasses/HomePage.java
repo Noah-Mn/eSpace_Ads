@@ -34,6 +34,7 @@ public class HomePage extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.bottomNavView.setBackground(null);
         binding.bottomNavView.getMenu().getItem(2).setEnabled(false);
+        replaceFragments(new HomeFlag());
 
 
 //        underline the home
@@ -62,6 +63,9 @@ public class HomePage extends AppCompatActivity {
             }
         });
     }
+    private void clickListeners(){
+
+    }
 
     private void removeItemUnderLine(BottomNavigationView bottomNavigationView){
         for (int i = 0; i < bottomNavigationView.getMenu().size(); i++){
@@ -82,6 +86,17 @@ public class HomePage extends AppCompatActivity {
         fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0){
+            super.onBackPressed();
+        }else {
+            getSupportFragmentManager().popBackStack("Home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
 
     }
 }

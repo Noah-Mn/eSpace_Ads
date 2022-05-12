@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#E6151414"
+    android:id="@+id/container"
     tools:context=".fragments.HomeFlag">
 
    <androidx.core.widget.NestedScrollView
