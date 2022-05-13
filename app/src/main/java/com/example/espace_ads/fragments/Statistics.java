@@ -35,6 +35,7 @@ public class Statistics extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_statistics, container, false);
         expandableListView = view.findViewById(R.id.expandable_list_view);
+//        expandableListView.setGroupIndicator(R.drawable.custom_expandable);
 
 
 //        inflate continents

@@ -381,7 +381,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/geographic_statistics"
                 android:layout_width="match_parent"
-                android:layout_height="390dp"
+                android:layout_height="420dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -421,26 +421,65 @@
                         android:textColor="#8BFFFFFF"
                         android:textSize="15sp" />
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_below="@id/hustling"
                         android:layout_marginTop="5dp"
                         android:layout_marginStart="35dp"
                         android:layout_marginEnd="35dp"
+                        android:orientation="vertical"
+                        android:overScrollMode="ifContentScrolls"
                         android:layout_marginBottom="10dp">
 
-                        <ExpandableListView
-                            android:id="@+id/expandable_list_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-                            android:layoutDirection="ltr" />
+                            <ExpandableListView
+                                android:id="@+id/expandable_list_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:divider="@null"
+                                android:transcriptMode="alwaysScroll"
+                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                                android:layoutDirection="ltr" />
 
-
-                    </RelativeLayout>
+                    </LinearLayout>
 
                 </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_demographics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Demographics"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/geographic_statistics" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/demographics"
+                android:layout_width="match_parent"
+                android:layout_height="185dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#1DFFFFFF"
+                android:scaleType="centerCrop"
+                app:cardElevation="0dp"
+                android:src="@drawable/grow_your_business"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@id/text_demographics">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
