@@ -11,18 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/background_image_small"
             android:scaleType="centerCrop"
+            android:background="@drawable/background_image_small"
             android:src="@drawable/noah"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"/>
+            app:riv_corner_radius="8dp"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_name"
@@ -110,12 +111,12 @@
             android:id="@+id/business_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/image_share_link"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_share_link"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -123,12 +124,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/backgroundsmall"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/user" />
+                android:src="@drawable/user"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_business_profile"
@@ -136,22 +137,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/icon1"
-                app:layout_constraintStart_toEndOf="@id/icon1"
-                app:layout_constraintTop_toTopOf="@id/icon1"
-                app:layout_constraintBottom_toBottomOf="@id/icon1"
                 android:text="Business profile"
                 android:textColor="@color/white"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/icon1"
+                app:layout_constraintStart_toEndOf="@id/icon1"
+                app:layout_constraintTop_toTopOf="@id/icon1" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_business_profile"
-                app:layout_constraintBottom_toBottomOf="@id/text_business_profile"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/next_24" />
+                android:src="@drawable/next_24"
+                app:layout_constraintBottom_toBottomOf="@id/text_business_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_business_profile" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -161,9 +162,9 @@
             android:layout_below="@id/business_profile"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -210,9 +211,9 @@
             android:layout_below="@id/bank"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -258,9 +259,9 @@
             android:layout_below="@id/help"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -306,9 +307,9 @@
             android:layout_below="@id/about"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -318,7 +319,8 @@
                 android:background="@drawable/backgroundsmall"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling"
+                android:src="@drawable/heart"
+                android:tint="#94FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -354,9 +356,9 @@
             android:layout_below="@id/partners"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp">
 
             <androidx.appcompat.widget.AppCompatImageView
