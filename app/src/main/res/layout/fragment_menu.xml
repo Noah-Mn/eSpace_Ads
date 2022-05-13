@@ -128,7 +128,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling" />
+                android:src="@drawable/user" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_business_profile"
@@ -221,7 +221,7 @@
                 android:background="@drawable/backgroundsmall"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling"
+                android:src="@drawable/help"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -269,7 +269,7 @@
                 android:background="@drawable/backgroundsmall"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling"
+                android:src="@drawable/information"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -365,7 +365,7 @@
                 android:background="@drawable/backgroundsmall"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling"
+                android:src="@drawable/settings"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
