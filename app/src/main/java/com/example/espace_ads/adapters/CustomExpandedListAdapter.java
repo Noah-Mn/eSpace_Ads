@@ -26,7 +26,7 @@ public class CustomExpandedListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return 0;
+        return this.expandableListTitle.size();
     }
 
     @Override
@@ -35,8 +35,8 @@ public class CustomExpandedListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getGroup(int i) {
-        return null;
+    public Object getGroup(int listPosition) {
+        return this.expandableListTitle.get(listPosition);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class CustomExpandedListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public long getGroupId(int i) {
-        return 0;
+    public long getGroupId(int listPosition) {
+        return listPosition;
     }
 
     @Override
@@ -60,8 +60,15 @@ public class CustomExpandedListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+    public View getGroupView(int listPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        String listTitle = (String) getGroup(listPosition);
+        if (convertView == null){
+            LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = layoutInflater.inflate(R.layout.list_group, null);
+        }
+        MaterialTextView listTitleTextView = (MaterialTextView) convertView.findViewById(R.id.list_title);
+        listTitleTextView.setText(listTitle);
+        return convertView;
     }
 
     @Override
@@ -77,7 +84,7 @@ public class CustomExpandedListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public boolean isChildSelectable(int i, int i1) {
-        return false;
+    public boolean isChildSelectable(int listPosition, int expandedListPosition) {
+        return true;
     }
 }
