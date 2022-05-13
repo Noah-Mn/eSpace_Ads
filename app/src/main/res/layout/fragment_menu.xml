@@ -158,11 +158,11 @@
             android:id="@+id/bank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/business_profile"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_share_link"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp">
 
@@ -171,12 +171,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/backgroundsmall"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling" />
+                android:src="@drawable/selling"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_bank"
@@ -184,33 +184,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/icon2"
-                app:layout_constraintStart_toEndOf="@id/icon2"
-                app:layout_constraintTop_toTopOf="@id/icon2"
-                app:layout_constraintBottom_toBottomOf="@id/icon2"
-                android:text="Business profile"
+                android:text="Bank"
                 android:textColor="@color/white"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/icon2"
+                app:layout_constraintStart_toEndOf="@id/icon2"
+                app:layout_constraintTop_toTopOf="@id/icon2" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_bank"
-                app:layout_constraintBottom_toBottomOf="@id/text_bank"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/next_24" />
+                android:src="@drawable/next_24"
+                app:layout_constraintBottom_toBottomOf="@id/text_bank"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_bank" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/bank"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_share_link"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp">
 
@@ -219,12 +219,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/backgroundsmall"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling" />
+                android:src="@drawable/selling"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_help"
@@ -232,33 +232,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/icon3"
-                app:layout_constraintStart_toEndOf="@id/icon3"
-                app:layout_constraintTop_toTopOf="@id/icon3"
-                app:layout_constraintBottom_toBottomOf="@id/icon3"
-                android:text="Business profile"
+                android:text="Help"
                 android:textColor="@color/white"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/icon3"
+                app:layout_constraintStart_toEndOf="@id/icon3"
+                app:layout_constraintTop_toTopOf="@id/icon3" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_help"
-                app:layout_constraintBottom_toBottomOf="@id/text_help"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/next_24" />
+                android:src="@drawable/next_24"
+                app:layout_constraintBottom_toBottomOf="@id/text_help"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_help" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/help"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_share_link"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp">
 
@@ -267,12 +267,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/backgroundsmall"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling" />
+                android:src="@drawable/selling"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_about"
@@ -280,33 +280,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/icon4"
-                app:layout_constraintStart_toEndOf="@id/icon4"
-                app:layout_constraintTop_toTopOf="@id/icon4"
-                app:layout_constraintBottom_toBottomOf="@id/icon4"
-                android:text="Business profile"
+                android:text="About"
                 android:textColor="@color/white"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/icon4"
+                app:layout_constraintStart_toEndOf="@id/icon4"
+                app:layout_constraintTop_toTopOf="@id/icon4" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_about"
-                app:layout_constraintBottom_toBottomOf="@id/text_about"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/next_24" />
+                android:src="@drawable/next_24"
+                app:layout_constraintBottom_toBottomOf="@id/text_about"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_about" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/partners"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/about"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_share_link"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp">
 
@@ -315,12 +315,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/backgroundsmall"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling" />
+                android:src="@drawable/selling"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_partners"
@@ -328,33 +328,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/icon5"
-                app:layout_constraintStart_toEndOf="@id/icon5"
-                app:layout_constraintTop_toTopOf="@id/icon5"
-                app:layout_constraintBottom_toBottomOf="@id/icon5"
-                android:text="Business profile"
+                android:text="Partners"
                 android:textColor="@color/white"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/icon5"
+                app:layout_constraintStart_toEndOf="@id/icon5"
+                app:layout_constraintTop_toTopOf="@id/icon5" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_partners"
-                app:layout_constraintBottom_toBottomOf="@id/text_partners"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/next_24" />
+                android:src="@drawable/next_24"
+                app:layout_constraintBottom_toBottomOf="@id/text_partners"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_partners" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/partners"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_share_link"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp">
 
@@ -363,12 +363,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/backgroundsmall"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling" />
+                android:src="@drawable/selling"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_settings"
@@ -376,22 +376,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/icon6"
-                app:layout_constraintStart_toEndOf="@id/icon6"
-                app:layout_constraintTop_toTopOf="@id/icon6"
-                app:layout_constraintBottom_toBottomOf="@id/icon6"
-                android:text="Business profile"
+                android:text="Settings"
                 android:textColor="@color/white"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/icon6"
+                app:layout_constraintStart_toEndOf="@id/icon6"
+                app:layout_constraintTop_toTopOf="@id/icon6" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_settings"
-                app:layout_constraintBottom_toBottomOf="@id/text_settings"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/next_24" />
+                android:src="@drawable/next_24"
+                app:layout_constraintBottom_toBottomOf="@id/text_settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_settings" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
