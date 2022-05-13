@@ -407,6 +407,7 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/hustling"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nations You're Hustling"
@@ -415,6 +416,22 @@
                         android:layout_marginStart="30dp"
                         android:layout_below="@id/world_map"
                         android:textSize="14sp"/>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="35dp"
+                        android:paddingEnd="35dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/hustling"
+                        android:paddingBottom="10dp">
+
+                        <ExpandableListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"/>
+
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
