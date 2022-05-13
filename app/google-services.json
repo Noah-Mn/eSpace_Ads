@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "334273105791",
+    "project_id": "espace-ads-4204a",
+    "storage_bucket": "espace-ads-4204a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334273105791:android:ed08623bdb801599d7144a",
+        "android_client_info": {
+          "package_name": "com.example.espace_ads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334273105791-jr304009rnpe9krc1cqopgkggi81uofh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzAD0gIUO0ViS_mT9VGgjYLPz0x12GWjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334273105791-jr304009rnpe9krc1cqopgkggi81uofh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

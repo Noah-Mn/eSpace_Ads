@@ -61,10 +61,10 @@
                         android:layout_marginEnd="35dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:background="@drawable/background_rounded"
-                        android:elevation="20dp"
+                        android:background="@drawable/backg_users"
+                        android:padding="8dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/orzora_black"
+                        android:src="@drawable/ic_baseline_group_24"
                         app:riv_oval="true" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -160,10 +160,9 @@
                         android:layout_marginEnd="35dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:background="@drawable/background_rounded"
-                        android:elevation="20dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/orzora_black"
+                        android:background="@drawable/backg_like"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_baseline_thumb_up_24"
                         app:riv_oval="true" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -260,10 +259,11 @@
                         android:layout_marginEnd="35dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:background="@drawable/background_rounded"
+                        android:background="@drawable/backg_click"
                         android:elevation="20dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/orzora_black"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_baseline_touch_app_24"
                         app:riv_oval="true" />
 
                     <com.google.android.material.textview.MaterialTextView
