@@ -3,12 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/drawable/custom_expandable.xml" value="0.157" />
+        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.157" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/activity_home_page.xml" value="0.23232323232323232" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_home_flag.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_notifications.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_statistics.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/list_group.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
+        <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/list_group.xml" value="0.25" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/list_item.xml" value="0.1956521739130435" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/menu/bottom_nav.xml" value="0.2222222222222222" />
         <entry key="app/src/main/res/drawable/background_image.xml" value="0.1525" />
