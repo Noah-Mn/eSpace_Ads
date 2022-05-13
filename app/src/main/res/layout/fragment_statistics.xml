@@ -32,7 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
+             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/people_reached"
                 android:layout_width="match_parent"
                 android:layout_height="185dp"
@@ -129,9 +129,9 @@
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/post_engagements"
                 android:layout_width="match_parent"
                 android:layout_height="185dp"
@@ -139,8 +139,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="#1DFFFFFF"
-                android:scaleType="centerCrop"
                 app:cardElevation="0dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/grow_your_business"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintTop_toBottomOf="@id/people_reached">
@@ -229,9 +229,9 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/link_clicks"
                 android:layout_width="match_parent"
                 android:layout_height="185dp"
@@ -326,7 +326,89 @@
                         android:text="Link clicks take people to your store front. Good ads get clicks"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_live_campaigns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:text="Live Campaigns"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/link_clicks" />
+
+            <FrameLayout
+                android:id="@+id/live_campaigns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_live_campaigns">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/live_campaigns_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"/>
+
+            </FrameLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_geographic_statistics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:text="Geographic Statistics"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/live_campaigns" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/business_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#19FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@id/text_geographic_statistics">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/background"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:cardCornerRadius="20dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="smoothies"
+                            android:scaleType="centerCrop"
+                            android:padding="5dp"
+                            android:src="@drawable/world_map" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
