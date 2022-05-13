@@ -173,7 +173,8 @@
                 android:background="@drawable/backgroundsmall"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/selling"
+                android:src="@drawable/ic_baseline_explore_24"
+                android:tint="#75000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
