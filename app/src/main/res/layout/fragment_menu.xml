@@ -73,7 +73,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/grow_your_business" />
+                android:src="@drawable/sitting_down"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/share"
+                    android:src="@drawable/share"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Share your profile link"
+                    android:textSize="19sp"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"
+                    />
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
