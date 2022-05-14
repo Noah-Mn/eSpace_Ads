@@ -9,6 +9,7 @@
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/layout/fragment_statistics.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/menu/bottom_nav.xml" value="0.2222222222222222" />
         <entry key="app/src/main/res/drawable/backg_click.xml" value="0.137" />
+        <entry key="app/src/main/res/drawable/backg_close.xml" value="0.137" />
         <entry key="app/src/main/res/drawable/backg_like.xml" value="0.137" />
         <entry key="app/src/main/res/drawable/backg_users.xml" value="0.137" />
         <entry key="app/src/main/res/drawable/background_image.xml" value="0.1525" />
@@ -28,6 +29,7 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
         <entry key="app/src/main/res/layout/live_campaign_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/notification_50k_people.xml" value="0.33" />
         <entry key="app/src/main/res/layout/recent_campaign_layout.xml" value="0.33" />
       </map>
     </option>
