@@ -98,13 +98,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circle"
+                android:progress="70"
+
                 />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/number_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="90"
+                android:text="70"
                 app:layout_constraintEnd_toStartOf="@id/percent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
