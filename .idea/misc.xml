@@ -30,6 +30,8 @@
         <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
         <entry key="app/src/main/res/layout/live_campaign_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/notification_50k_people.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/notification_campaign_almost_end.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/notification_sells_improved.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/recent_campaign_layout.xml" value="0.33" />
       </map>
     </option>

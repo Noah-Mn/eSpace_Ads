@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:id="@+id/fifty_k_impressions"
+    android:id="@+id/sells_improved"
     android:background="@android:color/transparent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,7 +53,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Your campaign has reached 50,000 impressions "
+                    android:text="Your sells have improved, advertise more"
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     android:textStyle="bold"
