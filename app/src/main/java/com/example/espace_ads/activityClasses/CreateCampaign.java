@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.espace_ads.R;
+
 public class CreateCampaign extends AppCompatActivity {
 
     @Override

@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/activity_create_campaign.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/blog_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_ads.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_business_profile_buy.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_business_profile_store.xml" value="0.25" />
