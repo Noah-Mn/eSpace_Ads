@@ -123,14 +123,25 @@ by reaching out to the audience you want."
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_goneMarginStart="20dp" />
 
-                <Spinner
-                    android:id="@+id/spinner_age"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/text_input_backg"
-                    android:spinnerMode="dropdown"
-                    android:textColorHint="#68FFFFFF" />
+                    app:strokeWidth="1dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="#43FFFFFF">
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:ms_arrow_tint="#3A3A3A"
+                        android:hint="Select age group"
+                        android:textColor="#68FFFFFF"
+                        android:textColorHint="#68FFFFFF"
+                        android:backgroundTint="#3A3A3A"/>
+
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
@@ -161,13 +172,25 @@ by reaching out to the audience you want."
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_goneMarginStart="20dp" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_gender"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/text_input_backg"
-                    android:spinnerMode="dropdown" />
+                    app:strokeWidth="1dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="#43FFFFFF">
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:ms_arrow_tint="#3A3A3A"
+                        android:hint="Select gender"
+                        android:textColor="#68FFFFFF"
+                        android:textColorHint="#68FFFFFF"
+                        android:backgroundTint="#3A3A3A"/>
+
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
@@ -202,8 +225,8 @@ by reaching out to the audience you want."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
                     android:padding="3dp"
                     android:text="Save"
                     android:textAlignment="center"

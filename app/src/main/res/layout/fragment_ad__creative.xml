@@ -240,8 +240,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_goneMarginStart="20dp" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_headline"
