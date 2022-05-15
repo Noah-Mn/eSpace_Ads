@@ -333,9 +333,45 @@
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Webside"/>
+                        android:textColor="#68FFFFFF"
+                        android:textStyle="bold"
+                        android:text="Website"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#68FFFFFF"
+                        android:textStyle="bold"
+                        android:text="Business Profile"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#68FFFFFF"
+                        android:textStyle="bold"
+                        android:text="Social Media Profile"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#68FFFFFF"
+                        android:textStyle="bold"
+                        android:text="Mobile Application"/>
 
                 </RadioGroup>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:padding="5dp"
+                    android:background="@drawable/text_input_backg"
+                    android:hint="Destination URL"
+                    android:textColorHint="#68FFFFFF"
+                    android:textColor="#68FFFFFF"
+                    android:textSize="13sp" />
 
 
 
