@@ -185,7 +185,7 @@
              android:layout_marginTop="30dp"
              app:cardElevation="0dp"
              android:layout_marginEnd="20dp"
-             android:backgroundTint="#19FFFFFF"
+             android:backgroundTint="#0DFFFFFF"
              app:cardCornerRadius="20dp"
              app:layout_constraintTop_toBottomOf="@id/blogs_list_view">
 
@@ -228,14 +228,18 @@
                    android:layout_below="@id/profile_image"
                    android:layout_centerHorizontal="true"
                    android:layout_marginTop="30dp"
-                   android:backgroundTint="#92000000"
+                   app:strokeColor="#60FFFFFF"
+                   app:strokeWidth="2dp"
+                   android:backgroundTint="@android:color/transparent"
                    app:cardCornerRadius="7dp">
 
                   <com.google.android.material.textview.MaterialTextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_gravity="center"
-                      android:padding="10dp"
+                      android:padding="5dp"
+                      android:paddingStart="8dp"
+                      android:paddingEnd="8dp"
                       android:text="Business Profile"
                       android:textAlignment="center"
                       android:textColor="@color/white"

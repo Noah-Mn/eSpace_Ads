@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/background_rounded.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable/backgroundsmall.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.137" />
+        <entry key="app/src/main/res/drawable/text_input_backg.xml" value="0.137" />
         <entry key="app/src/main/res/layout/activity_create_campaign.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/blog_layout.xml" value="0.25" />
@@ -26,7 +27,7 @@
         <entry key="app/src/main/res/layout/fragment_create_new.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_drafts.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_duplicates.xml" value="0.16979166666666667" />
-        <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
