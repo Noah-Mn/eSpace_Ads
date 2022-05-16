@@ -201,7 +201,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_date"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_backg"
@@ -218,7 +218,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_time"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_backg"
@@ -264,11 +264,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_end_date"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_backg"
-                    android:hint="End date"
+                    android:hint="End date  "
                     android:padding="5dp"
                     android:paddingStart="30dp"
                     android:paddingEnd="140dp"
@@ -281,11 +281,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_end_time"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_backg"
-                    android:hint="End time"
+                    android:hint="  End time"
                     android:padding="5dp"
                     android:paddingStart="50dp"
                     android:paddingEnd="20dp"
@@ -336,6 +336,8 @@
                 android:orientation="vertical"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="0dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/calculate_btn">

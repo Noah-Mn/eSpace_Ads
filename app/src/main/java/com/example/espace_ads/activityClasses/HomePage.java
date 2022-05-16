@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.databinding.ActivityHomePageBinding;
+import com.example.espace_ads.fragments.Ads;
 import com.example.espace_ads.fragments.HomeFlag;
 import com.example.espace_ads.fragments.Menu;
 import com.example.espace_ads.fragments.Notifications;
@@ -35,10 +36,10 @@ public class HomePage extends AppCompatActivity {
         binding.bottomNavView.setBackground(null);
         binding.bottomNavView.getMenu().getItem(2).setEnabled(false);
         replaceFragments(new HomeFlag());
+        listeners();
+    }
 
-
-//        underline the home
-        underLineMenuItem(binding.bottomNavView.getMenu().getItem(0));
+    private void listeners(){
         binding.bottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -62,10 +63,15 @@ public class HomePage extends AppCompatActivity {
                 return true;
             }
         });
-    }
-    private void clickListeners(){
 
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragments(new Ads());
+            }
+        });
     }
+
 
     private void removeItemUnderLine(BottomNavigationView bottomNavigationView){
         for (int i = 0; i < bottomNavigationView.getMenu().size(); i++){
