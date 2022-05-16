@@ -7,60 +7,58 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.example.espace_ads.R;
+import com.google.android.material.textview.MaterialTextView;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Target_Audience#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class Target_Audience extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Target_Audience() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Target_Audience.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Target_Audience newInstance(String param1, String param2) {
-        Target_Audience fragment = new Target_Audience();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    MaterialSpinner genderSpinner, ageSpinner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_target__audience, container, false);
+        View view = inflater.inflate(R.layout.fragment_target__audience, container, false);
+
+        setGenderSpinner(view);
+        setAgeSpinner(view);
+        return view;
     }
+    public void setGenderSpinner(View view){
+        genderSpinner = (MaterialSpinner)view.findViewById(R.id.spinner_gender);
+        ArrayList<String> gender = new ArrayList<>();
+
+        gender.add("Female");
+        gender.add("Male");
+        gender.add("All Genders");
+
+        ArrayAdapter<String> countAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item,gender);
+        countAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        genderSpinner.setAdapter(countAdapter);
+    }
+
+    public void setAgeSpinner(View view){
+        ageSpinner = (MaterialSpinner)view.findViewById(R.id.spinner_age);
+        ArrayList<String> age = new ArrayList<>();
+
+        age.add("18-25");
+        age.add("26-33");
+        age.add("34-41");
+        age.add("42+");
+
+        ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item,age);
+        ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        ageSpinner.setAdapter(ageAdapter);
+    }
+
 }

@@ -40,6 +40,7 @@
         <entry key="app/src/main/res/layout/notification_product_bought.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/notification_sells_improved.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/recent_campaign_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/simple_spinner_item.xml" value="0.16979166666666667" />
       </map>
     </option>
   </component>
