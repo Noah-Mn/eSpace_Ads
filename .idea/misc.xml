@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/activity_create_campaign.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/blog_layout.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/fragment_ads.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_budget.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_business_profile_buy.xml" value="0.33" />
@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
-        <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.2540919719407638" />
         <entry key="app/src/main/res/layout/fragment_target__audience.xml" value="0.33" />
         <entry key="app/src/main/res/layout/live_campaign_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/notification_50k_people.xml" value="0.33" />

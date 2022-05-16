@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#E6151414"
     tools:context=".fragments.BusinessProfileBuy">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="?attr/actionBarSize">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -19,6 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
@@ -26,10 +29,9 @@
                 android:text="@string/business_profile"
                 android:textColor="@color/white"
                 android:textSize="19sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/item_profile_card"
@@ -47,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/zokuma"/>
+                    android:src="@drawable/zokuma" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -55,6 +57,8 @@
                 android:id="@+id/text_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
@@ -62,16 +66,17 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="23sp"
-                app:layout_constraintTop_toBottomOf="@id/item_profile_card"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toBottomOf="@id/item_profile_card" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
@@ -79,16 +84,16 @@
                 android:textAlignment="center"
                 android:textColor="#D308B3FC"
                 android:textSize="35sp"
-                app:layout_constraintTop_toBottomOf="@id/text_item_name"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toBottomOf="@id/text_item_name" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_item_des"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
@@ -96,39 +101,38 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="23sp"
-                app:layout_constraintTop_toBottomOf="@id/text_item_price"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toBottomOf="@id/text_item_price" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_product_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="Beverage Company juwfuuuhdffhkibwefvyuv"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="25dp"
                 android:layout_marginBottom="2dp"
+                android:text="Beverage Company juwfuuuhdffhkibwefvyuv"
+                android:textColor="#66FFFFFF"
                 android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@id/text_item_des"
-                android:textColor="#66FFFFFF"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_item_des" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/item_buy_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/text_product_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginEnd="25dp"
                 android:backgroundTint="#3BFFFFFF"
-                app:cardCornerRadius="9dp">
+                app:cardCornerRadius="9dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_product_description">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"

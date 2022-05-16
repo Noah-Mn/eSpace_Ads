@@ -9,6 +9,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:paddingBottom="?attr/actionBarSize"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -206,25 +207,29 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_backg"
                     android:hint="Start date"
+                    android:textAlignment="textStart"
+                    android:layout_marginEnd="15dp"
                     android:padding="5dp"
                     android:paddingStart="30dp"
-                    android:paddingEnd="140dp"
                     android:textColor="#68FFFFFF"
                     android:textColorHint="#68FFFFFF"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@id/editText_time"
+                    app:layout_constraintEnd_toStartOf="@id/editText_time"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_start_date" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_time"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_backg"
                     android:hint="Start time"
+                    android:layout_marginStart="15dp"
                     android:padding="5dp"
-                    android:paddingStart="50dp"
+                    android:paddingStart="20dp"
+                    android:textAlignment="textEnd"
                     android:paddingEnd="20dp"
                     android:textColor="#68FFFFFF"
                     android:textColorHint="#68FFFFFF"
@@ -271,23 +276,24 @@
                     android:hint="End date  "
                     android:padding="5dp"
                     android:paddingStart="30dp"
-                    android:paddingEnd="140dp"
                     android:textColor="#68FFFFFF"
                     android:textColorHint="#68FFFFFF"
                     android:textSize="13sp"
+                    android:layout_marginEnd="15dp"
                     app:layout_constraintBottom_toBottomOf="@id/editText_end_time"
+                    app:layout_constraintEnd_toStartOf="@id/editText_end_time"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_end_date" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_end_time"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_backg"
                     android:hint="  End time"
                     android:padding="5dp"
-                    android:paddingStart="50dp"
+                    android:paddingStart="20dp"
                     android:paddingEnd="20dp"
                     android:textColor="#68FFFFFF"
                     android:textColorHint="#68FFFFFF"
@@ -535,6 +541,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="#3BFFFFFF"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
