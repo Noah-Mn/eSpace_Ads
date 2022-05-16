@@ -6,432 +6,479 @@
     android:background="#E6151414"
     tools:context=".fragments.CreateNew">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_objective"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:text="What's your marketing objective?"
-            android:textSize="19sp"/>
+
 
         <RelativeLayout
-            android:id="@+id/sells"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_objective"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/backgroundsmall"
-                android:padding="5dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/selling" />
+            android:layout_height="match_parent">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/sell_products"
+                android:id="@+id/text_objective"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon1"
-                android:text="Sell a product or service?"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="What's your marketing objective?"
                 android:textColor="@color/white"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/sells"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/sell_products"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon1"
-                android:text="Have more people buy from your business profile"
-                android:textColor="@color/white"
-                android:textSize="13sp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_below="@id/text_objective"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/next_24" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/website"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sells"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="centerCrop"
-                android:padding="5dp"
-                android:src="@drawable/web"
-                android:background="@drawable/backgroundsmall" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/web_traffic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon2"
-                android:text="Website traffic"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/web_traffic"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon2"
-                android:textSize="13sp"
-                android:text="Have more people visit your website"
-                android:textColor="@color/white" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/backgroundsmall"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/selling" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/sell_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next1"
+                    android:layout_toEndOf="@id/icon1"
+                    android:text="Sell a product or service?"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/sell_products"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next1"
+                    android:layout_toEndOf="@id/icon1"
+                    android:text="Have more people buy from your business profile"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/next1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/next_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/website"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/sells"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/next_24" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/build"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/website"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/backgroundsmall"
-                android:padding="5dp"
-                android:src="@drawable/follow"
-                android:scaleType="centerCrop" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/build_your_media"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon3"
-                android:text="Build your social media following"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/build_your_media"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon3"
-                android:textSize="13sp"
-                android:text="Have more people follow you on social media"
-                android:textColor="@color/white" />
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/backgroundsmall"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/web" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/web_traffic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next2"
+                    android:layout_toEndOf="@id/icon2"
+                    android:text="Website traffic"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/web_traffic"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next2"
+                    android:layout_toEndOf="@id/icon2"
+                    android:text="Have more people visit your website"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/next2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/next_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/build"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/website"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/next_24" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/views"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/build"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon4"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/backgroundsmall"
-                android:padding="5dp"
-                android:src="@drawable/play"
-                android:scaleType="centerCrop" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/video_views"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon4"
-                android:text="Video views"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/video_views"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon4"
-                android:textSize="13sp"
-                android:text="Promote your video to get people's attention"
-                android:textColor="@color/white" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/backgroundsmall"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/follow" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/build_your_media"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next3"
+                    android:layout_toEndOf="@id/icon3"
+                    android:text="Build your social media following"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/build_your_media"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next3"
+                    android:layout_toEndOf="@id/icon3"
+                    android:text="Have more people follow you on social media"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/next3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/next_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/views"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/build"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/next_24" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/ads"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/views"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon5"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/backgroundsmall"
-                android:padding="5dp"
-                android:src="@drawable/click"
-                android:scaleType="centerCrop" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/ad_engagement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon5"
-                android:text="Ad engagement"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ad_engagement"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon5"
-                android:textSize="13sp"
-                android:text="Have people to see and engage with your posts"
-                android:textColor="@color/white" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/backgroundsmall"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/play" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/video_views"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next4"
+                    android:layout_toEndOf="@id/icon4"
+                    android:text="Video views"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/video_views"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next4"
+                    android:layout_toEndOf="@id/icon4"
+                    android:text="Promote your video to get people's attention"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/next4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/next_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ads"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/views"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/next_24" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/events"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ads"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon6"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/backgroundsmall"
-                android:padding="5dp"
-                android:src="@drawable/event"
-                android:scaleType="centerCrop" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/event_resp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon6"
-                android:text="Event responses"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/event_resp"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon6"
-                android:textSize="13sp"
-                android:text="Get more people to see and engage with your page"
-                android:textColor="@color/white" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/backgroundsmall"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/click" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/ad_engagement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next5"
+                    android:layout_toEndOf="@id/icon5"
+                    android:text="Ad engagement"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ad_engagement"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next5"
+                    android:layout_toEndOf="@id/icon5"
+                    android:text="Have people to see and engage with your posts"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/next5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/next_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/events"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/ads"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/next_24" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/increase"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/events"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon7"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/backgroundsmall"
-                android:padding="5dp"
-                android:src="@drawable/brand"
-                android:scaleType="centerCrop" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/brand_awareness"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon7"
-                android:text="Increase brand awareness"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/brand_awareness"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon7"
-                android:textSize="13sp"
-                android:text="Build your brand and command greater value"
-                android:textColor="@color/white" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon6"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/backgroundsmall"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/event" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/event_resp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next6"
+                    android:layout_toEndOf="@id/icon6"
+                    android:text="Event responses"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/event_resp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next6"
+                    android:layout_toEndOf="@id/icon6"
+                    android:text="Get more people to see and engage with your page"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/next6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/next_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/increase"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/events"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/next_24" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/app_installs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/increase"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon8"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/backgroundsmall"
-                android:padding="5dp"
-                android:src="@drawable/smartphone"
-                android:scaleType="centerCrop" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/get_more_app"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon8"
-                android:text="Get more app installs"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/get_more_app"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/icon8"
-                android:textSize="13sp"
-                android:text="Have more people install your app from play/app store"
-                android:textColor="@color/white" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon7"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/backgroundsmall"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/brand" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/brand_awareness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next7"
+                    android:layout_toEndOf="@id/icon7"
+                    android:text="Increase brand awareness"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/brand_awareness"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next7"
+                    android:layout_toEndOf="@id/icon7"
+                    android:text="Build your brand and command greater value"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/next7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/next_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/app_installs"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/increase"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/next_24" />
-        </RelativeLayout>
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
 
-    </RelativeLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon8"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/backgroundsmall"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/smartphone" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/get_more_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/icon8"
+                    android:text="Get more app installs"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next8"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/get_more_app"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@id/next8"
+                    android:layout_toEndOf="@id/icon8"
+                    android:text="Have more people install your app from play/app store"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/next8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/next_24" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

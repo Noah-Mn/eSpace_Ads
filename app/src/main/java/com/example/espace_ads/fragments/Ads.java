@@ -17,29 +17,51 @@ import com.example.espace_ads.databinding.FragmentAdsBinding;
 public class Ads extends Fragment {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-
+    FragmentAdsBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        replaceFragments(new CreateNew());
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentAdsBinding binding;
-        // Inflate the layout for this fragment
-        binding = getLayoutInflater().inflate(get)
-//        return inflater.inflate(R.layout.fragment_ads, container, false);
+        binding = FragmentAdsBinding.inflate(inflater, container, false);
+        listeners();
+        replaceFragments(new CreateNew());
+        return binding.getRoot();
     }
     private void replaceFragments(Fragment fragment){
-        binding.container.setVisibility(View.VISIBLE);
-        fragmentManager = getSupportFragmentManager();
+        fragmentManager = getChildFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
-
     }
+
+    private void listeners(){
+        binding.createNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragments(new CreateNew());
+            }
+        });
+        binding.duplicate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragments(new Duplicates());
+            }
+        });
+
+        binding.drafts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragments(new Drafts());
+            }
+        });
+    }
+
 }
