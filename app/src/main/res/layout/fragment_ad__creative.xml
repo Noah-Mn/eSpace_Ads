@@ -337,6 +337,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_group">
                     <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/website"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#68FFFFFF"
@@ -344,6 +345,7 @@
                         android:text="Website"/>
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/business_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#68FFFFFF"
@@ -351,6 +353,7 @@
                         android:text="Business Profile"/>
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/social_media"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#68FFFFFF"
@@ -358,6 +361,7 @@
                         android:text="Social Media Profile"/>
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/mobile_application"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#68FFFFFF"

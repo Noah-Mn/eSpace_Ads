@@ -25,8 +25,11 @@ import android.view.ViewGroup;
 import com.example.espace_ads.R;
 import com.example.espace_ads.models.AdModel;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -38,6 +41,7 @@ public class Ad_Creative extends Fragment {
     TextInputEditText primaryText, headline, description, destination;
     String encodedImage;
     String primText, hedl, descr,destn;
+    MaterialRadioButton website, businessProfile,mobileApplication, socialMediaProfile;
     AdModel adModel = new AdModel();
 
     @Override
@@ -59,6 +63,11 @@ public class Ad_Creative extends Fragment {
         headline = view.findViewById(R.id.editText_headline);
         description = view.findViewById(R.id.editText_description);
         destination = view.findViewById(R.id.editText_destination);
+        website = view.findViewById(R.id.website);
+        businessProfile = view.findViewById(R.id.business_profile);
+        mobileApplication = view.findViewById(R.id.mobile_application);
+        socialMediaProfile = view.findViewById(R.id.social_media);
+
 
         getInfo();
         listeners();
@@ -120,5 +129,19 @@ public class Ad_Creative extends Fragment {
         previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+
+    private void setDestinationURL(){
+        if(website.isChecked()){
+            destination.setHint("Website URL");
+        }else if (businessProfile.isChecked()){
+            destination.setHint("Business Profile URL");
+        }else if (socialMediaProfile.isChecked()){
+            destination.setHint("Social Media Profile URL");
+        }else if (mobileApplication.isChecked()){
+            destination.setHint("Mobile Application URL");
+        }else {
+            destination.setHint("Select destination URL");
+        }
     }
 }

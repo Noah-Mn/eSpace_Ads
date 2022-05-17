@@ -18,6 +18,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class Target_Audience extends Fragment {
     String locations, age, gender;
     FirebaseFirestore db;
     MaterialCardView save;
-
+    private StorageReference mStorageRef;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class Target_Audience extends Fragment {
         View view = inflater.inflate(R.layout.fragment_target__audience, container, false);
 
         location = view.findViewById(R.id.editText_locations);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
         save = view.findViewById(R.id.save_btn);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,11 +56,11 @@ public class Target_Audience extends Fragment {
                 setData();
             }
         });
+
         setGenderSpinner(view);
         setAgeSpinner(view);
         getInfo();
 
-        db = FirebaseFirestore.getInstance();
         return view;
 
     }
@@ -96,7 +100,6 @@ public class Target_Audience extends Fragment {
     }
 
     public void setData() {
-
 
         db = FirebaseFirestore.getInstance();
         Map<String, Object> Ad = new HashMap<>();
