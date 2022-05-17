@@ -11,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.espace_ads.R;
+import com.example.espace_ads.models.AdModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,6 +29,7 @@ public class Target_Audience extends Fragment {
     TextInputEditText location;
     String locations, age, gender;
     FirebaseFirestore db;
+    MaterialCardView save;
 
 
     @Override
@@ -42,13 +45,20 @@ public class Target_Audience extends Fragment {
         View view = inflater.inflate(R.layout.fragment_target__audience, container, false);
 
         location = view.findViewById(R.id.editText_locations);
+        save = view.findViewById(R.id.save_btn);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setData();
+            }
+        });
         setGenderSpinner(view);
         setAgeSpinner(view);
         getInfo();
+
         db = FirebaseFirestore.getInstance();
-
-
         return view;
+
     }
 
     public void setGenderSpinner(View view) {
@@ -85,16 +95,17 @@ public class Target_Audience extends Fragment {
 
     }
 
-    public void getExtraData(String primaryText, String headline, String description, String destination, String encodedImage) {
+    public void setData() {
 
 
         db = FirebaseFirestore.getInstance();
         Map<String, Object> Ad = new HashMap<>();
+        AdModel adModel = new AdModel();
 
-        Ad.put("Primary Text", primaryText);
-        Ad.put("Headline", headline);
-        Ad.put("Description", description);
-        Ad.put("Destination", destination);
+        Ad.put("Primary Text", adModel.getPrimaryText());
+        Ad.put("Headline", adModel.getHeadline());
+        Ad.put("Description", adModel.getDescription());
+        Ad.put("Destination", adModel.getDestination());
         Ad.put("Location", locations);
         Ad.put("Gender", gender);
         Ad.put("Age", age);

@@ -77,26 +77,6 @@ public class Ad_Creative extends Fragment {
         adModel.setDestination(destn);
 
 
-        if (listener != null) {
-            listener.passData(primText, hedl, descr, destn, encodedImage);
-        }
-    }
-
-    public interface InterFaceListener {
-        void passData(String primaryText, String headline, String description, String destination, String encodedImage);
-    }
-
-    private InterFaceListener listener;
-
-    @Override
-    public void onAttach(@NonNull Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof InterFaceListener) {
-            listener = (InterFaceListener) activity;
-        } else {
-            throw new ClassCastException(activity.toString() + "must implement MyListFragment.OnItemSelectedListener");
-
-        }
     }
 
     private void listeners() {

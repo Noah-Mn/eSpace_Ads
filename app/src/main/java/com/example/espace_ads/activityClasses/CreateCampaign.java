@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
 
-public class CreateCampaign extends AppCompatActivity implements Ad_Creative.InterFaceListener {
+public class CreateCampaign extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
@@ -60,11 +60,4 @@ public class CreateCampaign extends AppCompatActivity implements Ad_Creative.Int
 
     }
 
-
-    @Override
-    public void passData(String primaryText, String headline, String description, String destination, String encodedImage) {
-        Target_Audience target_audience = (Target_Audience) getSupportFragmentManager().findFragmentById(R.id.target_audience);
-        assert target_audience != null;
-        target_audience.getExtraData(primaryText, headline, description, destination, encodedImage);
-    }
 }
