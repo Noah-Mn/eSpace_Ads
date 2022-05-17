@@ -20,9 +20,10 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.common.collect.Collections2;
 
+import java.io.InputStream;
 import java.util.Objects;
 
-public class CreateCampaign extends AppCompatActivity {
+public class CreateCampaign extends AppCompatActivity implements Ad_Creative.InterFaceListener {
 
     ActivityCreateCampaignBinding binding;
     TabLayout tabLayout;
@@ -80,4 +81,6 @@ public class CreateCampaign extends AppCompatActivity {
 //        binding.tabLayout.setOnTabSelectedListener(this);
 
     }
+
+
 }
