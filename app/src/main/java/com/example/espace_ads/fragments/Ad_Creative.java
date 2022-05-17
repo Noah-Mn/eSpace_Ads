@@ -40,8 +40,8 @@ public class Ad_Creative extends Fragment {
     MaterialCardView media, slideShow, createVideo;
     TextInputEditText primaryText, headline, description, destination;
     String encodedImage;
-    String primText, hedl, descr,destn;
-    MaterialRadioButton website, businessProfile,mobileApplication, socialMediaProfile;
+    String primText, hedl, descr, destn;
+    MaterialRadioButton website, businessProfile, mobileApplication, socialMediaProfile;
     AdModel adModel = new AdModel();
 
     @Override
@@ -85,7 +85,6 @@ public class Ad_Creative extends Fragment {
         adModel.setDescription(descr);
         adModel.setDestination(destn);
 
-
     }
 
     private void listeners() {
@@ -101,9 +100,9 @@ public class Ad_Creative extends Fragment {
         website.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(website.isChecked()){
+                if (website.isChecked()) {
                     destination.setHint("Website URL");
-                }else {
+                } else {
                     destination.setHint("Select destination URL");
                 }
             }
@@ -111,9 +110,9 @@ public class Ad_Creative extends Fragment {
         businessProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (businessProfile.isChecked()){
+                if (businessProfile.isChecked()) {
                     destination.setHint("Business Profile URL");
-                }else {
+                } else {
                     destination.setHint("Select destination URL");
                 }
             }
@@ -121,9 +120,9 @@ public class Ad_Creative extends Fragment {
         socialMediaProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (socialMediaProfile.isChecked()){
+                if (socialMediaProfile.isChecked()) {
                     destination.setHint("Social Media Profile URL");
-                }else {
+                } else {
                     destination.setHint("Select destination URL");
                 }
             }
@@ -131,16 +130,15 @@ public class Ad_Creative extends Fragment {
         mobileApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mobileApplication.isChecked()){
+                if (mobileApplication.isChecked()) {
                     destination.setHint("Mobile Application URL");
-                }else {
+                } else {
                     destination.setHint("Select destination URL");
                 }
             }
         });
     }
 
-    
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -173,17 +171,16 @@ public class Ad_Creative extends Fragment {
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
-
-    private void setDestinationURL(){
-        if(website.isChecked()){
+    private void setDestinationURL() {
+        if (website.isChecked()) {
             destination.setHint("Website URL");
-        }else if (businessProfile.isChecked()){
+        } else if (businessProfile.isChecked()) {
             destination.setHint("Business Profile URL");
-        }else if (socialMediaProfile.isChecked()){
+        } else if (socialMediaProfile.isChecked()) {
             destination.setHint("Social Media Profile URL");
-        }else if (mobileApplication.isChecked()){
+        } else if (mobileApplication.isChecked()) {
             destination.setHint("Mobile Application URL");
-        }else {
+        } else {
             destination.setHint("Select destination URL");
         }
     }
