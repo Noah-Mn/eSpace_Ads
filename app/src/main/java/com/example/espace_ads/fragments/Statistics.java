@@ -2,6 +2,8 @@ package com.example.espace_ads.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +14,16 @@ import android.widget.ExpandableListView;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.adapters.CustomExpandedListAdapter;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +34,18 @@ public class Statistics extends Fragment {
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
+
+    private static final String STACK_1_LABEL = "Females";
+    private static final String STACK_2_LABEL = "Males";
+
+    private static final String STACK_3_LABEL = "20% 10-24";
+    private static final String STACK_4_LABEL = "35% 25-34";
+    private static final String STACK_5_LABEL = "23% 35-64";
+    private static final String STACK_6_LABEL = "7% 65+";
+
+    private static final String SET_LABEL = " ";
+
+    private HorizontalBarChart barChart1, barChart2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +60,18 @@ public class Statistics extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_statistics, container, false);
         expandableListView = view.findViewById(R.id.expandable_list_view);
 //        expandableListView.setGroupIndicator(R.drawable.custom_expandable);
+
+        barChart1 = view.findViewById(R.id.chart1);
+        barChart2 = view.findViewById(R.id.chart2);
+
+
+        BarData data = createChartData();
+        configureChartAppearance();
+        prepareChartData(data);
+
+        BarData data1 = createChartData1();
+        prepareChartData1(data1);
+
 
 
 //        inflate continents
@@ -84,4 +120,91 @@ public class Statistics extends Fragment {
 
         return view;
     }
+    private void configureChartAppearance() {
+        barChart1.setDrawGridBackground(false);
+        barChart1.setDrawValueAboveBar(false);
+        barChart1.getDescription().setEnabled(false);
+
+        XAxis xAxis = barChart1.getXAxis();
+        xAxis.setGranularity(1f);
+
+        YAxis leftAxis = barChart1.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+        barChart1.getXAxis().setDrawGridLines(false);
+
+
+
+        barChart2.setDrawGridBackground(false);
+        barChart2.setDrawValueAboveBar(false);
+        barChart2.getXAxis().setDrawGridLines(false);
+
+        barChart2.getDescription().setEnabled(false);
+
+        XAxis xAxis1 = barChart2.getXAxis();
+        xAxis1.setGranularity(1f);
+
+        YAxis leftAxis1 = barChart2.getAxisLeft();
+        leftAxis1.setDrawGridLines(false);
+
+    }
+
+    private BarData createChartData() {
+        ArrayList<BarEntry> values = new ArrayList<>();
+
+            float value1 = 10;
+            float value2 = 15;
+
+            values.add(new BarEntry( 1, new float[]{value1, value2}));
+
+
+        BarDataSet set1 = new BarDataSet(values, SET_LABEL);
+
+        set1.setColors(new int[] {ColorTemplate.MATERIAL_COLORS[0], ColorTemplate.MATERIAL_COLORS[1]});
+        set1.setStackLabels(new String[] {STACK_1_LABEL, STACK_2_LABEL});
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        BarData data = new BarData(dataSets);
+        barChart1.setData(data);
+        return data;
+    }
+
+    private BarData createChartData1() {
+        ArrayList<BarEntry> values = new ArrayList<>();
+
+        float value1 = 7;
+        float value2 = 15;
+        float value3 = 45;
+        float value4 = 20;
+
+        values.add(new BarEntry( 1, new float[]{value1, value2, value3, value4}));
+
+
+        BarDataSet set1 = new BarDataSet(values, SET_LABEL);
+
+        set1.setColors(new int[] {ColorTemplate.MATERIAL_COLORS[0], ColorTemplate.MATERIAL_COLORS[1], ColorTemplate.MATERIAL_COLORS[2], ColorTemplate.MATERIAL_COLORS[3]});
+        set1.setStackLabels(new String[] {STACK_3_LABEL, STACK_4_LABEL,STACK_5_LABEL,STACK_6_LABEL});
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        BarData data = new BarData(dataSets);
+        barChart2.setData(data);
+        return data;
+    }
+
+    private void prepareChartData(BarData data) {
+        data.setValueTextSize(12f);
+        barChart1.setData(data);
+        barChart1.invalidate();
+
+    }
+    private void prepareChartData1(BarData data) {
+        data.setValueTextSize(12f);
+        barChart2.setData(data);
+        barChart2.invalidate();
+
+    }
+
 }
