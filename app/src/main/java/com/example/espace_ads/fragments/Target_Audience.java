@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.espace_ads.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 public class Target_Audience extends Fragment {
     MaterialSpinner genderSpinner, ageSpinner;
-    MaterialTextView location;
+    TextInputEditText location;
     String locations, age, gender;
 
     @Override

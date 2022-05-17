@@ -78,12 +78,12 @@ public class Ad_Creative extends Fragment {
 
 
         if (listener != null) {
-//            listener.passData(locations, gender, age);
+            listener.passData(primText, hedl, descr, destn, encodedImage);
         }
     }
 
     public interface InterFaceListener {
-//        void passData(String locations1, String gender1, String age1);
+        void passData(String primaryText, String headline, String description, String destination, String encodedImage);
     }
 
     private InterFaceListener listener;
