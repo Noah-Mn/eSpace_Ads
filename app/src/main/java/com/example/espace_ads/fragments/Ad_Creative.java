@@ -68,7 +68,7 @@ public class Ad_Creative extends Fragment {
         mobileApplication = view.findViewById(R.id.mobile_application);
         socialMediaProfile = view.findViewById(R.id.social_media);
 
-
+        setDestinationURL();
         getInfo();
         listeners();
         return view;
@@ -97,7 +97,49 @@ public class Ad_Creative extends Fragment {
                 pickImage.launch(intent);
             }
         });
+
+        website.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(website.isChecked()){
+                    destination.setHint("Website URL");
+                }else {
+                    destination.setHint("Select destination URL");
+                }
+            }
+        });
+        businessProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (businessProfile.isChecked()){
+                    destination.setHint("Business Profile URL");
+                }else {
+                    destination.setHint("Select destination URL");
+                }
+            }
+        });
+        socialMediaProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (socialMediaProfile.isChecked()){
+                    destination.setHint("Social Media Profile URL");
+                }else {
+                    destination.setHint("Select destination URL");
+                }
+            }
+        });
+        mobileApplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mobileApplication.isChecked()){
+                    destination.setHint("Mobile Application URL");
+                }else {
+                    destination.setHint("Select destination URL");
+                }
+            }
+        });
     }
+
     
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -130,6 +172,7 @@ public class Ad_Creative extends Fragment {
         byte[] bytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
+
 
     private void setDestinationURL(){
         if(website.isChecked()){

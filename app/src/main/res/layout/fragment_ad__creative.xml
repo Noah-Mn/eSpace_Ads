@@ -335,6 +335,7 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checkedButton="@null"
                     android:id="@+id/radio_group">
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/website"
