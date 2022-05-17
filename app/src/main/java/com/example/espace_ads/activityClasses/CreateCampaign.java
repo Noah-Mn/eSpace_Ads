@@ -63,6 +63,8 @@ public class CreateCampaign extends AppCompatActivity implements Ad_Creative.Int
 
     @Override
     public void passData(String primaryText, String headline, String description, String destination, String encodedImage) {
-        Target_Audience target_audience = (Target_Audience) getS
+        Target_Audience target_audience = (Target_Audience) getSupportFragmentManager().findFragmentById(R.id.target_audience);
+        assert target_audience != null;
+        target_audience.getExtraData(primaryText, headline, description, destination, encodedImage);
     }
 }

@@ -78,5 +78,8 @@ public class Target_Audience extends Fragment {
         age = ageSpinner.getText().toString();
 
     }
+    public void getExtraData(String primaryText, String headline, String description, String destination, String encodedImage){
+
+    }
 
 }
