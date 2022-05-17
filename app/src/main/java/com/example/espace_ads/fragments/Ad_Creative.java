@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.espace_ads.R;
+import com.example.espace_ads.models.AdModel;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
@@ -37,6 +38,7 @@ public class Ad_Creative extends Fragment {
     TextInputEditText primaryText, headline, description, destination;
     String encodedImage;
     String primText, hedl, descr,destn;
+    AdModel adModel = new AdModel();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,12 @@ public class Ad_Creative extends Fragment {
         hedl = Objects.requireNonNull(headline.getText()).toString();
         descr = Objects.requireNonNull(description.getText()).toString();
         destn = Objects.requireNonNull(destination.getText()).toString();
+
+        adModel.setPrimaryText(primText);
+        adModel.setHeadline(hedl);
+        adModel.setDescription(descr);
+        adModel.setDestination(destn);
+
 
         if (listener != null) {
 //            listener.passData(locations, gender, age);
@@ -114,6 +122,7 @@ public class Ad_Creative extends Fragment {
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
                             encodedImage = encodeImage(bitmap);
+                            adModel.setEncodedImage(encodedImage);
 
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
