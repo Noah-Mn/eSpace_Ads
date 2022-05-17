@@ -77,7 +77,6 @@ public class Target_Audience extends Fragment {
         gender = genderSpinner.getText().toString();
         age = ageSpinner.getText().toString();
 
-
     }
 
 }

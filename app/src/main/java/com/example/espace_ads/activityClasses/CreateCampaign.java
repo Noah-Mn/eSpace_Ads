@@ -9,6 +9,7 @@ import com.example.espace_ads.R;
 import com.example.espace_ads.adapters.CreateCampaignAdapter;
 import com.example.espace_ads.databinding.ActivityCreateCampaignBinding;
 import com.example.espace_ads.fragments.Ad_Creative;
+import com.example.espace_ads.fragments.Target_Audience;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -62,6 +63,6 @@ public class CreateCampaign extends AppCompatActivity implements Ad_Creative.Int
 
     @Override
     public void passData(String primaryText, String headline, String description, String destination, String encodedImage) {
-
+        Target_Audience target_audience = (Target_Audience) getS
     }
 }
