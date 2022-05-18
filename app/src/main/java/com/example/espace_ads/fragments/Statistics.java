@@ -38,10 +38,10 @@ public class Statistics extends Fragment {
     private static final String STACK_1_LABEL = "Females";
     private static final String STACK_2_LABEL = "Males";
 
-    private static final String STACK_3_LABEL = "20% 10-24";
-    private static final String STACK_4_LABEL = "35% 25-34";
-    private static final String STACK_5_LABEL = "23% 35-64";
-    private static final String STACK_6_LABEL = "7% 65+";
+    private static final String STACK_3_LABEL = "20% 10-24Yrs";
+    private static final String STACK_4_LABEL = "35% 25-34Yrs";
+    private static final String STACK_5_LABEL = "23% 35-64Yrs";
+    private static final String STACK_6_LABEL = "7% 65Yrs +";
 
     private static final String SET_LABEL = " ";
 
@@ -131,12 +131,16 @@ public class Statistics extends Fragment {
         YAxis leftAxis = barChart1.getAxisLeft();
         leftAxis.setDrawGridLines(false);
         barChart1.getXAxis().setDrawGridLines(false);
-
-
+        barChart1.getXAxis().setEnabled(false);
+        barChart1.getAxisLeft().setEnabled(false);
+        barChart1.getAxisRight().setEnabled(false);
 
         barChart2.setDrawGridBackground(false);
         barChart2.setDrawValueAboveBar(false);
         barChart2.getXAxis().setDrawGridLines(false);
+        barChart2.getXAxis().setEnabled(false);
+        barChart2.getAxisLeft().setEnabled(false);
+        barChart2.getAxisRight().setEnabled(false);
 
         barChart2.getDescription().setEnabled(false);
 
@@ -159,7 +163,7 @@ public class Statistics extends Fragment {
 
         BarDataSet set1 = new BarDataSet(values, SET_LABEL);
 
-        set1.setColors(new int[] {ColorTemplate.MATERIAL_COLORS[0], ColorTemplate.MATERIAL_COLORS[1]});
+        set1.setColors(new int[] {getResources().getColor(R.color.vibrant_pink), getResources().getColor(R.color.light_skyBlue)});
         set1.setStackLabels(new String[] {STACK_1_LABEL, STACK_2_LABEL});
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
@@ -167,6 +171,8 @@ public class Statistics extends Fragment {
 
         BarData data = new BarData(dataSets);
         barChart1.setData(data);
+        barChart1.getLegend().setTextColor(getResources().getColor(R.color.white));
+        data.setDrawValues(false);
         return data;
     }
 
@@ -183,7 +189,7 @@ public class Statistics extends Fragment {
 
         BarDataSet set1 = new BarDataSet(values, SET_LABEL);
 
-        set1.setColors(new int[] {ColorTemplate.MATERIAL_COLORS[0], ColorTemplate.MATERIAL_COLORS[1], ColorTemplate.MATERIAL_COLORS[2], ColorTemplate.MATERIAL_COLORS[3]});
+        set1.setColors(new int[] {getResources().getColor(R.color.vibrant_pink), getResources().getColor(R.color.rainBow_orange), getResources().getColor(R.color.light_skyBlue), getResources().getColor(R.color.whatever_color)});
         set1.setStackLabels(new String[] {STACK_3_LABEL, STACK_4_LABEL,STACK_5_LABEL,STACK_6_LABEL});
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
@@ -191,6 +197,9 @@ public class Statistics extends Fragment {
 
         BarData data = new BarData(dataSets);
         barChart2.setData(data);
+        barChart2.getLegend().setTextColor(getResources().getColor(R.color.white));
+
+        data.setDrawValues(false);
         return data;
     }
 

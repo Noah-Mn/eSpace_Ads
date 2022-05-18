@@ -8,5 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="mainBackground">#C6000000</color>
+    <color name="vibrant_pink">#FF57D2</color>
+    <color name="light_skyBlue">#87CEFA </color>
+    <color name="rainBow_orange">#FF8F33</color>
+    <color name="whatever_color">#D84315</color>
 
 </resources>

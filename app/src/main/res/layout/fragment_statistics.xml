@@ -481,7 +481,8 @@
                     <com.github.mikephil.charting.charts.HorizontalBarChart
                         android:id="@+id/chart1"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="65dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
@@ -489,8 +490,9 @@
                     <com.github.mikephil.charting.charts.HorizontalBarChart
                         android:id="@+id/chart2"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
