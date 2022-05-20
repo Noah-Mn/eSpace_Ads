@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,14 +9,14 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:paddingBottom="?attr/actionBarSize"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
 
-            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
 
             <LinearLayout
                 android:id="@+id/ad_creative_text"
@@ -153,10 +152,10 @@
                     android:id="@+id/create_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/slide_show"
                     android:layout_alignTop="@id/slide_show"
                     android:layout_alignBottom="@id/slide_show"
                     android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/slide_show"
                     android:backgroundTint="#3BFFFFFF"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="0dp">
@@ -210,12 +209,12 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="2dp"
-                    android:padding="5dp"
-                    android:inputType="text"
                     android:background="@drawable/text_input_backg"
                     android:hint="Tell people what your add is about"
-                    android:textColorHint="#68FFFFFF"
+                    android:inputType="text"
+                    android:padding="5dp"
                     android:textColor="#68FFFFFF"
+                    android:textColorHint="#68FFFFFF"
                     android:textSize="13sp" />
 
             </LinearLayout>
@@ -244,7 +243,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_headline"
@@ -252,12 +251,12 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="2dp"
-                    android:padding="5dp"
-                    android:inputType="text"
                     android:background="@drawable/text_input_backg"
                     android:hint="Write a short headline"
-                    android:textColorHint="#68FFFFFF"
+                    android:inputType="text"
+                    android:padding="5dp"
                     android:textColor="#68FFFFFF"
+                    android:textColorHint="#68FFFFFF"
                     android:textSize="13sp" />
 
             </LinearLayout>
@@ -295,12 +294,12 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="2dp"
-                    android:padding="5dp"
-                    android:inputType="text"
                     android:background="@drawable/text_input_backg"
                     android:hint="Include additional details"
-                    android:textColorHint="#68FFFFFF"
+                    android:inputType="text"
+                    android:padding="5dp"
                     android:textColor="#68FFFFFF"
+                    android:textColorHint="#68FFFFFF"
                     android:textSize="13sp" />
 
             </LinearLayout>
@@ -333,41 +332,42 @@
                     app:layout_goneMarginStart="20dp" />
 
                 <RadioGroup
+                    android:id="@+id/radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checkedButton="@null"
-                    android:id="@+id/radio_group">
+                    android:checkedButton="@null">
+
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/website"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Website"
                         android:textColor="#68FFFFFF"
-                        android:textStyle="bold"
-                        android:text="Website"/>
+                        android:textStyle="bold" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/business_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Business Profile"
                         android:textColor="#68FFFFFF"
-                        android:textStyle="bold"
-                        android:text="Business Profile"/>
+                        android:textStyle="bold" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/social_media"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Social Media Profile"
                         android:textColor="#68FFFFFF"
-                        android:textStyle="bold"
-                        android:text="Social Media Profile"/>
+                        android:textStyle="bold" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/mobile_application"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Mobile Application"
                         android:textColor="#68FFFFFF"
-                        android:textStyle="bold"
-                        android:text="Mobile Application"/>
+                        android:textStyle="bold" />
 
                 </RadioGroup>
 
@@ -377,42 +377,15 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:padding="5dp"
-                    android:inputType="text"
                     android:background="@drawable/text_input_backg"
                     android:hint="Destination URL"
-                    android:textColorHint="#68FFFFFF"
+                    android:inputType="text"
+                    android:padding="5dp"
                     android:textColor="#68FFFFFF"
+                    android:textColorHint="#68FFFFFF"
                     android:textSize="13sp" />
 
             </LinearLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/save_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/destination"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:visibility="visible"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="#3BFFFFFF"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="0dp">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:padding="3dp"
-                    android:text="Save"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-
-            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

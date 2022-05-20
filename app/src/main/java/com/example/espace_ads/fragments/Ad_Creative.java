@@ -24,6 +24,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.espace_ads.R;
+import com.example.espace_ads.interfaces.AdDataUpdate;
+import com.example.espace_ads.models.AdData;
 import com.example.espace_ads.models.AdModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,7 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Ad_Creative extends Fragment {
+public class Ad_Creative extends Fragment implements AdDataUpdate {
     MaterialCardView media, slideShow, createVideo, saveBtn;
     TextInputEditText primaryText, headline, description, destination;
     String encodedImage;
@@ -51,6 +53,7 @@ public class Ad_Creative extends Fragment {
     MaterialRadioButton website, businessProfile, mobileApplication, socialMediaProfile;
     AdModel adModel = new AdModel();
     FirebaseFirestore db;
+    private AdData adData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -215,5 +218,20 @@ public class Ad_Creative extends Fragment {
         } else {
             destination.setHint("Select destination URL");
         }
+    }
+
+    @Override
+    public void setData(AdData adData) {
+        this.adData = adData;
+    }
+
+    @Override
+    public AdData getData() {
+        this.adData.primaryText = primaryText.getText().toString();
+        this.adData.description = description.getText().toString();
+        this.adData.destination = destination.getText().toString();
+        this.adData.headline = headline.getText().toString();
+
+        return this.adData;
     }
 }
