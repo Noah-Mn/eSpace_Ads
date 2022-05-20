@@ -21,28 +21,36 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.models.AdModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Ad_Creative extends Fragment {
-    MaterialCardView media, slideShow, createVideo;
+    MaterialCardView media, slideShow, createVideo, saveBtn;
     TextInputEditText primaryText, headline, description, destination;
     String encodedImage;
     String primText, hedl, descr, destn;
     MaterialRadioButton website, businessProfile, mobileApplication, socialMediaProfile;
     AdModel adModel = new AdModel();
+    FirebaseFirestore db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,24 +75,17 @@ public class Ad_Creative extends Fragment {
         businessProfile = view.findViewById(R.id.business_profile);
         mobileApplication = view.findViewById(R.id.mobile_application);
         socialMediaProfile = view.findViewById(R.id.social_media);
+        saveBtn = view.findViewById(R.id.save_btn);
 
-        setDestinationURL();
-        getInfo();
-        listeners();
-        return view;
-    }
-
-    private void getInfo() {
         primText = Objects.requireNonNull(primaryText.getText()).toString();
         hedl = Objects.requireNonNull(headline.getText()).toString();
         descr = Objects.requireNonNull(description.getText()).toString();
         destn = Objects.requireNonNull(destination.getText()).toString();
 
-        adModel.setPrimaryText(primText);
-        adModel.setHeadline(hedl);
-        adModel.setDescription(descr);
-        adModel.setDestination(destn);
 
+        setDestinationURL();
+        listeners();
+        return view;
     }
 
     private void listeners() {
@@ -135,6 +136,37 @@ public class Ad_Creative extends Fragment {
                 } else {
                     destination.setHint("Select destination URL");
                 }
+            }
+        });
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = FirebaseFirestore.getInstance();
+                Map<String, Object> Ad = new HashMap<>();
+
+                Ad.put("Primary Text", primaryText);
+                Ad.put("Headline", headline);
+                Ad.put("Description",description );
+                Ad.put("Destination", destination);
+
+                db.collection("Advert")
+                        .add(Ad)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getContext(), "Done!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
             }
         });
     }

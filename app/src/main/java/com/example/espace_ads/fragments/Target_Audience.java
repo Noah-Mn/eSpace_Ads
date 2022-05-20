@@ -34,6 +34,9 @@ public class Target_Audience extends Fragment {
     MaterialCardView save;
     private StorageReference mStorageRef;
 
+    public Target_Audience() {
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +53,12 @@ public class Target_Audience extends Fragment {
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         save = view.findViewById(R.id.save_btn);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setData();
-            }
-        });
 
         setGenderSpinner(view);
         setAgeSpinner(view);
         getInfo();
+
+
 
         return view;
 
@@ -69,8 +68,8 @@ public class Target_Audience extends Fragment {
         genderSpinner = (MaterialSpinner) view.findViewById(R.id.spinner_gender);
         ArrayList<String> gender = new ArrayList<>();
 
-        gender.add("Female");
         gender.add("Male");
+        gender.add("Female");
         gender.add("All Genders");
 
         ArrayAdapter<String> countAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, gender);
@@ -82,10 +81,10 @@ public class Target_Audience extends Fragment {
         ageSpinner = (MaterialSpinner) view.findViewById(R.id.spinner_age);
         ArrayList<String> age = new ArrayList<>();
 
-        age.add("18-25");
-        age.add("26-33");
-        age.add("34-41");
-        age.add("42+");
+        age.add("10-24");
+        age.add("25-34");
+        age.add("35-64");
+        age.add("46+");
 
         ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, age);
         ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -99,38 +98,39 @@ public class Target_Audience extends Fragment {
 
     }
 
-    public void setData() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = FirebaseFirestore.getInstance();
+                Map<String, Object> Ad = new HashMap<>();
 
-        db = FirebaseFirestore.getInstance();
-        Map<String, Object> Ad = new HashMap<>();
-        AdModel adModel = new AdModel();
+                Ad.put("Location", location.getText().toString());
+                Ad.put("Gender", genderSpinner.getText().toString());
+                Ad.put("Age", ageSpinner.getText().toString());
 
-        Ad.put("Primary Text", adModel.getPrimaryText());
-        Ad.put("Headline", adModel.getHeadline());
-        Ad.put("Description", adModel.getDescription());
-        Ad.put("Destination", adModel.getDestination());
-        Ad.put("Location", locations);
-        Ad.put("Gender", gender);
-        Ad.put("Age", age);
+                db.collection("Advert")
+                        .add(Ad)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getContext(), "Done!", Toast.LENGTH_SHORT).show();
 
-        db.collection("Advert")
-                .add(Ad)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getContext(), "Done!", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            }
+        });
 
     }
-
 }
 
 
