@@ -20,6 +20,8 @@
         <entry key="app/src/main/res/drawable/background_image.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable/background_rounded.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable/backgroundsmall.xml" value="0.1525" />
+        <entry key="app/src/main/res/drawable/custom_expandable.xml" value="0.1795" />
+        <entry key="app/src/main/res/drawable/navigate_next_24.xml" value="0.1795" />
         <entry key="app/src/main/res/layout/activity_create_campaign.xml" value="0.15670289855072464" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.16979166666666667" />
@@ -33,6 +35,8 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_target__audience.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/live_campaign_layout.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/recent_campaign_layout.xml" value="0.33" />
       </map>
     </option>
   </component>

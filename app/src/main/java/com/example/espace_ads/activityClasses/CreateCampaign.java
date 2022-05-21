@@ -10,7 +10,6 @@ import com.example.espace_ads.adapters.CreateCampaignAdapter;
 import com.example.espace_ads.databinding.ActivityCreateCampaignBinding;
 import com.example.espace_ads.fragments.Ad_Creative;
 import com.example.espace_ads.fragments.Target_Audience;
-import com.example.espace_ads.models.AdData;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -21,9 +20,8 @@ public class CreateCampaign extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager;
     CreateCampaignAdapter adapter;
-    AdData adData = new AdData();
 
-   @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -31,8 +29,6 @@ public class CreateCampaign extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
-
-
         adapter = new CreateCampaignAdapter(this);
         viewPager.setAdapter(adapter);
 

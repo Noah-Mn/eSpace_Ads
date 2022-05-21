@@ -2,10 +2,7 @@ package com.example.espace_ads.fragments;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -24,19 +21,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.espace_ads.R;
-import com.example.espace_ads.interfaces.AdDataUpdate;
-import com.example.espace_ads.models.AdData;
 import com.example.espace_ads.models.AdModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -45,16 +37,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Ad_Creative extends Fragment implements AdDataUpdate {
+public class Ad_Creative extends Fragment {
     MaterialCardView media, slideShow, createVideo, saveBtn;
     TextInputEditText primaryText, headline, description, destination;
     String encodedImage;
     String primText, hedl, descr, destn;
     MaterialRadioButton website, businessProfile, mobileApplication, socialMediaProfile;
-    AdModel adModel = new AdModel();
     FirebaseFirestore db;
-    private AdData adData;
-
+    AdModel adModel;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,31 +57,68 @@ public class Ad_Creative extends Fragment implements AdDataUpdate {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ad__creative, container, false);
 
-        media = view.findViewById(R.id.media);
-        slideShow = view.findViewById(R.id.slide_show);
-        createVideo = view.findViewById(R.id.create_video);
-        primaryText = view.findViewById(R.id.editText_primary_text);
-        headline = view.findViewById(R.id.editText_headline);
-        description = view.findViewById(R.id.editText_description);
-        destination = view.findViewById(R.id.editText_destination);
-        website = view.findViewById(R.id.website);
-        businessProfile = view.findViewById(R.id.business_profile);
-        mobileApplication = view.findViewById(R.id.mobile_application);
-        socialMediaProfile = view.findViewById(R.id.social_media);
-        saveBtn = view.findViewById(R.id.save_btn);
-
-        primText = Objects.requireNonNull(primaryText.getText()).toString();
-        hedl = Objects.requireNonNull(headline.getText()).toString();
-        descr = Objects.requireNonNull(description.getText()).toString();
-        destn = Objects.requireNonNull(destination.getText()).toString();
-
-
+        media = (MaterialCardView) view.findViewById(R.id.media);
+        slideShow = (MaterialCardView) view.findViewById(R.id.slide_show);
+        createVideo = (MaterialCardView) view.findViewById(R.id.create_video);
+        primaryText = (TextInputEditText) view.findViewById(R.id.editText_primary_text);
+        headline = (TextInputEditText) view.findViewById(R.id.editText_headline);
+        description = (TextInputEditText) view.findViewById(R.id.editText_description);
+        destination = (TextInputEditText) view.findViewById(R.id.editText_destination);
+        website = (MaterialRadioButton) view.findViewById(R.id.website);
+        businessProfile = (MaterialRadioButton) view.findViewById(R.id.business_profile);
+        mobileApplication = (MaterialRadioButton) view.findViewById(R.id.mobile_application);
+        socialMediaProfile = (MaterialRadioButton) view.findViewById(R.id.social_media);
+        saveBtn = (MaterialCardView) view.findViewById(R.id.save_btn);
+        adModel = new AdModel();
         setDestinationURL();
-        listeners();
+        listener();
+
         return view;
     }
 
-    private void listeners() {
+    public void listener(){
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                primText = Objects.requireNonNull(primaryText.getText()).toString();
+                hedl = Objects.requireNonNull(headline.getText()).toString();
+                descr = Objects.requireNonNull(description.getText()).toString();
+                destn = Objects.requireNonNull(destination.getText()).toString();
+                adModel.setHeadline(hedl);
+
+                db = FirebaseFirestore.getInstance();
+                Map<String, Object> Ad = new HashMap<>();
+
+                Ad.put("Headline", hedl);
+                Ad.put("Description", descr);
+                Ad.put("Destination", destn);
+                Ad.put("Primary Text", primText);
+                Ad.put("Location", "null");
+                Ad.put("Gender", "null");
+                Ad.put("Age", "null");
+
+                db.collection("Advert")
+                        .add(Ad)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+            }
+        });
+
+
         media.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,36 +169,7 @@ public class Ad_Creative extends Fragment implements AdDataUpdate {
             }
         });
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                db = FirebaseFirestore.getInstance();
-                Map<String, Object> Ad = new HashMap<>();
 
-                Ad.put("Primary Text", primaryText);
-                Ad.put("Headline", headline);
-                Ad.put("Description",description );
-                Ad.put("Destination", destination);
-
-                db.collection("Advert")
-                        .add(Ad)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getContext(), "Done!", Toast.LENGTH_SHORT).show();
-
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-
-            }
-        });
     }
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
@@ -220,18 +218,4 @@ public class Ad_Creative extends Fragment implements AdDataUpdate {
         }
     }
 
-    @Override
-    public void setData(AdData adData) {
-        this.adData = adData;
-    }
-
-    @Override
-    public AdData getData() {
-        this.adData.primaryText = primaryText.getText().toString();
-        this.adData.description = description.getText().toString();
-        this.adData.destination = destination.getText().toString();
-        this.adData.headline = headline.getText().toString();
-
-        return this.adData;
-    }
 }

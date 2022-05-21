@@ -1,18 +1,18 @@
 package com.example.espace_ads.models;
 
 public class AdModel {
-    String destination, primaryText, headline, description, encodedImage;
-
-    public AdModel(String destination, String primaryText, String headline, String description, String encodedImage) {
-        this.destination = destination;
-        this.primaryText = primaryText;
-        this.headline = headline;
-        this.description = description;
-        this.encodedImage = encodedImage;
-    }
+    String destination, primaryText, headline, description, encodedImage, documentReference;
 
     public AdModel() {
 
+    }
+
+    public String getDocumentReference() {
+        return documentReference;
+    }
+
+    public void setDocumentReference(String documentReference) {
+        this.documentReference = documentReference;
     }
 
     public String getDestination() {

@@ -12,12 +12,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.models.AdModel;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -25,6 +29,7 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Target_Audience extends Fragment {
     MaterialSpinner genderSpinner, ageSpinner;
@@ -50,22 +55,21 @@ public class Target_Audience extends Fragment {
         View view = inflater.inflate(R.layout.fragment_target__audience, container, false);
 
         location = view.findViewById(R.id.editText_locations);
+        genderSpinner = (MaterialSpinner) view.findViewById(R.id.spinner_gender);
+        ageSpinner = (MaterialSpinner) view.findViewById(R.id.spinner_age);
         mStorageRef = FirebaseStorage.getInstance().getReference();
-
         save = view.findViewById(R.id.save_btn);
 
         setGenderSpinner(view);
         setAgeSpinner(view);
-        getInfo();
-
-
+        setInfo();
 
         return view;
 
     }
 
     public void setGenderSpinner(View view) {
-        genderSpinner = (MaterialSpinner) view.findViewById(R.id.spinner_gender);
+
         ArrayList<String> gender = new ArrayList<>();
 
         gender.add("Male");
@@ -78,7 +82,7 @@ public class Target_Audience extends Fragment {
     }
 
     public void setAgeSpinner(View view) {
-        ageSpinner = (MaterialSpinner) view.findViewById(R.id.spinner_age);
+
         ArrayList<String> age = new ArrayList<>();
 
         age.add("10-24");
@@ -91,46 +95,49 @@ public class Target_Audience extends Fragment {
         ageSpinner.setAdapter(ageAdapter);
     }
 
-    private void getInfo() {
-        locations = location.getText().toString();
-        gender = genderSpinner.getText().toString();
-        age = ageSpinner.getText().toString();
+    private void setInfo() {
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 db = FirebaseFirestore.getInstance();
-                Map<String, Object> Ad = new HashMap<>();
+                locations = Objects.requireNonNull(location.getText()).toString();
+                gender = genderSpinner.getText().toString();
+                age = ageSpinner.getText().toString();
+                AdModel adModel = new AdModel();
 
-                Ad.put("Location", location.getText().toString());
-                Ad.put("Gender", genderSpinner.getText().toString());
-                Ad.put("Age", ageSpinner.getText().toString());
+                if (!locations.isEmpty() && !gender.isEmpty() && !age.isEmpty()) {
 
-                db.collection("Advert")
-                        .add(Ad)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getContext(), "Done!", Toast.LENGTH_SHORT).show();
+                    db.collection("Advert")
+                            .whereEqualTo("Headline", adModel.getHeadline())
+                            .get()
+                            .addOnCompleteListener(task -> {
 
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                        String Ad_ID = documentSnapshot.getId();
+                                            db.collection("Advert")
+                                                    .document(Ad_ID)
+                                                    .update("Location", locations,
+                                                            "Gender", gender,
+                                                            "Age", age);
+                                            Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                } else {
+                                    Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                } else {
+                    Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
 
     }
+
 }
 
 

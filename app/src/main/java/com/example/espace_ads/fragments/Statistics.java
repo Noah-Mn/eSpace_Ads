@@ -16,6 +16,7 @@ import com.example.espace_ads.R;
 import com.example.espace_ads.adapters.CustomExpandedListAdapter;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -35,8 +36,8 @@ public class Statistics extends Fragment {
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
 
-    private static final String STACK_1_LABEL = "Females";
-    private static final String STACK_2_LABEL = "Males";
+    private static final String STACK_1_LABEL = "78% Females";
+    private static final String STACK_2_LABEL = "22% Males";
 
     private static final String STACK_3_LABEL = "20% 10-24Yrs";
     private static final String STACK_4_LABEL = "35% 25-34Yrs";
@@ -85,29 +86,29 @@ public class Statistics extends Fragment {
         expandableListTitle.add("Australia");
 
         List<String> africa = new ArrayList<>();
-        africa.add("Malawi");
-        africa.add("Zambia");
-        africa.add("Namibia");
+        africa.add("Malawi" + " "+" 20000 impressions");
+        africa.add("Zambia" + " "+" 20000 impressions");
+        africa.add("Namibia" + " "+" 20000 impressions");
 
         List<String> america = new ArrayList<>();
-        america.add("Malawi");
-        america.add("Zambia");
-        america.add("Namibia");
+        america.add("Malawi" + " "+" 20000 impressions");
+        america.add("Zambia" + " "+" 20000 impressions");
+        america.add("Namibia" + " "+" 20000 impressions");
 
         List<String> europe = new ArrayList<>();
-        europe.add("Malawi");
-        europe.add("Zambia");
-        europe.add("Namibia");
+        europe.add("Malawi" + " "+" 20000 impressions");
+        europe.add("Zambia" + " "+" 20000 impressions");
+        europe.add("Namibia" + " "+" 20000 impressions");
 
         List<String> asia = new ArrayList<>();
-        asia.add("Malawi");
-        asia.add("Zambia");
-        asia.add("Namibia");
+        asia.add("Malawi" + " "+" 20000 impressions");
+        asia.add("Zambia" + " "+" 20000 impressions");
+        asia.add("Namibia" + " "+" 20000 impressions");
 
         List<String> australia = new ArrayList<>();
-        australia.add("Malawi");
-        australia.add("Zambia");
-        australia.add("Namibia");
+        australia.add("Malawi" + " "+" 20000 impressions");
+        australia.add("Zambia" + " "+" 20000 impressions");
+        australia.add("Namibia" + " "+" 20000 impressions");
 
         expandableListDetail.put(expandableListTitle.get(0), africa);
         expandableListDetail.put(expandableListTitle.get(1), america);
@@ -172,6 +173,7 @@ public class Statistics extends Fragment {
         BarData data = new BarData(dataSets);
         barChart1.setData(data);
         barChart1.getLegend().setTextColor(getResources().getColor(R.color.white));
+        barChart1.getLegend().setWordWrapEnabled(true);
         data.setDrawValues(false);
         return data;
     }
@@ -186,7 +188,6 @@ public class Statistics extends Fragment {
 
         values.add(new BarEntry( 1, new float[]{value1, value2, value3, value4}));
 
-
         BarDataSet set1 = new BarDataSet(values, SET_LABEL);
 
         set1.setColors(new int[] {getResources().getColor(R.color.vibrant_pink), getResources().getColor(R.color.rainBow_orange), getResources().getColor(R.color.light_skyBlue), getResources().getColor(R.color.whatever_color)});
@@ -199,6 +200,8 @@ public class Statistics extends Fragment {
         barChart2.setData(data);
         barChart2.getLegend().setTextColor(getResources().getColor(R.color.white));
 
+        barChart2.getLegend().setWordWrapEnabled(true);
+        Legend legend = barChart2.getLegend();
         data.setDrawValues(false);
         return data;
     }
@@ -207,7 +210,6 @@ public class Statistics extends Fragment {
         data.setValueTextSize(12f);
         barChart1.setData(data);
         barChart1.invalidate();
-
     }
     private void prepareChartData1(BarData data) {
         data.setValueTextSize(12f);
