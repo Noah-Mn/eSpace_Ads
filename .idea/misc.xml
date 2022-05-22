@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_ads.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/fragment_budget.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_business_profile_buy.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_business_profile_store.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_create_new.xml" value="0.33" />
@@ -34,7 +35,7 @@
         <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_target__audience.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/fragment_target__audience.xml" value="0.25" />
         <entry key="app/src/main/res/layout/live_campaign_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/recent_campaign_layout.xml" value="0.33" />
       </map>

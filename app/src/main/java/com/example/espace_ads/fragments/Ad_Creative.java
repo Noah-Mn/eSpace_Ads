@@ -94,6 +94,11 @@ public class Ad_Creative extends Fragment {
                 Ad.put("Description", descr);
                 Ad.put("Destination", destn);
                 Ad.put("Primary Text", primText);
+                Ad.put("Status", "Live");
+                Ad.put("Start Date", "null");
+                Ad.put("Start Time", "null");
+                Ad.put("End Date", "null");
+                Ad.put("End Time", "null");
                 Ad.put("Location", "null");
                 Ad.put("Gender", "null");
                 Ad.put("Age", "null");

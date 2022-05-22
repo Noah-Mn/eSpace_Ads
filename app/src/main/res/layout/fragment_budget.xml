@@ -115,8 +115,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="#3A3A3A"
-                        android:hint="Amount"
                         android:textColor="#68FFFFFF"
+                        app:ms_background_color="#CB000000"
+                        app:ms_text_color="#68FFFFFF"
+                        app:ms_hide_arrow="true"
+                        android:hint="Amount"
                         android:textColorHint="#68FFFFFF"
                         app:ms_arrow_tint="#3A3A3A" />
 
@@ -160,7 +163,7 @@
                     app:strokeWidth="1dp">
 
                     <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/spinner_age"
+                        android:id="@+id/spinner_amount_per_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="#3A3A3A"

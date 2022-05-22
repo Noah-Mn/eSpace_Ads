@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
     android:background="#E6151414"
     tools:context=".activityClasses.HomePage">
 

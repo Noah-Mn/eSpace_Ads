@@ -9,9 +9,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.espace_ads.databinding.LiveCampaignLayoutBinding;
-import com.example.espace_ads.models.AdModel;
+import com.example.espace_ads.databinding.RecentCampaignLayoutBinding;
 import com.example.espace_ads.models.LiveCampaignModel;
+import com.example.espace_ads.models.RecentCampaignModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,30 +21,30 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LiveCampaignAdapter extends RecyclerView.Adapter<LiveCampaignAdapter.LiveCampaignViewHolder> {
-
-    List<LiveCampaignModel> liveCampaignModelList = new ArrayList<>();
+public class RecentCampaignAdapter extends RecyclerView.Adapter<RecentCampaignAdapter.RecentCampaignViewHolder> {
+    List<RecentCampaignModel> recentCampaignModelList;
     FirebaseFirestore db;
     Context context;
 
-    public LiveCampaignAdapter(List<LiveCampaignModel> liveCampaignModelList, Context context) {
-        this.liveCampaignModelList = liveCampaignModelList;
+    public RecentCampaignAdapter(List<RecentCampaignModel> recentCampaignModelList, Context context) {
+        this.recentCampaignModelList = recentCampaignModelList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public LiveCampaignViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        LiveCampaignLayoutBinding liveCampaignLayoutBinding = LiveCampaignLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new LiveCampaignViewHolder(liveCampaignLayoutBinding);
+    public RecentCampaignViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        RecentCampaignLayoutBinding recentCampaignLayoutBinding = RecentCampaignLayoutBinding.inflate(
+                LayoutInflater.from(parent.getContext()),parent,false);
+        return new RecentCampaignViewHolder(recentCampaignLayoutBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LiveCampaignViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecentCampaignViewHolder holder, int position) {
+
         db = FirebaseFirestore.getInstance();
         db.collection("Advert")
-                .whereEqualTo("Status", "Live")
+//                .whereEqualTo("Status", "Recent")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -54,7 +54,7 @@ public class LiveCampaignAdapter extends RecyclerView.Adapter<LiveCampaignAdapte
                                 String headline = documentSnapshot.getString("Headline");
                                 String primaryText = documentSnapshot.getString("Primary Text");
                                 holder.binding.campaignName.setText(headline);
-                                holder.binding.campaignDetail.setText(primaryText);
+//                                holder.binding.campaignDetail.setText(primaryText);
                             }
                         }else {
                             Toast.makeText(context, "Failed to get data", Toast.LENGTH_SHORT).show();
@@ -65,15 +65,15 @@ public class LiveCampaignAdapter extends RecyclerView.Adapter<LiveCampaignAdapte
 
     @Override
     public int getItemCount() {
-        return liveCampaignModelList.size();
+        return recentCampaignModelList.size();
     }
 
-    public class LiveCampaignViewHolder extends RecyclerView.ViewHolder {
+    public static class RecentCampaignViewHolder extends RecyclerView.ViewHolder {
 
-        LiveCampaignLayoutBinding binding;
-        public LiveCampaignViewHolder(@NonNull LiveCampaignLayoutBinding liveCampaignLayoutBinding) {
-            super(liveCampaignLayoutBinding.getRoot());
-            binding = liveCampaignLayoutBinding;
+        RecentCampaignLayoutBinding binding;
+        public RecentCampaignViewHolder(@NonNull RecentCampaignLayoutBinding recentCampaignLayoutBinding) {
+            super(recentCampaignLayoutBinding.getRoot());
+            binding = recentCampaignLayoutBinding;
         }
     }
 }
