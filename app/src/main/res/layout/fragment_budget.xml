@@ -86,8 +86,10 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="5dp"
                     app:cardCornerRadius="8dp"
+                    android:clickable="true"
                     app:strokeColor="#43FFFFFF"
-                    app:strokeWidth="1dp">
+                    app:strokeWidth="1dp"
+                    android:focusable="true">
 
                     <com.jaredrummler.materialspinner.MaterialSpinner
                         android:id="@+id/spinner_frequency"
@@ -95,9 +97,11 @@
                         android:layout_height="match_parent"
                         app:ms_background_color="#373737"
                         android:hint="Frequency"
+                        android:clickable="true"
                         android:textColor="#B0FFFFFF"
                         android:textColorHint="#B0FFFFFF"
-                        app:ms_arrow_tint="#3A3A3A" />
+                        app:ms_arrow_tint="#3A3A3A"
+                        android:focusable="true" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -107,7 +111,9 @@
                     android:layout_marginTop="20dp"
                     app:cardCornerRadius="8dp"
                     app:strokeColor="#43FFFFFF"
-                    app:strokeWidth="1dp">
+                    android:clickable="true"
+                    app:strokeWidth="1dp"
+                    android:focusable="true">
 
                     <com.jaredrummler.materialspinner.MaterialSpinner
                         android:id="@+id/spinner_amount"
@@ -117,8 +123,32 @@
                         app:ms_background_color="#373737"
                         app:ms_text_color="#B0FFFFFF"
                         app:ms_hide_arrow="true"
+                        android:clickable="true"
                         android:hint="Amount"
-                        android:textColorHint="#B0FFFFFF"/>
+                        android:textColorHint="#B0FFFFFF"
+                        android:focusable="true" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/custom"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="#43FFFFFF"
+                    android:clickable="true"
+                    app:strokeWidth="1dp"
+                    android:visibility="gone"
+                    android:focusable="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="#B0FFFFFF"
+                        android:background="#373737"
+                        android:textColorHint="#B0FFFFFF"
+                        android:id="@+id/custom_amount"/>
 
                 </com.google.android.material.card.MaterialCardView>
 

@@ -1,5 +1,9 @@
 package com.example.espace_ads.activityClasses;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
 
