@@ -48,8 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
-                    android:text="With targeted ads, you can have a more effective campaign
-by reaching out to the audience you want."
+                    android:text="With targeted ads, you can have a more effective campaign by reaching out to the audience you want."
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 
@@ -92,8 +91,8 @@ by reaching out to the audience you want."
                     android:hint="Location"
                     android:inputType="text"
                     android:padding="5dp"
-                    android:textColor="#68FFFFFF"
-                    android:textColorHint="#68FFFFFF"
+                    android:textColor="#B0FFFFFF"
+                    android:textColorHint="#B0FFFFFF"
                     android:textSize="13sp" />
 
             </LinearLayout>
@@ -139,11 +138,11 @@ by reaching out to the audience you want."
                         android:layout_height="match_parent"
                         app:ms_arrow_tint="#3A3A3A"
                         android:hint="Select age group"
-                        android:textColor="#68FFFFFF"
-                        app:ms_background_color="#CB000000"
-                        app:ms_text_color="#68FFFFFF"
-                        app:ms_hide_arrow="true"
-                        android:textColorHint="#68FFFFFF"/>
+                        app:ms_background_color="#373737"
+                        app:ms_text_color="#B0FFFFFF"
+                        android:textColor="#B0FFFFFF"
+                        android:textColorHint="#B0FFFFFF"
+                        app:ms_hide_arrow="true"/>
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -190,11 +189,11 @@ by reaching out to the audience you want."
                         android:layout_height="match_parent"
                         app:ms_arrow_tint="#3A3A3A"
                         android:hint="Select gender"
-                        app:ms_background_color="#CB000000"
-                        app:ms_text_color="#68FFFFFF"
+                        app:ms_background_color="#373737"
+                        app:ms_text_color="#B0FFFFFF"
                         app:ms_hide_arrow="true"
-                        android:textColor="#68FFFFFF"
-                        android:textColorHint="#68FFFFFF"/>
+                        android:textColor="#B0FFFFFF"
+                        android:textColorHint="#B0FFFFFF"/>
 
                 </com.google.android.material.card.MaterialCardView>
 
