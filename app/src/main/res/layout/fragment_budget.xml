@@ -132,23 +132,24 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/custom"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone"
                     app:cardCornerRadius="8dp"
                     app:strokeColor="#43FFFFFF"
-                    android:clickable="true"
-                    app:strokeWidth="1dp"
-                    android:visibility="gone"
-                    android:focusable="true">
+                    app:strokeWidth="1dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/custom_amount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="#B0FFFFFF"
                         android:background="#373737"
-                        android:textColorHint="#B0FFFFFF"
-                        android:id="@+id/custom_amount"/>
+                        android:textColor="#B0FFFFFF"
+                        android:inputType="number"
+                        android:textColorHint="#B0FFFFFF" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -260,6 +261,7 @@
                     android:layout_marginStart="15dp"
                     android:inputType="time"
                     android:padding="5dp"
+                    android:focusableInTouchMode="false"
                     android:paddingStart="20dp"
                     android:textAlignment="textEnd"
                     android:paddingEnd="20dp"
@@ -328,6 +330,7 @@
                     android:padding="5dp"
                     android:inputType="time"
                     android:paddingStart="20dp"
+                    android:focusableInTouchMode="false"
                     android:paddingEnd="20dp"
                     android:textColor="#B0FFFFFF"
                     android:textColorHint="#B0FFFFFF"
