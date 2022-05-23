@@ -173,13 +173,41 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <FrameLayout
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/preview"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@id/create_video"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical" />
+                    android:orientation="vertical"
+                    android:visibility="visible"/>
+                <VideoView
+                    android:id="@+id/video_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/create_video"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:visibility="visible"/>
+                <FrameLayout
+                    android:id="@+id/slideshow_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/create_video"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:clipToPadding="false"
+                        android:id="@+id/slide_images"/>
+                </FrameLayout>
+
+
+
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/upload"
@@ -189,6 +217,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="15dp"
                     android:backgroundTint="#3BFFFFFF"
+                    android:visibility="visible"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="0dp">
 
@@ -205,8 +234,6 @@
                         android:textSize="14sp" />
 
                 </com.google.android.material.card.MaterialCardView>
-
-
 
 
             </RelativeLayout>
@@ -426,17 +453,17 @@
                 android:id="@+id/save_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/destination"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="#3BFFFFFF"
                 app:cardCornerRadius="5dp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/destination">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
