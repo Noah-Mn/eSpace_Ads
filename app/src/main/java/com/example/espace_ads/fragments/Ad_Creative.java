@@ -2,6 +2,7 @@ package com.example.espace_ads.fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.example.espace_ads.R;
@@ -31,7 +33,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -50,7 +54,7 @@ public class Ad_Creative extends Fragment {
     AdModel adModel;
     private Uri filepath;
     private final int PICK_IMAGE_REQUEST = 22;
-    FirebaseStorage storage;
+
     StorageReference storageReference;
 
     @Override
@@ -77,8 +81,8 @@ public class Ad_Creative extends Fragment {
         mobileApplication = (MaterialRadioButton) view.findViewById(R.id.mobile_application);
         socialMediaProfile = (MaterialRadioButton) view.findViewById(R.id.social_media);
         saveBtn = (MaterialCardView) view.findViewById(R.id.save_btn);
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+
+        storageReference = FirebaseStorage.getInstance().getReference("Single Image");
 
         adModel = new AdModel();
         setDestinationURL();
@@ -138,9 +142,10 @@ public class Ad_Creative extends Fragment {
         media.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                pickImage.launch(intent);
+//                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                pickImage.launch(intent);
+                chooseImage();
             }
         });
 
@@ -247,6 +252,41 @@ public class Ad_Creative extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
             filepath = data.getData();
 
+        }
+    }
+
+    private String getFileExtension(Uri uri){
+        ContentResolver contentResolver = (getActivity()).getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private void uploadFile(){
+        if (filepath != null){
+            StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(filepath));
+
+            fileReference.putFile(filepath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+
+                        }
+                    });
+        }else {
+            Toast.makeText(getContext(), "No file selected!", Toast.LENGTH_SHORT).show();
         }
     }
 }
