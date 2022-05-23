@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -29,6 +30,8 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -45,6 +48,11 @@ public class Ad_Creative extends Fragment {
     MaterialRadioButton website, businessProfile, mobileApplication, socialMediaProfile;
     FirebaseFirestore db;
     AdModel adModel;
+    private Uri filepath;
+    private final int PICK_IMAGE_REQUEST = 22;
+    FirebaseStorage storage;
+    StorageReference storageReference;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +77,9 @@ public class Ad_Creative extends Fragment {
         mobileApplication = (MaterialRadioButton) view.findViewById(R.id.mobile_application);
         socialMediaProfile = (MaterialRadioButton) view.findViewById(R.id.social_media);
         saveBtn = (MaterialCardView) view.findViewById(R.id.save_btn);
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
         adModel = new AdModel();
         setDestinationURL();
         listener();
@@ -222,5 +233,20 @@ public class Ad_Creative extends Fragment {
             destination.setHint("Select destination URL");
         }
     }
+    private void chooseImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+            filepath = data.getData();
+
+        }
+    }
 }
