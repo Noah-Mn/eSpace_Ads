@@ -183,12 +183,14 @@
                     android:visibility="gone"/>
                 <VideoView
                     android:id="@+id/video_preview"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="200dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_below="@id/create_video"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:visibility="gone"/>
+                    android:visibility="visible"/>
                 <FrameLayout
                     android:id="@+id/slideshow_preview"
                     android:layout_width="match_parent"

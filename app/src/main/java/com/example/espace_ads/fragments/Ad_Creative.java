@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,8 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -58,14 +61,17 @@ public class Ad_Creative extends Fragment {
     MaterialRadioButton website, businessProfile, mobileApplication, socialMediaProfile;
     FirebaseFirestore db;
     AdModel adModel;
-    private Uri filepath, slideImagesUri;
+    VideoView videoView;
+    private Uri filepath, slideImagesUri, videoUri;
     private final int PICK_IMAGE_REQUEST = 22;
+    private final int PICK_VIDEO_REQUEST = 1;
     AppCompatImageView imagePreview;
     ProgressBar progressBar;
-    StorageReference storageReference, StrReferenceSlideShow;
-    DatabaseReference reference, dbReferenceSlideShow, referenceVideo;
+    StorageReference storageReference, StrReferenceSlideShow, StrVideoRef;
+    DatabaseReference reference, dbReferenceSlideShow, dbReferenceVideo;
     private StorageTask uploadTask;
     private int uploadCount = 0;
+    MediaController mediaController;
     ArrayList<Uri> imageList = new ArrayList<>();
 
     @Override
@@ -98,6 +104,28 @@ public class Ad_Creative extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference("Single Image");
         StrReferenceSlideShow = FirebaseStorage.getInstance().getReference("Slide Show");
         dbReferenceSlideShow = FirebaseDatabase.getInstance().getReference("Slide Show");
+        dbReferenceVideo = FirebaseDatabase.getInstance().getReference("Video");
+        StrVideoRef = FirebaseStorage.getInstance().getReference("Video");
+        videoView = (VideoView) view.findViewById(R.id.video_preview);
+        mediaController = new MediaController(getContext());
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
+        videoView.start();
+
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                float videoRatio = mp.getVideoWidth() / (float) mp.getVideoHeight();
+                float screenRatio = videoView.getWidth() / (float)
+                        videoView.getHeight();
+                float scaleX = videoRatio / screenRatio;
+                if (scaleX >= 1f) {
+                    videoView.setScaleX(scaleX);
+                } else {
+                    videoView.setScaleY(1f / scaleX);
+                }
+            }
+        });
 
         adModel = new AdModel();
         setDestinationURL();
@@ -112,12 +140,17 @@ public class Ad_Creative extends Fragment {
             @Override
             public void onClick(View v) {
 
+                progressBar.setVisibility(View.VISIBLE);
+
                 if (uploadTask != null && uploadTask.isInProgress()) {
                     Toast.makeText(getContext(), "Upload is in progress", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
+
                 }
                 uploadSlideImages();
+                uploadVideo();
+
 
                 primText = Objects.requireNonNull(primaryText.getText()).toString();
                 hedl = Objects.requireNonNull(headline.getText()).toString();
@@ -206,6 +239,12 @@ public class Ad_Creative extends Fragment {
                 }
             }
         });
+        createVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseVideo();
+            }
+        });
         mobileApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -282,7 +321,7 @@ public class Ad_Creative extends Fragment {
             imagePreview.setVisibility(View.VISIBLE);
             imagePreview.setImageURI(filepath);
         }
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data.getClipData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getClipData() != null) {
             int countClipData = data.getClipData().getItemCount();
 
             int currentImageSelect = 0;
@@ -292,6 +331,11 @@ public class Ad_Creative extends Fragment {
                 imageList.add(slideImagesUri);
                 currentImageSelect += currentImageSelect;
             }
+        }
+        if (requestCode == PICK_VIDEO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            videoUri = data.getData();
+            videoView.setVisibility(View.VISIBLE);
+            videoView.setVideoURI(videoUri);
         }
     }
 
@@ -352,10 +396,10 @@ public class Ad_Creative extends Fragment {
     }
 
     private void uploadSlideImages() {
-        for (uploadCount = 0; uploadCount < imageList.size(); uploadCount++){
+        for (uploadCount = 0; uploadCount < imageList.size(); uploadCount++) {
 
             Uri individualImage = imageList.get(uploadCount);
-            StorageReference slideImages = StrReferenceSlideShow.child("Image"+ individualImage.getLastPathSegment());
+            StorageReference slideImages = StrReferenceSlideShow.child("Image" + individualImage.getLastPathSegment());
 
             slideImages.putFile(individualImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -383,12 +427,67 @@ public class Ad_Creative extends Fragment {
         }
     }
 
-    private void storeLink(String urI){
+    private void storeLink(String urI) {
         DatabaseReference slideshowRef = dbReferenceSlideShow.child("slides");
-        HashMap<String,String> hashMap = new HashMap<>();
+        HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("ImgLink", urI);
         slideshowRef.push().setValue(hashMap);
         Toast.makeText(getContext(), "Images uploaded successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    private void chooseVideo() {
+        Intent intent = new Intent();
+        intent.setType("video/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_VIDEO_REQUEST);
+    }
+
+    private String getVideoExtension(Uri uri) {
+        ContentResolver contentResolver = (getActivity()).getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private void uploadVideo() {
+        if (videoUri != null) {
+            StorageReference fileReference = StrVideoRef.child(System.currentTimeMillis() + "." + getVideoExtension(videoUri));
+
+            uploadTask = fileReference.putFile(videoUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.setProgress(0);
+                                    progressBar.setVisibility(View.GONE);
+                                    videoView.setVisibility(View.GONE);
+                                }
+                            }, 500);
+                            Toast.makeText(getContext(), "Video Upload successful", Toast.LENGTH_LONG).show();
+                            Upload upload = new Upload(headline.getText().toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
+
+                            String uploadId = reference.push().getKey();
+                            reference.child(uploadId).setValue(upload);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            progressBar.setProgress((int) progress);
+                        }
+                    });
+        } else {
+            Toast.makeText(getContext(), "No file selected!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
