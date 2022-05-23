@@ -8,16 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +16,13 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.models.AdModel;
@@ -41,11 +39,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -58,12 +58,14 @@ public class Ad_Creative extends Fragment {
     MaterialRadioButton website, businessProfile, mobileApplication, socialMediaProfile;
     FirebaseFirestore db;
     AdModel adModel;
-    private Uri filepath;
+    private Uri filepath, slideImagesUri;
     private final int PICK_IMAGE_REQUEST = 22;
     AppCompatImageView imagePreview;
     ProgressBar progressBar;
     StorageReference storageReference;
     DatabaseReference reference;
+    private StorageTask uploadTask;
+    ArrayList<Uri> imageList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,13 +103,17 @@ public class Ad_Creative extends Fragment {
         return view;
     }
 
-    public void listener(){
+    public void listener() {
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                uploadFile();
+                if (uploadTask != null && uploadTask.isInProgress()) {
+                    Toast.makeText(getContext(), "Upload is in progress", Toast.LENGTH_SHORT).show();
+                } else {
+                    uploadFile();
+                }
 
                 primText = Objects.requireNonNull(primaryText.getText()).toString();
                 hedl = Objects.requireNonNull(headline.getText()).toString();
@@ -251,7 +257,8 @@ public class Ad_Creative extends Fragment {
             destination.setHint("Select destination URL");
         }
     }
-    private void chooseImage(){
+
+    private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -262,24 +269,35 @@ public class Ad_Creative extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filepath = data.getData();
             imagePreview.setVisibility(View.VISIBLE);
             imagePreview.setImageURI(filepath);
         }
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data.getClipData() != null) {
+            int countClipData = data.getClipData().getItemCount();
+
+            int currentImageSelect = 0;
+            while (currentImageSelect < countClipData) {
+
+                slideImagesUri = data.getClipData().getItemAt(currentImageSelect).getUri();
+                imageList.add(slideImagesUri);
+                currentImageSelect += currentImageSelect;
+            }
+        }
     }
 
-    private String getFileExtension(Uri uri){
+    private String getFileExtension(Uri uri) {
         ContentResolver contentResolver = (getActivity()).getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void uploadFile(){
-        if (filepath != null){
+    private void uploadFile() {
+        if (filepath != null) {
             StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(filepath));
 
-            fileReference.putFile(filepath)
+            uploadTask = fileReference.putFile(filepath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -312,8 +330,17 @@ public class Ad_Creative extends Fragment {
                             progressBar.setProgress((int) progress);
                         }
                     });
-        }else {
+        } else {
             Toast.makeText(getContext(), "No file selected!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void chooseMultipleImages() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
 }
