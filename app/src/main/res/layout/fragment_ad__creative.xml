@@ -174,13 +174,13 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/preview"
+                    android:id="@+id/image_preview"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@id/create_video"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:visibility="visible"/>
+                    android:visibility="gone"/>
                 <VideoView
                     android:id="@+id/video_preview"
                     android:layout_width="match_parent"
@@ -188,7 +188,7 @@
                     android:layout_below="@id/create_video"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:visibility="visible"/>
+                    android:visibility="gone"/>
                 <FrameLayout
                     android:id="@+id/slideshow_preview"
                     android:layout_width="match_parent"
@@ -196,28 +196,26 @@
                     android:layout_below="@id/create_video"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:clipToPadding="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:id="@+id/slide_images"/>
                 </FrameLayout>
-
-
-
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/upload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/preview"
+                    android:layout_below="@id/image_preview"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="15dp"
                     android:backgroundTint="#3BFFFFFF"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="0dp">
 

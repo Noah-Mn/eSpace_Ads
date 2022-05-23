@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -45,7 +46,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Ad_Creative extends Fragment {
-    MaterialCardView media, slideShow, createVideo, saveBtn;
+    MaterialCardView media, slideShow, createVideo, saveBtn, uploadBtn;
     TextInputEditText primaryText, headline, description, destination;
     String encodedImage;
     String primText, hedl, descr, destn;
@@ -54,6 +55,7 @@ public class Ad_Creative extends Fragment {
     AdModel adModel;
     private Uri filepath;
     private final int PICK_IMAGE_REQUEST = 22;
+    AppCompatImageView imagePreview;
 
     StorageReference storageReference;
 
@@ -81,7 +83,9 @@ public class Ad_Creative extends Fragment {
         mobileApplication = (MaterialRadioButton) view.findViewById(R.id.mobile_application);
         socialMediaProfile = (MaterialRadioButton) view.findViewById(R.id.social_media);
         saveBtn = (MaterialCardView) view.findViewById(R.id.save_btn);
+        uploadBtn = (MaterialCardView) view.findViewById(R.id.upload);
 
+        imagePreview = view.findViewById(R.id.image_preview);
         storageReference = FirebaseStorage.getInstance().getReference("Single Image");
 
         adModel = new AdModel();
@@ -251,7 +255,9 @@ public class Ad_Creative extends Fragment {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
             filepath = data.getData();
-
+            imagePreview.setVisibility(View.VISIBLE);
+            imagePreview.setImageURI(filepath);
+            uploadBtn.setVisibility(View.VISIBLE);
         }
     }
 
