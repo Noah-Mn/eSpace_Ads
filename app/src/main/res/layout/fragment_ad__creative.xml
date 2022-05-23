@@ -207,32 +207,15 @@
                         android:id="@+id/slide_images"/>
                 </FrameLayout>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/upload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_below="@id/image_preview"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="15dp"
-                    android:backgroundTint="#3BFFFFFF"
-                    android:visibility="gone"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="0dp">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:padding="3dp"
-                        android:text=" Upload "
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-
-                </com.google.android.material.card.MaterialCardView>
-
+                    android:layout_alignParentStart="true"
+                    android:indeterminateOnly="false"
+                    android:visibility="visible" />
 
             </RelativeLayout>
 

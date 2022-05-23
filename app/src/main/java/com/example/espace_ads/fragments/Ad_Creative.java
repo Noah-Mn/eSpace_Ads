@@ -16,21 +16,26 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.models.AdModel;
+import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,7 +51,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Ad_Creative extends Fragment {
-    MaterialCardView media, slideShow, createVideo, saveBtn, uploadBtn;
+    MaterialCardView media, slideShow, createVideo, saveBtn;
     TextInputEditText primaryText, headline, description, destination;
     String encodedImage;
     String primText, hedl, descr, destn;
@@ -56,8 +61,9 @@ public class Ad_Creative extends Fragment {
     private Uri filepath;
     private final int PICK_IMAGE_REQUEST = 22;
     AppCompatImageView imagePreview;
-
+    ProgressBar progressBar;
     StorageReference storageReference;
+    DatabaseReference reference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,8 +89,8 @@ public class Ad_Creative extends Fragment {
         mobileApplication = (MaterialRadioButton) view.findViewById(R.id.mobile_application);
         socialMediaProfile = (MaterialRadioButton) view.findViewById(R.id.social_media);
         saveBtn = (MaterialCardView) view.findViewById(R.id.save_btn);
-        uploadBtn = (MaterialCardView) view.findViewById(R.id.upload);
-
+        progressBar = (ProgressBar) view.findViewById(R.id.progress);
+        reference = FirebaseDatabase.getInstance().getReference("Single Image");
         imagePreview = view.findViewById(R.id.image_preview);
         storageReference = FirebaseStorage.getInstance().getReference("Single Image");
 
@@ -100,6 +106,9 @@ public class Ad_Creative extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                uploadFile();
+
                 primText = Objects.requireNonNull(primaryText.getText()).toString();
                 hedl = Objects.requireNonNull(headline.getText()).toString();
                 descr = Objects.requireNonNull(description.getText()).toString();
@@ -257,7 +266,6 @@ public class Ad_Creative extends Fragment {
             filepath = data.getData();
             imagePreview.setVisibility(View.VISIBLE);
             imagePreview.setImageURI(filepath);
-            uploadBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -275,20 +283,33 @@ public class Ad_Creative extends Fragment {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.setProgress(0);
+                                    progressBar.setVisibility(View.GONE);
+                                    imagePreview.setVisibility(View.GONE);
+                                }
+                            }, 500);
+                            Toast.makeText(getContext(), "Image Upload successful", Toast.LENGTH_LONG).show();
+                            Upload upload = new Upload(headline.getText().toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
 
+                            String uploadId = reference.push().getKey();
+                            reference.child(uploadId).setValue(upload);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                             double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-
+                            progressBar.setProgress((int) progress);
                         }
                     });
         }else {
