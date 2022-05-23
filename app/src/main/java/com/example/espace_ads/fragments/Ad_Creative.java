@@ -62,9 +62,10 @@ public class Ad_Creative extends Fragment {
     private final int PICK_IMAGE_REQUEST = 22;
     AppCompatImageView imagePreview;
     ProgressBar progressBar;
-    StorageReference storageReference;
-    DatabaseReference reference;
+    StorageReference storageReference, StrReferenceSlideShow;
+    DatabaseReference reference, dbReferenceSlideShow, referenceVideo;
     private StorageTask uploadTask;
+    private int uploadCount = 0;
     ArrayList<Uri> imageList = new ArrayList<>();
 
     @Override
@@ -95,6 +96,8 @@ public class Ad_Creative extends Fragment {
         reference = FirebaseDatabase.getInstance().getReference("Single Image");
         imagePreview = view.findViewById(R.id.image_preview);
         storageReference = FirebaseStorage.getInstance().getReference("Single Image");
+        StrReferenceSlideShow = FirebaseStorage.getInstance().getReference("Slide Show");
+        dbReferenceSlideShow = FirebaseDatabase.getInstance().getReference("Slide Show");
 
         adModel = new AdModel();
         setDestinationURL();
@@ -114,6 +117,7 @@ public class Ad_Creative extends Fragment {
                 } else {
                     uploadFile();
                 }
+                uploadSlideImages();
 
                 primText = Objects.requireNonNull(primaryText.getText()).toString();
                 hedl = Objects.requireNonNull(headline.getText()).toString();
@@ -161,10 +165,14 @@ public class Ad_Creative extends Fragment {
         media.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                pickImage.launch(intent);
                 chooseImage();
+            }
+        });
+
+        slideShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseMultipleImages();
             }
         });
 
@@ -341,6 +349,46 @@ public class Ad_Creative extends Fragment {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    private void uploadSlideImages() {
+        for (uploadCount = 0; uploadCount < imageList.size(); uploadCount++){
+
+            Uri individualImage = imageList.get(uploadCount);
+            StorageReference slideImages = StrReferenceSlideShow.child("Image"+ individualImage.getLastPathSegment());
+
+            slideImages.putFile(individualImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    slideImages.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String UrI = String.valueOf(uri);
+                            storeLink(UrI);
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                    double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                    progressBar.setProgress((int) progress);
+                }
+            });
+        }
+    }
+
+    private void storeLink(String urI){
+        DatabaseReference slideshowRef = dbReferenceSlideShow.child("slides");
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put("ImgLink", urI);
+        slideshowRef.push().setValue(hashMap);
+        Toast.makeText(getContext(), "Images uploaded successfully", Toast.LENGTH_SHORT).show();
     }
 
 }
