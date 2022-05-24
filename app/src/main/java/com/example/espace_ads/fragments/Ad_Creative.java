@@ -33,6 +33,7 @@ import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
@@ -55,10 +56,10 @@ import java.util.Objects;
 
 public class Ad_Creative extends Fragment {
     MaterialCardView media, slideShow, createVideo, saveBtn;
-    TextInputEditText primaryText, headline, description, destination;
+    TextInputEditText primaryText, headline, description, editTextWebsite, editTextBusiness_pro, editTextSocialMediaPro, editTextMobileApp;
     String encodedImage;
-    String primText, hedl, descr, destn;
-    MaterialRadioButton website, businessProfile, mobileApplication, socialMediaProfile;
+    String primText, hedl, descr, destn1, destn2, destn3, destn4;
+    MaterialCheckBox website, businessProfile, mobileApplication, socialMediaProfile;
     FirebaseFirestore db;
     AdModel adModel;
     VideoView videoView;
@@ -92,14 +93,18 @@ public class Ad_Creative extends Fragment {
         primaryText = (TextInputEditText) view.findViewById(R.id.editText_primary_text);
         headline = (TextInputEditText) view.findViewById(R.id.editText_headline);
         description = (TextInputEditText) view.findViewById(R.id.editText_description);
-        destination = (TextInputEditText) view.findViewById(R.id.editText_destination);
-        website = (MaterialRadioButton) view.findViewById(R.id.website);
-        businessProfile = (MaterialRadioButton) view.findViewById(R.id.business_profile);
-        mobileApplication = (MaterialRadioButton) view.findViewById(R.id.mobile_application);
-        socialMediaProfile = (MaterialRadioButton) view.findViewById(R.id.social_media);
+
+        editTextWebsite = (TextInputEditText) view.findViewById(R.id.editText_website);
+        editTextBusiness_pro = (TextInputEditText) view.findViewById(R.id.editText_business_pro);
+        editTextSocialMediaPro = (TextInputEditText) view.findViewById(R.id.editText_social_media_pro);
+        editTextMobileApp = (TextInputEditText) view.findViewById(R.id.editText_mobile_app);
+
+        website = (MaterialCheckBox) view.findViewById(R.id.website);
+        businessProfile = (MaterialCheckBox) view.findViewById(R.id.business_profile);
+        mobileApplication = (MaterialCheckBox) view.findViewById(R.id.mobile_application);
+        socialMediaProfile = (MaterialCheckBox) view.findViewById(R.id.social_media);
         saveBtn = (MaterialCardView) view.findViewById(R.id.save_btn);
         progressBar = (ProgressBar) view.findViewById(R.id.progress);
-        reference = FirebaseDatabase.getInstance().getReference("Single Image");
         imagePreview = view.findViewById(R.id.image_preview);
         storageReference = FirebaseStorage.getInstance().getReference("Single Image");
         StrReferenceSlideShow = FirebaseStorage.getInstance().getReference("Slide Show");
@@ -128,7 +133,6 @@ public class Ad_Creative extends Fragment {
         });
 
         adModel = new AdModel();
-        setDestinationURL();
         listener();
 
         return view;
@@ -151,11 +155,13 @@ public class Ad_Creative extends Fragment {
                 uploadSlideImages();
                 uploadVideo();
 
-
                 primText = Objects.requireNonNull(primaryText.getText()).toString();
                 hedl = Objects.requireNonNull(headline.getText()).toString();
                 descr = Objects.requireNonNull(description.getText()).toString();
-                destn = Objects.requireNonNull(destination.getText()).toString();
+                destn1 = Objects.requireNonNull(editTextWebsite.getText()).toString();
+                destn2 = Objects.requireNonNull(editTextBusiness_pro.getText()).toString();
+                destn3 = Objects.requireNonNull(editTextSocialMediaPro.getText()).toString();
+                destn4 = Objects.requireNonNull(editTextMobileApp.getText()).toString();
                 adModel.setHeadline(hedl);
 
                 db = FirebaseFirestore.getInstance();
@@ -163,7 +169,10 @@ public class Ad_Creative extends Fragment {
 
                 Ad.put("Headline", hedl);
                 Ad.put("Description", descr);
-                Ad.put("Destination", destn);
+                Ad.put("Destination1", destn1);
+                Ad.put("Destination2", destn2);
+                Ad.put("Destination3", destn3);
+                Ad.put("Destination4", destn4);
                 Ad.put("Primary Text", primText);
                 Ad.put("Status", "Live");
                 Ad.put("Start Date", "null");
@@ -181,7 +190,6 @@ public class Ad_Creative extends Fragment {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show();
-
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -190,10 +198,8 @@ public class Ad_Creative extends Fragment {
                                 Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show();
                             }
                         });
-
             }
         });
-
 
         media.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,9 +219,10 @@ public class Ad_Creative extends Fragment {
             @Override
             public void onClick(View view) {
                 if (website.isChecked()) {
-                    destination.setHint("Website URL");
+                    editTextWebsite.setHint("Website URL");
+                    editTextWebsite.setVisibility(View.VISIBLE);
                 } else {
-                    destination.setHint("Select destination URL");
+                    editTextWebsite.setVisibility(View.GONE);
                 }
             }
         });
@@ -223,9 +230,10 @@ public class Ad_Creative extends Fragment {
             @Override
             public void onClick(View view) {
                 if (businessProfile.isChecked()) {
-                    destination.setHint("Business Profile URL");
+                    editTextBusiness_pro.setHint("Business Profile URL");
+                    editTextBusiness_pro.setVisibility(View.VISIBLE);
                 } else {
-                    destination.setHint("Select destination URL");
+                    editTextBusiness_pro.setVisibility(View.GONE);
                 }
             }
         });
@@ -233,9 +241,10 @@ public class Ad_Creative extends Fragment {
             @Override
             public void onClick(View view) {
                 if (socialMediaProfile.isChecked()) {
-                    destination.setHint("Social Media Profile URL");
+                    editTextSocialMediaPro.setHint("Social Media Profile URL");
+                    editTextSocialMediaPro.setVisibility(View.VISIBLE);
                 } else {
-                    destination.setHint("Select destination URL");
+                    editTextSocialMediaPro.setVisibility(View.GONE);
                 }
             }
         });
@@ -249,14 +258,13 @@ public class Ad_Creative extends Fragment {
             @Override
             public void onClick(View view) {
                 if (mobileApplication.isChecked()) {
-                    destination.setHint("Mobile Application URL");
+                    editTextMobileApp.setHint("Mobile Application URL");
+                    editTextMobileApp.setVisibility(View.VISIBLE);
                 } else {
-                    destination.setHint("Select destination URL");
+                    editTextMobileApp.setVisibility(View.GONE);
                 }
             }
         });
-
-
     }
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
@@ -289,20 +297,6 @@ public class Ad_Creative extends Fragment {
         previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
-
-    private void setDestinationURL() {
-        if (website.isChecked()) {
-            destination.setHint("Website URL");
-        } else if (businessProfile.isChecked()) {
-            destination.setHint("Business Profile URL");
-        } else if (socialMediaProfile.isChecked()) {
-            destination.setHint("Social Media Profile URL");
-        } else if (mobileApplication.isChecked()) {
-            destination.setHint("Mobile Application URL");
-        } else {
-            destination.setHint("Select destination URL");
-        }
     }
 
     private void chooseImage() {
@@ -346,6 +340,7 @@ public class Ad_Creative extends Fragment {
     }
 
     private void uploadFile() {
+        reference = FirebaseDatabase.getInstance().getReference("Data");
         if (filepath != null) {
             StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(filepath));
 
@@ -489,5 +484,4 @@ public class Ad_Creative extends Fragment {
             Toast.makeText(getContext(), "No file selected!", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
