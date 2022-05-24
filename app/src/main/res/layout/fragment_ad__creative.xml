@@ -180,7 +180,7 @@
                     android:layout_below="@id/create_video"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <VideoView
                     android:id="@+id/video_preview"
@@ -192,6 +192,7 @@
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
                     android:visibility="gone" />
+
                 <FrameLayout
                     android:id="@+id/slideshow_preview"
                     android:layout_width="match_parent"
@@ -202,12 +203,12 @@
                     android:visibility="gone">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/slide_images"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
                         android:clipToPadding="false"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:id="@+id/slide_images"/>
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
                 </FrameLayout>
 
 
@@ -377,37 +378,37 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_goneMarginStart="20dp" />
 
-                    <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/website"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Website"
-                        android:textColor="#68FFFFFF"
-                        android:textStyle="bold" />
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Website"
+                    android:textColor="#68FFFFFF"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/business_profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Business Profile"
-                        android:textColor="#68FFFFFF"
-                        android:textStyle="bold" />
+                    android:id="@+id/business_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Business Profile"
+                    android:textColor="#68FFFFFF"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/social_media"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Social Media Profile"
-                        android:textColor="#68FFFFFF"
-                        android:textStyle="bold" />
+                    android:id="@+id/social_media"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Social Media Profile"
+                    android:textColor="#68FFFFFF"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/mobile_application"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mobile Application"
-                        android:textColor="#68FFFFFF"
-                        android:textStyle="bold" />
+                    android:id="@+id/mobile_application"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile Application"
+                    android:textColor="#68FFFFFF"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_website"
@@ -419,10 +420,10 @@
                     android:hint="Destination URL"
                     android:inputType="text"
                     android:padding="5dp"
-                    android:visibility="gone"
                     android:textColor="#68FFFFFF"
                     android:textColorHint="#68FFFFFF"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:visibility="gone" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_business_pro"
@@ -434,10 +435,10 @@
                     android:hint="Destination URL"
                     android:inputType="text"
                     android:padding="5dp"
-                    android:visibility="gone"
                     android:textColor="#68FFFFFF"
                     android:textColorHint="#68FFFFFF"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:visibility="gone" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_social_media_pro"
@@ -449,10 +450,10 @@
                     android:hint="Destination URL"
                     android:inputType="text"
                     android:padding="5dp"
-                    android:visibility="gone"
                     android:textColor="#68FFFFFF"
                     android:textColorHint="#68FFFFFF"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:visibility="gone" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_mobile_app"
@@ -464,10 +465,10 @@
                     android:hint="Destination URL"
                     android:inputType="text"
                     android:padding="5dp"
-                    android:visibility="gone"
                     android:textColor="#68FFFFFF"
                     android:textColorHint="#68FFFFFF"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

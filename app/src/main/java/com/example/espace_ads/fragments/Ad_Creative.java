@@ -6,7 +6,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.models.AdModel;
@@ -34,11 +35,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.checkbox.MaterialCheckBox;
-import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -73,6 +72,8 @@ public class Ad_Creative extends Fragment {
     private StorageTask uploadTask;
     private int uploadCount = 0;
     MediaController mediaController;
+    FragmentTransaction fragmentTransaction;
+    FragmentManager fragmentManager;
     ArrayList<Uri> imageList = new ArrayList<>();
 
     @Override
@@ -117,18 +118,15 @@ public class Ad_Creative extends Fragment {
         mediaController.setAnchorView(videoView);
         videoView.start();
 
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                float videoRatio = mp.getVideoWidth() / (float) mp.getVideoHeight();
-                float screenRatio = videoView.getWidth() / (float)
-                        videoView.getHeight();
-                float scaleX = videoRatio / screenRatio;
-                if (scaleX >= 1f) {
-                    videoView.setScaleX(scaleX);
-                } else {
-                    videoView.setScaleY(1f / scaleX);
-                }
+        videoView.setOnPreparedListener(mp -> {
+            float videoRatio = mp.getVideoWidth() / (float) mp.getVideoHeight();
+            float screenRatio = videoView.getWidth() / (float)
+                    videoView.getHeight();
+            float scaleX = videoRatio / screenRatio;
+            if (scaleX >= 1f) {
+                videoView.setScaleX(scaleX);
+            } else {
+                videoView.setScaleY(1f / scaleX);
             }
         });
 
@@ -140,120 +138,83 @@ public class Ad_Creative extends Fragment {
 
     public void listener() {
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        saveBtn.setOnClickListener(v -> {
 
-                progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
 
-                if (uploadTask != null && uploadTask.isInProgress()) {
-                    Toast.makeText(getContext(), "Upload is in progress", Toast.LENGTH_SHORT).show();
-                } else {
-                    uploadFile();
+            if (uploadTask != null && uploadTask.isInProgress()) {
+                Toast.makeText(getContext(), "Upload is in progress", Toast.LENGTH_SHORT).show();
+            } else {
+                uploadFile();
+            }
+            uploadSlideImages();
+            uploadVideo();
 
-                }
-                uploadSlideImages();
-                uploadVideo();
+            primText = Objects.requireNonNull(primaryText.getText()).toString();
+            hedl = Objects.requireNonNull(headline.getText()).toString();
+            descr = Objects.requireNonNull(description.getText()).toString();
+            destn1 = Objects.requireNonNull(editTextWebsite.getText()).toString();
+            destn2 = Objects.requireNonNull(editTextBusiness_pro.getText()).toString();
+            destn3 = Objects.requireNonNull(editTextSocialMediaPro.getText()).toString();
+            destn4 = Objects.requireNonNull(editTextMobileApp.getText()).toString();
+            adModel.setHeadline(hedl);
 
-                primText = Objects.requireNonNull(primaryText.getText()).toString();
-                hedl = Objects.requireNonNull(headline.getText()).toString();
-                descr = Objects.requireNonNull(description.getText()).toString();
-                destn1 = Objects.requireNonNull(editTextWebsite.getText()).toString();
-                destn2 = Objects.requireNonNull(editTextBusiness_pro.getText()).toString();
-                destn3 = Objects.requireNonNull(editTextSocialMediaPro.getText()).toString();
-                destn4 = Objects.requireNonNull(editTextMobileApp.getText()).toString();
-                adModel.setHeadline(hedl);
+            db = FirebaseFirestore.getInstance();
+            Map<String, Object> Ad = new HashMap<>();
 
-                db = FirebaseFirestore.getInstance();
-                Map<String, Object> Ad = new HashMap<>();
+            Ad.put("Headline", hedl);
+            Ad.put("Description", descr);
+            Ad.put("Destination1 Website", destn1);
+            Ad.put("Destination2 Business Pro", destn2);
+            Ad.put("Destination3 Social Media Pro", destn3);
+            Ad.put("Destination4 Mobile App", destn4);
+            Ad.put("Primary Text", primText);
+            Ad.put("Status", "Live");
+            Ad.put("Start Date", "null");
+            Ad.put("Start Time", "null");
+            Ad.put("End Date", "null");
+            Ad.put("End Time", "null");
+            Ad.put("Location", "null");
+            Ad.put("Gender", "null");
+            Ad.put("Age", "null");
 
-                Ad.put("Headline", hedl);
-                Ad.put("Description", descr);
-                Ad.put("Destination1", destn1);
-                Ad.put("Destination2", destn2);
-                Ad.put("Destination3", destn3);
-                Ad.put("Destination4", destn4);
-                Ad.put("Primary Text", primText);
-                Ad.put("Status", "Live");
-                Ad.put("Start Date", "null");
-                Ad.put("Start Time", "null");
-                Ad.put("End Date", "null");
-                Ad.put("End Time", "null");
-                Ad.put("Location", "null");
-                Ad.put("Gender", "null");
-                Ad.put("Age", "null");
+            db.collection("Advert")
+                    .add(Ad)
+                    .addOnSuccessListener(documentReference -> Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show());
+        });
 
-                db.collection("Advert")
-                        .add(Ad)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        media.setOnClickListener(view -> chooseImage());
 
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+        slideShow.setOnClickListener(view -> chooseMultipleImages());
+
+        createVideo.setOnClickListener(v -> chooseVideo());
+
+        website.setOnClickListener(view -> {
+            if (website.isChecked()) {
+                editTextWebsite.setHint("Website URL");
+                editTextWebsite.setVisibility(View.VISIBLE);
+            } else {
+                editTextWebsite.setVisibility(View.GONE);
+            }
+        });
+        businessProfile.setOnClickListener(view -> {
+            if (businessProfile.isChecked()) {
+                editTextBusiness_pro.setHint("Business Profile URL");
+                editTextBusiness_pro.setVisibility(View.VISIBLE);
+            } else {
+                editTextBusiness_pro.setVisibility(View.GONE);
+            }
+        });
+        socialMediaProfile.setOnClickListener(view -> {
+            if (socialMediaProfile.isChecked()) {
+                editTextSocialMediaPro.setHint("Social Media Profile URL");
+                editTextSocialMediaPro.setVisibility(View.VISIBLE);
+            } else {
+                editTextSocialMediaPro.setVisibility(View.GONE);
             }
         });
 
-        media.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseImage();
-            }
-        });
-
-        slideShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseMultipleImages();
-            }
-        });
-
-        website.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (website.isChecked()) {
-                    editTextWebsite.setHint("Website URL");
-                    editTextWebsite.setVisibility(View.VISIBLE);
-                } else {
-                    editTextWebsite.setVisibility(View.GONE);
-                }
-            }
-        });
-        businessProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (businessProfile.isChecked()) {
-                    editTextBusiness_pro.setHint("Business Profile URL");
-                    editTextBusiness_pro.setVisibility(View.VISIBLE);
-                } else {
-                    editTextBusiness_pro.setVisibility(View.GONE);
-                }
-            }
-        });
-        socialMediaProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (socialMediaProfile.isChecked()) {
-                    editTextSocialMediaPro.setHint("Social Media Profile URL");
-                    editTextSocialMediaPro.setVisibility(View.VISIBLE);
-                } else {
-                    editTextSocialMediaPro.setVisibility(View.GONE);
-                }
-            }
-        });
-        createVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseVideo();
-            }
-        });
         mobileApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -407,17 +368,9 @@ public class Ad_Creative extends Fragment {
                         }
                     });
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                    double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                    progressBar.setProgress((int) progress);
-                }
+            }).addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show()).addOnProgressListener(snapshot -> {
+                double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                progressBar.setProgress((int) progress);
             });
         }
     }
@@ -484,4 +437,5 @@ public class Ad_Creative extends Fragment {
             Toast.makeText(getContext(), "No file selected!", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
