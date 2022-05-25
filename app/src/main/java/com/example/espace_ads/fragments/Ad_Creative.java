@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.models.AdModel;
+import com.example.espace_ads.models.ImageCompressTask;
 import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,6 +55,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Ad_Creative extends Fragment {
     MaterialCardView media, slideShow, createVideo, saveBtn;
@@ -78,6 +81,8 @@ public class Ad_Creative extends Fragment {
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     ArrayList<Uri> imageList = new ArrayList<>();
+    private ImageCompressTask imageCompressTask;
+    private ExecutorService mExecutorService = Executors.newFixedThreadPool(1);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -283,13 +288,12 @@ public class Ad_Creative extends Fragment {
         }
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getClipData() != null) {
             int countClipData = data.getClipData().getItemCount();
-
             int currentImageSelect = 0;
             while (currentImageSelect < countClipData) {
 
                 slideImagesUri = data.getClipData().getItemAt(currentImageSelect).getUri();
                 imageList.add(slideImagesUri);
-                currentImageSelect += currentImageSelect;
+                currentImageSelect = currentImageSelect + 1;
             }
         }
         if (requestCode == PICK_VIDEO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
@@ -377,6 +381,7 @@ public class Ad_Creative extends Fragment {
                 double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
                 progressBar.setProgress((int) progress);
             });
+            imageList.clear();
         }
     }
 
@@ -385,7 +390,7 @@ public class Ad_Creative extends Fragment {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("ImgLink", urI);
         slideshowRef.push().setValue(hashMap);
-        Toast.makeText(getContext(), "Images uploaded successfully", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Images uploaded successfully", Toast.LENGTH_SHORT).show();
     }
 
     private void chooseVideo() {
@@ -442,7 +447,8 @@ public class Ad_Creative extends Fragment {
             Toast.makeText(getContext(), "No file selected!", Toast.LENGTH_SHORT).show();
         }
     }
-    public String getEmail(){
+
+    public String getEmail() {
         String emailAddress;
         emailAddress = currentUser.getEmail();
         return emailAddress;

@@ -45,7 +45,7 @@ public class Menu extends Fragment {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         username = view.findViewById(R.id.text_name);
-
+        getUserData();
         return view;
     }
     public void getUserData() {

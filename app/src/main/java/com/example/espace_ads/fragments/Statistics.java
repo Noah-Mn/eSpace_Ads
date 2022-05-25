@@ -5,15 +5,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.adapters.CustomExpandedListAdapter;
+import com.example.espace_ads.adapters.LiveCampaignAdapter;
+import com.example.espace_ads.models.LiveCampaignModel;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -25,6 +29,13 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +46,10 @@ public class Statistics extends Fragment {
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
+    FirebaseFirestore db;
+    FirebaseUser currentUser;
+    RecyclerView liveCampaignListView;
+    ArrayList<LiveCampaignModel> liveCampaignModelList = new ArrayList<>();
 
     private static final String STACK_1_LABEL = "78% Females";
     private static final String STACK_2_LABEL = "22% Males";
@@ -61,10 +76,12 @@ public class Statistics extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_statistics, container, false);
         expandableListView = view.findViewById(R.id.expandable_list_view);
 //        expandableListView.setGroupIndicator(R.drawable.custom_expandable);
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        liveCampaignListView = view.findViewById(R.id.live_campaigns_list);
 
         barChart1 = view.findViewById(R.id.chart1);
         barChart2 = view.findViewById(R.id.chart2);
-
 
         BarData data = createChartData();
         configureChartAppearance();
@@ -72,8 +89,6 @@ public class Statistics extends Fragment {
 
         BarData data1 = createChartData1();
         prepareChartData1(data1);
-
-
 
 //        inflate continents
         expandableListTitle = new ArrayList<>();
@@ -118,6 +133,34 @@ public class Statistics extends Fragment {
 
         expandableListAdapter = new CustomExpandedListAdapter(getContext(), expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
+
+        LiveCampaignAdapter adapter = new LiveCampaignAdapter(liveCampaignModelList, getContext());
+        liveCampaignListView.setHasFixedSize(true);
+        liveCampaignListView.setAdapter(adapter);
+
+
+        db.collection("Advert")
+                .whereEqualTo("Email Address", getEmail())
+                .whereEqualTo("Status", "Live")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful() && task.getResult() != null) {
+
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                String headline = documentSnapshot.getString("Headline");
+                                String primaryText = documentSnapshot.getString("Primary Text");
+                                LiveCampaignModel liveCampaignModel = new LiveCampaignModel(headline, primaryText);
+                                liveCampaignModelList.add(liveCampaignModel);
+                            }
+                            adapter.setLiveCampaignList(liveCampaignModelList);
+                        } else {
+                            Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
         return view;
     }
@@ -215,7 +258,12 @@ public class Statistics extends Fragment {
         data.setValueTextSize(12f);
         barChart2.setData(data);
         barChart2.invalidate();
+    }
 
+    public String getEmail() {
+        String emailAddress;
+        emailAddress = currentUser.getEmail();
+        return emailAddress;
     }
 
 }
