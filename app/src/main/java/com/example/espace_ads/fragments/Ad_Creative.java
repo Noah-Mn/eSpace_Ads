@@ -25,12 +25,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.models.AdModel;
-import com.example.espace_ads.models.ImageCompressTask;
 import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,8 +52,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Ad_Creative extends Fragment {
     MaterialCardView media, slideShow, createVideo, saveBtn;
@@ -78,16 +73,11 @@ public class Ad_Creative extends Fragment {
     private int uploadCount = 0;
     MediaController mediaController;
     FirebaseUser currentUser;
-    FragmentTransaction fragmentTransaction;
-    FragmentManager fragmentManager;
     ArrayList<Uri> imageList = new ArrayList<>();
-    private ImageCompressTask imageCompressTask;
-    private ExecutorService mExecutorService = Executors.newFixedThreadPool(1);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
