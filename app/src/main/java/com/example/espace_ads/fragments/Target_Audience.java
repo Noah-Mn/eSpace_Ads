@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -42,6 +44,7 @@ public class Target_Audience extends Fragment {
     FirebaseFirestore db;
     MaterialCardView save;
     private StorageReference mStorageRef;
+    FirebaseUser currentUser;
 
     public Target_Audience() {
     }
@@ -58,6 +61,7 @@ public class Target_Audience extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_target__audience, container, false);
 
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         location = view.findViewById(R.id.editText_locations);
         genderSpinner = (MaterialSpinner) view.findViewById(R.id.spinner_gender);
         ageSpinner = (MaterialSpinner) view.findViewById(R.id.spinner_age);
@@ -103,6 +107,7 @@ public class Target_Audience extends Fragment {
     private void setInfo() {
 
         db.collection("Advert")
+                .whereEqualTo("Email Address", getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -125,6 +130,7 @@ public class Target_Audience extends Fragment {
                                         if (!locations.isEmpty() && !gender.isEmpty() && !age.isEmpty()) {
 
                                             db.collection("Advert")
+                                                    .whereEqualTo("Email Address", getEmail())
                                                     .whereEqualTo("Headline", headline)
                                                     .get()
                                                     .addOnCompleteListener(task -> {
@@ -138,7 +144,6 @@ public class Target_Audience extends Fragment {
                                                                                 "Gender", gender,
                                                                                 "Age", age);
                                                                 Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show();
-
                                                             }
                                                         } else {
                                                             Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show();
@@ -157,5 +162,11 @@ public class Target_Audience extends Fragment {
                 });
 
     }
+    public String getEmail(){
+        String emailAddress;
+        emailAddress = currentUser.getEmail();
+        return emailAddress;
+    }
+
 
 }

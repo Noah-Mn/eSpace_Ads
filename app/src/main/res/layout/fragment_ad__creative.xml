@@ -175,8 +175,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image_preview"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_width="190dp"
+                    android:layout_height="190dp"
                     android:layout_below="@id/create_video"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"

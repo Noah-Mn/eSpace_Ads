@@ -14,6 +14,8 @@ import com.example.espace_ads.models.AdModel;
 import com.example.espace_ads.models.LiveCampaignModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,11 +25,12 @@ import java.util.List;
 
 public class LiveCampaignAdapter extends RecyclerView.Adapter<LiveCampaignAdapter.LiveCampaignViewHolder> {
 
-    List<LiveCampaignModel> liveCampaignModelList = new ArrayList<>();
+    ArrayList<LiveCampaignModel> liveCampaignModelList;
     FirebaseFirestore db;
     Context context;
+    FirebaseUser currentUser;
 
-    public LiveCampaignAdapter(List<LiveCampaignModel> liveCampaignModelList, Context context) {
+    public LiveCampaignAdapter(ArrayList<LiveCampaignModel> liveCampaignModelList, Context context) {
         this.liveCampaignModelList = liveCampaignModelList;
         this.context = context;
     }
@@ -42,25 +45,10 @@ public class LiveCampaignAdapter extends RecyclerView.Adapter<LiveCampaignAdapte
 
     @Override
     public void onBindViewHolder(@NonNull LiveCampaignViewHolder holder, int position) {
-        db = FirebaseFirestore.getInstance();
-        db.collection("Advert")
-                .whereEqualTo("Status", "Live")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && task.getResult() != null){
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                String headline = documentSnapshot.getString("Headline");
-                                String primaryText = documentSnapshot.getString("Primary Text");
-                                holder.binding.campaignName.setText(headline);
-                                holder.binding.campaignDetail.setText(primaryText);
-                            }
-                        }else {
-                            Toast.makeText(context, "Failed to get data", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
+        LiveCampaignModel liveCampaignModel = liveCampaignModelList.get(position);
+        holder.binding.campaignName.setText(liveCampaignModel.getHeadline());
+        holder.binding.campaignDetail.setText(liveCampaignModel.getPrimaryText());
     }
 
     @Override
@@ -68,12 +56,17 @@ public class LiveCampaignAdapter extends RecyclerView.Adapter<LiveCampaignAdapte
         return liveCampaignModelList.size();
     }
 
-    public class LiveCampaignViewHolder extends RecyclerView.ViewHolder {
+    public static class LiveCampaignViewHolder extends RecyclerView.ViewHolder {
 
         LiveCampaignLayoutBinding binding;
         public LiveCampaignViewHolder(@NonNull LiveCampaignLayoutBinding liveCampaignLayoutBinding) {
             super(liveCampaignLayoutBinding.getRoot());
             binding = liveCampaignLayoutBinding;
         }
+    }
+
+    public void setLiveCampaignList(ArrayList<LiveCampaignModel> liveCampaignModelList) {
+        this.liveCampaignModelList = liveCampaignModelList;
+        notifyDataSetChanged();
     }
 }

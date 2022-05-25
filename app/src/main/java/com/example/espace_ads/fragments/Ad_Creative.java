@@ -36,6 +36,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -72,6 +74,7 @@ public class Ad_Creative extends Fragment {
     private StorageTask uploadTask;
     private int uploadCount = 0;
     MediaController mediaController;
+    FirebaseUser currentUser;
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     ArrayList<Uri> imageList = new ArrayList<>();
@@ -116,6 +119,7 @@ public class Ad_Creative extends Fragment {
         mediaController = new MediaController(getContext());
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         videoView.start();
 
         videoView.setOnPreparedListener(mp -> {
@@ -163,6 +167,7 @@ public class Ad_Creative extends Fragment {
             Map<String, Object> Ad = new HashMap<>();
 
             Ad.put("Headline", hedl);
+            Ad.put("Email Address", getEmail());
             Ad.put("Description", descr);
             Ad.put("Destination1 Website", destn1);
             Ad.put("Destination2 Business Pro", destn2);
@@ -436,6 +441,11 @@ public class Ad_Creative extends Fragment {
         } else {
             Toast.makeText(getContext(), "No file selected!", Toast.LENGTH_SHORT).show();
         }
+    }
+    public String getEmail(){
+        String emailAddress;
+        emailAddress = currentUser.getEmail();
+        return emailAddress;
     }
 
 }

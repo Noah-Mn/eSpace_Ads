@@ -22,11 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecentCampaignAdapter extends RecyclerView.Adapter<RecentCampaignAdapter.RecentCampaignViewHolder> {
-    List<RecentCampaignModel> recentCampaignModelList;
-    FirebaseFirestore db;
+    ArrayList<RecentCampaignModel> recentCampaignModelList;
     Context context;
 
-    public RecentCampaignAdapter(List<RecentCampaignModel> recentCampaignModelList, Context context) {
+    public RecentCampaignAdapter(ArrayList<RecentCampaignModel> recentCampaignModelList, Context context) {
         this.recentCampaignModelList = recentCampaignModelList;
         this.context = context;
     }
@@ -41,26 +40,8 @@ public class RecentCampaignAdapter extends RecyclerView.Adapter<RecentCampaignAd
 
     @Override
     public void onBindViewHolder(@NonNull RecentCampaignViewHolder holder, int position) {
-
-        db = FirebaseFirestore.getInstance();
-        db.collection("Advert")
-//                .whereEqualTo("Status", "Recent")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && task.getResult() != null){
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                String headline = documentSnapshot.getString("Headline");
-                                String primaryText = documentSnapshot.getString("Primary Text");
-                                holder.binding.campaignName.setText(headline);
-//                                holder.binding.campaignDetail.setText(primaryText);
-                            }
-                        }else {
-                            Toast.makeText(context, "Failed to get data", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        RecentCampaignModel recentCampaignModel = recentCampaignModelList.get(position);
+        holder.binding.campaignName.setText(recentCampaignModel.getHeadline());
     }
 
     @Override
@@ -75,5 +56,9 @@ public class RecentCampaignAdapter extends RecyclerView.Adapter<RecentCampaignAd
             super(recentCampaignLayoutBinding.getRoot());
             binding = recentCampaignLayoutBinding;
         }
+    }
+    public void setRecentCampaignList(ArrayList<RecentCampaignModel> recentCampaignModelList) {
+        this.recentCampaignModelList = recentCampaignModelList;
+        notifyDataSetChanged();
     }
 }

@@ -9,6 +9,11 @@ public class LiveCampaignModel implements Serializable {
     public LiveCampaignModel() {
     }
 
+    public LiveCampaignModel(String headline, String primaryText) {
+        this.headline = headline;
+        this.primaryText = primaryText;
+    }
+
     public String getPrimaryText() {
         return primaryText;
     }

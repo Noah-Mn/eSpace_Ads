@@ -42,7 +42,6 @@
              android:ellipsize="end"
              android:gravity="center"
              android:maxLines="1"
-             android:text="Noah ikefouuibfehilb"
              android:textColor="@color/white"
              android:textSize="19sp"
              android:textStyle="bold"
