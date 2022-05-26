@@ -19,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         analytics = FirebaseAnalytics.getInstance(this);
         new Handler().postDelayed(() -> startActivity(new Intent(MainActivity.this, LogIn.class)),splashTime);
     }

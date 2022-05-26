@@ -37,9 +37,6 @@ public class HomePage extends AppCompatActivity {
         binding = ActivityHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         binding.bottomNavView.setBackground(null);
         binding.bottomNavView.getMenu().getItem(2).setEnabled(false);
         replaceFragments(new HomeFlag());
