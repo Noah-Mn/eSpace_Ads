@@ -23,6 +23,6 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         analytics = FirebaseAnalytics.getInstance(this);
-        new Handler().postDelayed(() -> startActivity(new Intent(MainActivity.this, HomePage.class)),splashTime);
+        new Handler().postDelayed(() -> startActivity(new Intent(MainActivity.this, LogIn.class)),splashTime);
     }
 }

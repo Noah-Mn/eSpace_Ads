@@ -3,4 +3,7 @@
     <style name="BottomAppBarOverlay">
         <item name="android:listViewWhiteStyle">@color/white</item>
     </style>
+    <style name="theme">
+        <item name="backgroundTint">#E6151414</item>
+    </style>
 </resources>

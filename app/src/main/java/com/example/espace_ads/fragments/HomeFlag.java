@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.example.espace_ads.adapters.RecentCampaignAdapter;
 import com.example.espace_ads.models.LiveCampaignModel;
 import com.example.espace_ads.models.RecentCampaignModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
@@ -30,7 +32,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.mig35.carousellayoutmanager.CarouselLayoutManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFlag extends Fragment {
 
@@ -38,7 +39,8 @@ public class HomeFlag extends Fragment {
     FirebaseFirestore db;
     FirebaseUser currentUser;
     String name;
-    MaterialTextView username;
+    MaterialTextView username, liveCampaign, recentCampaign;
+    ProgressBar liveCampaignProgressBar, recentCampaignProgressBar;
     private final String TAG = "Home Fragment";
     ArrayList<LiveCampaignModel> liveCampaignModelList = new ArrayList<>();
     ArrayList<RecentCampaignModel> recentCampaignModelList = new ArrayList<>();
@@ -62,6 +64,12 @@ public class HomeFlag extends Fragment {
         MaterialCardView cardView = view.findViewById(R.id.business_profile_card);
         username = view.findViewById(R.id.text_name);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        liveCampaign = view.findViewById(R.id.if_no_live);
+        recentCampaign = view.findViewById(R.id.if_no_recent);
+        liveCampaignProgressBar = view.findViewById(R.id.progress_live);
+        recentCampaignProgressBar = view.findViewById(R.id.progress_recent);
+        liveCampaignProgressBar.setVisibility(View.VISIBLE);
+        recentCampaignProgressBar.setVisibility(View.VISIBLE);
 
         getUserData();
 //        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFlag.this).commit());
@@ -98,10 +106,23 @@ public class HomeFlag extends Fragment {
                                 LiveCampaignModel liveCampaignModel = new LiveCampaignModel(headline, primaryText);
                                 liveCampaignModelList.add(liveCampaignModel);
                             }
-                            adapter.setLiveCampaignList(liveCampaignModelList);
+                            if (liveCampaignModelList.size() > 0) {
+                                adapter.setLiveCampaignList(liveCampaignModelList);
+                                liveCampaignProgressBar.setVisibility(View.GONE);
+                                liveCampaign.setVisibility(View.GONE);
+                            } else {
+                                liveCampaign.setVisibility(View.VISIBLE);
+                                liveCampaignProgressBar.setVisibility(View.GONE);
+                            }
                         } else {
                             Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
+
                         }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -122,10 +143,22 @@ public class HomeFlag extends Fragment {
                                 recentCampaignModelList.add(recentCampaignModel);
 
                             }
-                            adapter1.setRecentCampaignList(recentCampaignModelList);
+                            if (recentCampaignModelList.size() > 0) {
+                                adapter1.setRecentCampaignList(recentCampaignModelList);
+                                recentCampaignProgressBar.setVisibility(View.GONE);
+                                recentCampaign.setVisibility(View.GONE);
+                            } else {
+                                recentCampaign.setVisibility(View.VISIBLE);
+                                recentCampaignProgressBar.setVisibility(View.GONE);
+                            }
                         } else {
                             Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
                     }
                 });
 

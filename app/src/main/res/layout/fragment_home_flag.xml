@@ -112,6 +112,23 @@
                 android:orientation="horizontal"
                 android:clipToPadding="false"/>
 
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progress_live"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:id="@+id/if_no_live"
+               android:text="No live campaigns"
+               android:layout_gravity="center"
+               android:textColor="@color/white"
+                android:visibility="gone"
+               android:textSize="14sp"/>
+
          </FrameLayout>
 
          <com.google.android.material.textview.MaterialTextView
@@ -387,6 +404,23 @@
                 android:orientation="vertical"
                 android:padding="20dp"
                 android:clipToPadding="false"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progress_recent"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/if_no_recent"
+                android:text="No recent campaigns"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:textSize="14sp"/>
 
          </FrameLayout>
 
