@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class Budget extends Fragment {
 
@@ -89,31 +90,55 @@ public class Budget extends Fragment {
 
                 if (position == amountValues.length - 1) {
                     custom.setVisibility(View.VISIBLE);
-//                    int value = Integer.parseInt(customAmount.getText().toString());
+                    /***<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<keeps giving an error>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ****/
+//                    long value = Integer.parseInt(customAmount.getText().toString());
+//                    Toast.makeText(getContext(), "Entered"+value, Toast.LENGTH_SHORT).show();
+
 
 //                   will set value here
                 } else {
                     custom.setVisibility(View.GONE);
                    long value = amountValues[position];
+                    Toast.makeText(getContext(), "Selected"+value, Toast.LENGTH_SHORT).show();
 
-//                   else another value here
+                   /*******else another value here********/
                 }
 
         });
+        amountSp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+//                if nothing selected default is position 0
+                long value = amountValues[0];
+            }
+        });
+        amountSp.setFocusable(false);
     }
 
 
     public void setFrequencySpinner(View view) {
 
-        ArrayList<String> frequency = new ArrayList<>();
-
-        frequency.add("Daily");
-        frequency.add("Weekly");
-        frequency.add("Monthly");
+        String[] frequency = new String[]{"Daily", "Weekly", "Monthly"};
+//        these values are in hours to be changed if need be
+        long[] values = new long[]{24L,168L, 672L};
 
         ArrayAdapter<String> frequencyAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, frequency);
         frequencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         frequencySp.setAdapter(frequencyAdapter);
+        frequencySp.setOnItemSelectedListener((view1, position, id, item) -> {
+
+                long value = values[position];
+                Toast.makeText(getContext(), "Selected"+value, Toast.LENGTH_SHORT).show();
+
+        });
+        frequencySp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                long value = values[0];
+                Toast.makeText(getContext(), "Selected" + value, Toast.LENGTH_SHORT).show();
+            }
+        });
+        frequencySp.setFocusable(false);
     }
 
     public void setAmountPerViewSpinner(View view) {
@@ -128,6 +153,7 @@ public class Budget extends Fragment {
         ArrayAdapter<String> amountPerViewAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, amountPerView);
         amountPerViewAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         amountPerViewSp.setAdapter(amountPerViewAdapter);
+        amountPerViewSp.setFocusable(false);
     }
 
     public void loadTimePicker() {
@@ -178,10 +204,10 @@ public class Budget extends Fragment {
     public static void disableSoftInputFromAppearing(TextInputEditText pTime) {
         if (Build.VERSION.SDK_INT >= 11) {
             pTime.setRawInputType(InputType.TYPE_NULL);
-            pTime.setTextIsSelectable(true);
+            pTime.setTextIsSelectable(false);
         } else {
             pTime.setRawInputType(InputType.TYPE_NULL);
-            pTime.setFocusable(true);
+            pTime.setFocusable(false);
         }
     }
     public void getInfo(){

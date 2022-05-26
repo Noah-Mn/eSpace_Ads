@@ -88,20 +88,41 @@ public class Target_Audience extends Fragment {
         ArrayAdapter<String> countAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, gender);
         countAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         genderSpinner.setAdapter(countAdapter);
+        genderSpinner.setFocusable(false);
     }
 
     public void setAgeSpinner(View view) {
 
-        ArrayList<String> age = new ArrayList<>();
-
-        age.add("10-24");
-        age.add("25-34");
-        age.add("35-64");
-        age.add("46+");
+        String[] age = new String[]{"10-24", "25-34", "35-45", "46+"};
 
         ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, age);
         ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         ageSpinner.setAdapter(ageAdapter);
+        ageSpinner.setFocusable(false);
+        /**
+        ageSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                if (position == 0){
+                    for (long age = 10; age <= 24; age++){
+
+                    }
+                }else if (position == 1){
+                    for (long age = 25; age <= 34; age++){
+
+                    }
+                }else if (position == 2){
+                    for (long age = 35; age <= 45; age++){
+
+                    }
+                }else {
+                    for (long age = 46; age >= 46; age++){
+
+                    }
+                }
+            }
+        });
+         **/
     }
 
     private void setInfo() {
