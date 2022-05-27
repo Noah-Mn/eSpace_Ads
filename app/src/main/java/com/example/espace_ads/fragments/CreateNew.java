@@ -17,8 +17,6 @@ import com.example.espace_ads.databinding.FragmentCreateNewBinding;
 
 public class CreateNew extends Fragment {
 
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
     FragmentCreateNewBinding binding;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,56 +34,57 @@ public class CreateNew extends Fragment {
         return binding.getRoot();
     }
     private void listeners(){
-        binding.next1.setOnClickListener(new View.OnClickListener() {
+
+        binding.sells.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CreateCampaign.class);
+                startActivity(intent);
+            }
+        });
+        binding.website.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), CreateCampaign.class);
                 startActivity(intent);
             }
         });
-        binding.next2.setOnClickListener(new View.OnClickListener() {
+        binding.build.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), CreateCampaign.class);
                 startActivity(intent);
             }
         });
-        binding.next3.setOnClickListener(new View.OnClickListener() {
+        binding.views.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), CreateCampaign.class);
                 startActivity(intent);
             }
         });
-        binding.next4.setOnClickListener(new View.OnClickListener() {
+        binding.ads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), CreateCampaign.class);
                 startActivity(intent);
             }
         });
-        binding.next5.setOnClickListener(new View.OnClickListener() {
+        binding.events.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), CreateCampaign.class);
                 startActivity(intent);
             }
         });
-        binding.next6.setOnClickListener(new View.OnClickListener() {
+        binding.increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), CreateCampaign.class);
                 startActivity(intent);
             }
         });
-        binding.next7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), CreateCampaign.class);
-                startActivity(intent);
-            }
-        });
-        binding.next8.setOnClickListener(new View.OnClickListener() {
+        binding.appInstalls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), CreateCampaign.class);
