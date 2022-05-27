@@ -182,7 +182,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
 
                 </androidx.appcompat.widget.AppCompatImageView>

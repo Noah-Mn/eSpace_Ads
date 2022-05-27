@@ -28,7 +28,7 @@ public class SongTrimmer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySongTrimmerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.sBar.setClickable(false);
+        binding.sBar.setClickable(true);
         binding.btnPause.setEnabled(false);
         mediaPlayer = new MediaPlayer();
 
