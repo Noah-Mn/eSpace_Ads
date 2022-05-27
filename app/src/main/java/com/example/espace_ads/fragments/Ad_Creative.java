@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import com.example.espace_ads.R;
+import com.example.espace_ads.activityClasses.SongTrimmer;
 import com.example.espace_ads.models.AdModel;
 import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -47,6 +50,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,10 +65,12 @@ public class Ad_Creative extends Fragment {
     MaterialCheckBox website, businessProfile, mobileApplication, socialMediaProfile;
     FirebaseFirestore db;
     AdModel adModel;
+    LinearLayout musicChooser;
     VideoView videoView;
-    private Uri filepath, slideImagesUri, videoUri;
+    private Uri filepath, slideImagesUri, videoUri, audioUri;
     private final int PICK_IMAGE_REQUEST = 22;
     private final int PICK_VIDEO_REQUEST = 1;
+    private final int CHOOSE_SONG = 2;
     AppCompatImageView imagePreview;
     ProgressBar progressBar;
     StorageReference storageReference, StrReferenceSlideShow, StrVideoRef;
@@ -74,6 +80,7 @@ public class Ad_Creative extends Fragment {
     MediaController mediaController;
     FirebaseUser currentUser;
     ArrayList<Uri> imageList = new ArrayList<>();
+    MediaPlayer mediaPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,6 +99,7 @@ public class Ad_Creative extends Fragment {
         primaryText = (TextInputEditText) view.findViewById(R.id.editText_primary_text);
         headline = (TextInputEditText) view.findViewById(R.id.editText_headline);
         description = (TextInputEditText) view.findViewById(R.id.editText_description);
+        musicChooser = (LinearLayout) view.findViewById(R.id.music);
 
         editTextWebsite = (TextInputEditText) view.findViewById(R.id.editText_website);
         editTextBusiness_pro = (TextInputEditText) view.findViewById(R.id.editText_business_pro);
@@ -226,6 +234,19 @@ public class Ad_Creative extends Fragment {
                 }
             }
         });
+
+        musicChooser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseSong();
+            }
+        });
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                // will edit later
+            }
+        });
     }
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
@@ -267,6 +288,13 @@ public class Ad_Creative extends Fragment {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
+    private void chooseSong(){
+        Intent intent = new Intent();
+        intent.setType("audio/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, CHOOSE_SONG);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -290,6 +318,24 @@ public class Ad_Creative extends Fragment {
             videoUri = data.getData();
             videoView.setVisibility(View.VISIBLE);
             videoView.setVideoURI(videoUri);
+        }
+        if (requestCode == CHOOSE_SONG && resultCode == RESULT_OK && data != null && data.getData() != null){
+            audioUri = data.getData();
+            Intent intent = new Intent(getContext(), SongTrimmer.class);
+            intent.putExtra("audioUri",audioUri.toString());
+            startActivity(intent);
+
+//            mediaPlayer = new MediaPlayer();
+//            try {
+//                mediaPlayer.setDataSource(getContext(), audioUri);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }try {
+//                mediaPlayer.prepare();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            mediaPlayer.start();
         }
     }
 

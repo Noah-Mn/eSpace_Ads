@@ -8,8 +8,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:paddingBottom="?attr/actionBarSize"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="?attr/actionBarSize">
 
 
         <RelativeLayout
@@ -449,10 +449,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@id/icon8"
-                    android:text="Get more app installs"
                     android:layout_marginEnd="5dp"
                     android:layout_toStartOf="@id/next8"
+                    android:layout_toEndOf="@id/icon8"
+                    android:text="Get more app installs"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />

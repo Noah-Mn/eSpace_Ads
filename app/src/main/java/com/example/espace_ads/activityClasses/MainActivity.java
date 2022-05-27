@@ -1,11 +1,10 @@
 package com.example.espace_ads.activityClasses;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.espace_ads.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -20,6 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         analytics = FirebaseAnalytics.getInstance(this);
-        new Handler().postDelayed(() -> startActivity(new Intent(MainActivity.this, LogIn.class)),splashTime);
+        new Handler().postDelayed(() -> startActivity(new Intent(MainActivity.this, HomePage.class)), splashTime);
     }
 }

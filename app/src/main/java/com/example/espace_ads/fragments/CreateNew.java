@@ -2,22 +2,19 @@ package com.example.espace_ads.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.espace_ads.R;
+import androidx.fragment.app.Fragment;
+
 import com.example.espace_ads.activityClasses.CreateCampaign;
 import com.example.espace_ads.databinding.FragmentCreateNewBinding;
 
 public class CreateNew extends Fragment {
 
     FragmentCreateNewBinding binding;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +30,8 @@ public class CreateNew extends Fragment {
 
         return binding.getRoot();
     }
-    private void listeners(){
+
+    private void listeners() {
 
         binding.sells.setOnClickListener(new View.OnClickListener() {
             @Override
