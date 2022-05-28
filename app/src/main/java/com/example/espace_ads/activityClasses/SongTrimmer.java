@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -40,7 +39,6 @@ public class SongTrimmer extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         videoView = findViewById(R.id.imgLogo);
 
-
         try {
             listeners();
         } catch (IOException e) {
@@ -67,16 +65,18 @@ public class SongTrimmer extends AppCompatActivity {
 
                     binding.sBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener() {
                         @Override
-                        public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Object minValue, Object maxValue) {
-                            videoView.seekTo((int) minValue*1000);
+                        public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Number minValue, Number maxValue) {
+
+                            videoView.seekTo((int) minValue * 1000);
                         }
+
                     });
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (videoView.getCurrentPosition() >= binding.sBar.getSelectedMaxValue().intValue()*1000){
-                                videoView.seekTo(binding.sBar.getSelectedMinValue().intValue()*1000);
+                            if (videoView.getCurrentPosition() >= binding.sBar.getSelectedMaxValue().intValue() * 1000) {
+                                videoView.seekTo(binding.sBar.getSelectedMinValue().intValue() * 1000);
                             }
                         }
                     }, 1000);

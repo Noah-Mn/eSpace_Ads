@@ -9,5 +9,4 @@
     android:textColor="@color/black"
     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1">
 
-
 </TextView>

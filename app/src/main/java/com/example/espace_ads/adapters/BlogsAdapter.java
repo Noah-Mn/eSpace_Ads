@@ -3,7 +3,6 @@ package com.example.espace_ads.adapters;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.espace_ads.databinding.BlogLayoutBinding;
 import com.example.espace_ads.models.BlogsModel;
-import com.example.espace_ads.models.LiveCampaignModel;
 
 import java.util.ArrayList;
 
-public class BlogsAdapter extends RecyclerView.Adapter<BlogsAdapter.BlogsViewHolder>{
+public class BlogsAdapter extends RecyclerView.Adapter<BlogsAdapter.BlogsViewHolder> {
 
     ArrayList<BlogsModel> blogsModelArrayList;
     Context context;
@@ -50,6 +48,7 @@ public class BlogsAdapter extends RecyclerView.Adapter<BlogsAdapter.BlogsViewHol
     public static class BlogsViewHolder extends RecyclerView.ViewHolder {
 
         BlogLayoutBinding binding;
+
         public BlogsViewHolder(@NonNull BlogLayoutBinding blogLayoutBinding) {
             super(blogLayoutBinding.getRoot());
             binding = blogLayoutBinding;

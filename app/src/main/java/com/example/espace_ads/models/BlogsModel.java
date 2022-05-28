@@ -1,9 +1,5 @@
 package com.example.espace_ads.models;
 
-import android.net.Uri;
-
-import java.util.Date;
-
 public class BlogsModel {
     String campaignLogo;
     String campaignDetail;
