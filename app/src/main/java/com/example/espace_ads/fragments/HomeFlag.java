@@ -15,8 +15,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.espace_ads.R;
+import com.example.espace_ads.adapters.BlogsAdapter;
 import com.example.espace_ads.adapters.LiveCampaignAdapter;
 import com.example.espace_ads.adapters.RecentCampaignAdapter;
+import com.example.espace_ads.models.BlogsModel;
 import com.example.espace_ads.models.LiveCampaignModel;
 import com.example.espace_ads.models.RecentCampaignModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 
 public class HomeFlag extends Fragment {
 
-    RecyclerView liveCampaignRecycleView, recentCampaignRecyclerView;
+    RecyclerView liveCampaignRecycleView, recentCampaignRecyclerView, blogsRecyclerView;
     FirebaseFirestore db;
     FirebaseUser currentUser;
     String name;
@@ -44,6 +46,7 @@ public class HomeFlag extends Fragment {
     private final String TAG = "Home Fragment";
     ArrayList<LiveCampaignModel> liveCampaignModelList = new ArrayList<>();
     ArrayList<RecentCampaignModel> recentCampaignModelList = new ArrayList<>();
+    ArrayList<BlogsModel> blogsModelArrayList = new ArrayList<>();
     View view;
 
     @Override
@@ -70,6 +73,7 @@ public class HomeFlag extends Fragment {
         recentCampaignProgressBar = view.findViewById(R.id.progress_recent);
         liveCampaignProgressBar.setVisibility(View.VISIBLE);
         recentCampaignProgressBar.setVisibility(View.VISIBLE);
+        blogsRecyclerView = view.findViewById(R.id.blogs_list);
 
         getUserData();
 //        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFlag.this).commit());
@@ -89,6 +93,10 @@ public class HomeFlag extends Fragment {
         RecentCampaignAdapter adapter1 = new RecentCampaignAdapter(recentCampaignModelList, getContext());
         recentCampaignRecyclerView.setHasFixedSize(true);
         recentCampaignRecyclerView.setAdapter(adapter1);
+
+        BlogsAdapter blogsAdapter = new BlogsAdapter(blogsModelArrayList, getContext());
+        blogsRecyclerView.setHasFixedSize(true);
+        blogsRecyclerView.setAdapter(blogsAdapter);
 
         db.collection("Advert")
                 .whereEqualTo("Email Address", getEmail())
@@ -161,6 +169,8 @@ public class HomeFlag extends Fragment {
                         Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        /**      <<<<<<<<<<<<<<<<<<<<<<<<<<get blogs somewhere here>>>>>>>>>>>>>>>>>>>    **/
 
         return view;
     }

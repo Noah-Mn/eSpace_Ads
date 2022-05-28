@@ -2,29 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
-    <TextView
-        android:id="@+id/txtVw1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Now Playing: "
-        android:layout_marginTop="30dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <TextView
-        android:id="@+id/txtSname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtVw1"
-        android:layout_toRightOf="@+id/txtVw1"
-        android:text="TextView" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <VideoView
         android:id="@+id/imgLogo"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
+        android:layout_above="@id/sBar"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:src="@drawable/musical_note1" />
 
     <ImageButton
@@ -67,17 +53,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/sBar"
-        android:layout_marginStart="10dp"
+        android:layout_alignBottom="@id/sBar"
+        android:layout_marginStart="2dp"
+        android:gravity="bottom"
+        android:paddingBottom="8dp"
         android:text="0 min, 0 sec" />
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <org.florescu.android.rangeseekbar.RangeSeekBar
         android:id="@+id/sBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnBackward"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="10dp"
         android:layout_toLeftOf="@+id/txtSongTime"
-        android:layout_toRightOf="@+id/txtStartTime" />
-
+        android:layout_toRightOf="@+id/txtStartTime"
+        app:showLabels="false" />
 
 </RelativeLayout>

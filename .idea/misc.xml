@@ -30,7 +30,8 @@
         <entry key="app/src/main/res/layout/activity_create_campaign.xml" value="0.15670289855072464" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_song_trimmer.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/layout/activity_song_trimmer.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/blog_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_ads.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_budget.xml" value="0.25" />

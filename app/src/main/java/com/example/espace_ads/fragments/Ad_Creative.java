@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.activityClasses.SongTrimmer;
-import com.example.espace_ads.models.AdModel;
 import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,7 +49,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,7 +62,6 @@ public class Ad_Creative extends Fragment {
     String primText, hedl, descr, destn1, destn2, destn3, destn4;
     MaterialCheckBox website, businessProfile, mobileApplication, socialMediaProfile;
     FirebaseFirestore db;
-    AdModel adModel;
     LinearLayout musicChooser;
     VideoView videoView;
     private Uri filepath, slideImagesUri, videoUri, audioUri;
@@ -137,7 +134,6 @@ public class Ad_Creative extends Fragment {
             }
         });
 
-        adModel = new AdModel();
         listener();
 
         return view;
@@ -164,7 +160,6 @@ public class Ad_Creative extends Fragment {
             destn2 = Objects.requireNonNull(editTextBusiness_pro.getText()).toString();
             destn3 = Objects.requireNonNull(editTextSocialMediaPro.getText()).toString();
             destn4 = Objects.requireNonNull(editTextMobileApp.getText()).toString();
-            adModel.setHeadline(hedl);
 
             db = FirebaseFirestore.getInstance();
             Map<String, Object> Ad = new HashMap<>();
@@ -185,6 +180,7 @@ public class Ad_Creative extends Fragment {
             Ad.put("Location", "null");
             Ad.put("Gender", "null");
             Ad.put("Age", "null");
+            Ad.put("Payment State", "Not Paid");
 
             db.collection("Advert")
                     .add(Ad)
@@ -261,7 +257,7 @@ public class Ad_Creative extends Fragment {
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
                             encodedImage = encodeImage(bitmap);
-                            adModel.setEncodedImage(encodedImage);
+
 
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -288,7 +284,7 @@ public class Ad_Creative extends Fragment {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
-    private void chooseSong(){
+    private void chooseSong() {
         Intent intent = new Intent();
         intent.setType("audio/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -319,10 +315,10 @@ public class Ad_Creative extends Fragment {
             videoView.setVisibility(View.VISIBLE);
             videoView.setVideoURI(videoUri);
         }
-        if (requestCode == CHOOSE_SONG && resultCode == RESULT_OK && data != null && data.getData() != null){
+        if (requestCode == CHOOSE_SONG && resultCode == RESULT_OK && data != null && data.getData() != null) {
             audioUri = data.getData();
             Intent intent = new Intent(getContext(), SongTrimmer.class);
-            intent.putExtra("audioUri",audioUri.toString());
+            intent.putExtra("audioUri", audioUri.toString());
             startActivity(intent);
 
 //            mediaPlayer = new MediaPlayer();
