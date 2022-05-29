@@ -36,7 +36,7 @@
         <entry key="app/src/main/res/layout/fragment_ads.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_budget.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_business_profile_buy.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_business_profile_store.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_business_profile_store.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_create_new.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_drafts.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_duplicates.xml" value="0.16979166666666667" />
@@ -45,6 +45,7 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_target__audience.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/grid_item.xml" value="0.2" />
         <entry key="app/src/main/res/layout/list_group.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/live_campaign_layout.xml" value="0.5" />
