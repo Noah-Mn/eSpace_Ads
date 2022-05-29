@@ -125,6 +125,7 @@ public class Budget extends Fragment {
         ArrayAdapter<String> frequencyAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, frequency);
         frequencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         frequencySp.setAdapter(frequencyAdapter);
+//        frequencySp.setFocusedByDefault(true);
         frequencySp.setOnItemSelectedListener((view1, position, id, item) -> {
 
                 long value = values[position];

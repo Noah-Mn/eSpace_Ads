@@ -1,5 +1,6 @@
 package com.example.espace_ads.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -60,6 +62,7 @@ public class HomeFlag extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class HomeFlag extends Fragment {
         spinner = view.findViewById(R.id.spinner);
 
         getUserData();
+        setSpinner(view);
 //        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFlag.this).commit());
 
 
@@ -210,18 +214,20 @@ public class HomeFlag extends Fragment {
                 });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setSpinner(View view) {
 
         String[] accounts = new String[]{"Logout"};
 
-        ArrayAdapter<String> accountsAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, accounts);
+        ArrayAdapter<String> accountsAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, accounts);
         accountsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(accountsAdapter);
+        spinner.setFocusedByDefault(true);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
-                    //logout
+                    Toast.makeText(getContext(), "Log out clicked", Toast.LENGTH_SHORT).show();
                 }
             }
 
