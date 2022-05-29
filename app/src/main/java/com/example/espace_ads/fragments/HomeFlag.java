@@ -5,7 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.mig35.carousellayoutmanager.CarouselLayoutManager;
 
 import java.util.ArrayList;
@@ -48,6 +52,7 @@ public class HomeFlag extends Fragment {
     ArrayList<RecentCampaignModel> recentCampaignModelList = new ArrayList<>();
     ArrayList<BlogsModel> blogsModelArrayList = new ArrayList<>();
     View view;
+    Spinner spinner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class HomeFlag extends Fragment {
         liveCampaignProgressBar.setVisibility(View.VISIBLE);
         recentCampaignProgressBar.setVisibility(View.VISIBLE);
         blogsRecyclerView = view.findViewById(R.id.blogs_list);
+        spinner = view.findViewById(R.id.spinner);
 
         getUserData();
 //        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFlag.this).commit());
@@ -202,6 +208,28 @@ public class HomeFlag extends Fragment {
                         }
                     }
                 });
+    }
+
+    public void setSpinner(View view) {
+
+        String[] accounts = new String[]{"Logout"};
+
+        ArrayAdapter<String> accountsAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, accounts);
+        accountsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner.setAdapter(accountsAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0){
+                    //logout
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     public String getEmail() {

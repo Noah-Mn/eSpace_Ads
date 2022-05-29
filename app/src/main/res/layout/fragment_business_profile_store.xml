@@ -141,7 +141,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Beverage Company juwfuuuhdffhkibwefvyuvwdyhvubqwdufvyuwdvfyubyufbduwbjibbuwdbubuufubfbhbhbvkvfhdbhbvbslibvufbbfvbhfbbbbhfbslbvjdbfsvbvfdhhdfbhbdddbvhfh"
+                    android:text="Orzora is a beverage company specialized in coffee manufacturing, 100% juice... "
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:textColor="#66FFFFFF"/>
