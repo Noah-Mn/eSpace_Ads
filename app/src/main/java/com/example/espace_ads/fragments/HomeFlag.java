@@ -106,6 +106,8 @@ public class HomeFlag extends Fragment{
 
                         switch (item.getItemId()){
                             case R.id.logout:
+
+                                /**    logout to be implemented here   **/
                                 Toast.makeText(getContext(), "Logout", Toast.LENGTH_SHORT).show();
                                 break;
                         }
@@ -207,7 +209,7 @@ public class HomeFlag extends Fragment{
                     }
                 });
 
-        /**      <<<<<<<<<<<<<<<<<<<<<<<<<<get blogs somewhere here>>>>>>>>>>>>>>>>>>>    **/
+        /**      <<<<<<<<<<<<<<<<<<<<<<<<<<get blogs from somewhere here>>>>>>>>>>>>>>>>>>>    **/
 
         return view;
     }
@@ -245,6 +247,5 @@ public class HomeFlag extends Fragment{
         emailAddress = currentUser.getEmail();
         return emailAddress;
     }
-
 
 }
