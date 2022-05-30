@@ -3,17 +3,24 @@ package com.example.espace_ads.fragments;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -40,8 +47,9 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.mig35.carousellayoutmanager.CarouselLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class HomeFlag extends Fragment {
+public class HomeFlag extends Fragment{
 
     RecyclerView liveCampaignRecycleView, recentCampaignRecyclerView, blogsRecyclerView;
     FirebaseFirestore db;
@@ -54,7 +62,7 @@ public class HomeFlag extends Fragment {
     ArrayList<RecentCampaignModel> recentCampaignModelList = new ArrayList<>();
     ArrayList<BlogsModel> blogsModelArrayList = new ArrayList<>();
     View view;
-    Spinner spinner;
+    AppCompatImageView dropdown;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,12 +90,31 @@ public class HomeFlag extends Fragment {
         liveCampaignProgressBar.setVisibility(View.VISIBLE);
         recentCampaignProgressBar.setVisibility(View.VISIBLE);
         blogsRecyclerView = view.findViewById(R.id.blogs_list);
-        spinner = view.findViewById(R.id.spinner);
+        dropdown = view.findViewById(R.id.drop_down);
 
         getUserData();
-        setSpinner(view);
 //        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFlag.this).commit());
 
+        dropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(getContext(), dropdown);
+                popupMenu.getMenuInflater().inflate(R.menu.menu_item, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()){
+                            case R.id.logout:
+                                Toast.makeText(getContext(), "Logout", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,35 +240,11 @@ public class HomeFlag extends Fragment {
                     }
                 });
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setSpinner(View view) {
-
-        String[] accounts = new String[]{"Logout"};
-
-        ArrayAdapter<String> accountsAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, accounts);
-        accountsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinner.setAdapter(accountsAdapter);
-        spinner.setFocusedByDefault(true);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0){
-                    Toast.makeText(getContext(), "Log out clicked", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
     public String getEmail() {
         String emailAddress;
         emailAddress = currentUser.getEmail();
         return emailAddress;
     }
+
 
 }
