@@ -31,6 +31,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -314,14 +315,14 @@ public class Budget extends Fragment {
     }
     public void calculateDays() throws ParseException {
         getInfo();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
         Date date1 = sdf.parse(startingDate);
         Date date2 = sdf.parse(endingDate);
 
         assert date1 != null;
         assert date2 != null;
-        long difference = (int)(date2.getTime() - date1.getTime());
-        int daysBetween = (int) TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+        long difference = Math.abs(date2.getTime() - date1.getTime());
+        long daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
 
         Toast.makeText(getContext(), "Days" + daysBetween, Toast.LENGTH_SHORT).show();
 
