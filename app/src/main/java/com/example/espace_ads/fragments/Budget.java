@@ -1,7 +1,12 @@
 package com.example.espace_ads.fragments;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
@@ -9,17 +14,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.espace_ads.R;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +47,8 @@ public class Budget extends Fragment {
     private int currentMinute;
     private TimePickerDialog timePickerDialog;
     String startingDate, endingDate, startingTime, endingTime;
+    private DatePickerDialog datePickerDialog;
+    private OnFragmentInteractionListener mListener;
 
     public Budget() {
         // Required empty public constructor
@@ -47,6 +60,7 @@ public class Budget extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,11 +75,14 @@ public class Budget extends Fragment {
         startTime = view.findViewById(R.id.editText_time);
         endTime = view.findViewById(R.id.editText_end_time);
         btnCalculate = view.findViewById(R.id.calculate_btn);
+        startDate = view.findViewById(R.id.editText_date);
+        endDate = view.findViewById(R.id.editText_end_date);
 
         setAmountSpinner(view);
         setFrequencySpinner(view);
         setAmountPerViewSpinner(view);
         loadTimePicker();
+        datePicker();
 
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +175,7 @@ public class Budget extends Fragment {
     }
 
     public void loadTimePicker() {
-        disableSoftInputFromAppearing(startTime);
+        disableSoftInputFromAppearing(startTime, startDate);
         startTime.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -179,7 +196,7 @@ public class Budget extends Fragment {
             }
         });
 
-        disableSoftInputFromAppearing(endTime);
+        disableSoftInputFromAppearing(endTime, endDate);
         endTime.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -202,13 +219,60 @@ public class Budget extends Fragment {
 
     }
 
-    public static void disableSoftInputFromAppearing(TextInputEditText pTime) {
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void datePicker(){
+        disableSoftInputFromAppearing(startTime, startDate);
+        startDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int REQUEST_CODE = 11;
+                final FragmentManager fm = ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportFragmentManager();
+
+//                 create the datePickerFragment
+                AppCompatDialogFragment newFragment = new DatePickerFragment();
+                // set the targetFragment to receive the results, specifying the request code
+                newFragment.setTargetFragment(Budget.this, REQUEST_CODE);
+                // show the datePicker
+                newFragment.show(fm, "datePicker");
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // check for the results
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // get date from string
+            String selectedDate = data.getStringExtra("selectedDate");
+            // set the value of the editText
+            startDate.setText(selectedDate);
+        }
+    }
+
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+    public static void disableSoftInputFromAppearing(TextInputEditText pTime, TextInputEditText date) {
         if (Build.VERSION.SDK_INT >= 11) {
             pTime.setRawInputType(InputType.TYPE_NULL);
+            date.setRawInputType(InputType.TYPE_NULL);
             pTime.setTextIsSelectable(false);
+            date.setTextIsSelectable(false);
         } else {
             pTime.setRawInputType(InputType.TYPE_NULL);
+            date.setRawInputType(InputType.TYPE_NULL);
             pTime.setFocusable(false);
+            date.setFocusable(false);
         }
     }
     public void getInfo(){
@@ -230,4 +294,5 @@ public class Budget extends Fragment {
         return numDays;
 
     }
+
 }
