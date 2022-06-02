@@ -79,6 +79,7 @@ public class Ad_Creative extends Fragment {
     ArrayList<Uri> imageList = new ArrayList<>();
     MediaPlayer mediaPlayer;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -298,6 +299,7 @@ public class Ad_Creative extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filepath = data.getData();
             imagePreview.setVisibility(View.VISIBLE);
+            musicChooser.setVisibility(View.VISIBLE);
             imagePreview.setImageURI(filepath);
         }
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getClipData() != null) {

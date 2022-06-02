@@ -2,9 +2,7 @@ package com.example.espace_ads.fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -15,15 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -32,12 +27,12 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class Budget extends Fragment {
 
@@ -53,7 +48,6 @@ public class Budget extends Fragment {
     private OnFragmentInteractionListener mListener;
     final int REQUEST_CODE = 11;
     final int REQUEST_CODE_2 = 10;
-
 
     public Budget() {
         // Required empty public constructor
@@ -84,6 +78,7 @@ public class Budget extends Fragment {
         endDate = view.findViewById(R.id.editText_end_date);
 
 
+
         setAmountSpinner(view);
         setFrequencySpinner(view);
         setAmountPerViewSpinner(view);
@@ -93,7 +88,13 @@ public class Budget extends Fragment {
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getInfo();
+                try {
+                    calculateDays();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+//                Toast.makeText(getContext(), "Days "+ days, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -306,22 +307,23 @@ public class Budget extends Fragment {
         }
     }
     public void getInfo(){
-        startingTime = startTime.getText().toString();
-        endingTime = endTime.getText().toString();
+        startingTime = Objects.requireNonNull(startTime.getText()).toString();
+        endingTime = Objects.requireNonNull(endTime.getText()).toString();
+        startingDate = Objects.requireNonNull(startDate.getText()).toString();
+        endingDate = Objects.requireNonNull(endDate.getText()).toString();
     }
-    public long calculate() throws ParseException {
+    public void calculateDays() throws ParseException {
         getInfo();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         Date date1 = sdf.parse(startingDate);
         Date date2 = sdf.parse(endingDate);
 
         assert date1 != null;
         assert date2 != null;
-        long numDays = date1.getTime()- date2.getTime();
+        long difference = (int)(date2.getTime() - date1.getTime());
+        int daysBetween = (int) TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
 
-        Toast.makeText(getContext(), "Days" + numDays, Toast.LENGTH_SHORT).show();
-
-        return numDays;
+        Toast.makeText(getContext(), "Days" + daysBetween, Toast.LENGTH_SHORT).show();
 
     }
 

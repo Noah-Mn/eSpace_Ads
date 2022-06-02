@@ -195,6 +195,7 @@
                     android:layout_alignEnd="@id/image_preview"
                     android:layout_alignBottom="@id/image_preview"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
