@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -49,6 +51,9 @@ public class Budget extends Fragment {
     String startingDate, endingDate, startingTime, endingTime;
     private DatePickerDialog datePickerDialog;
     private OnFragmentInteractionListener mListener;
+    final int REQUEST_CODE = 11;
+    final int REQUEST_CODE_2 = 10;
+
 
     public Budget() {
         // Required empty public constructor
@@ -77,6 +82,7 @@ public class Budget extends Fragment {
         btnCalculate = view.findViewById(R.id.calculate_btn);
         startDate = view.findViewById(R.id.editText_date);
         endDate = view.findViewById(R.id.editText_end_date);
+
 
         setAmountSpinner(view);
         setFrequencySpinner(view);
@@ -225,13 +231,25 @@ public class Budget extends Fragment {
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int REQUEST_CODE = 11;
-                final FragmentManager fm = ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportFragmentManager();
 
+                final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
 //                 create the datePickerFragment
                 AppCompatDialogFragment newFragment = new DatePickerFragment();
                 // set the targetFragment to receive the results, specifying the request code
                 newFragment.setTargetFragment(Budget.this, REQUEST_CODE);
+                // show the datePicker
+                newFragment.show(fm, "datePicker");
+            }
+        });
+
+        endDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
+//                 create the datePickerFragment
+                AppCompatDialogFragment newFragment = new DatePickerFragment();
+                // set the targetFragment to receive the results, specifying the request code
+                newFragment.setTargetFragment(Budget.this, REQUEST_CODE_2);
                 // show the datePicker
                 newFragment.show(fm, "datePicker");
             }
@@ -246,10 +264,22 @@ public class Budget extends Fragment {
             String selectedDate = data.getStringExtra("selectedDate");
             // set the value of the editText
             startDate.setText(selectedDate);
+        }else if (requestCode == REQUEST_CODE_2 && resultCode == Activity.RESULT_OK){
+            String selectedDate = data.getStringExtra("selectedDate");
+            endDate.setText(selectedDate);
         }
     }
 
-
+//    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
     @Override
     public void onDetach() {
