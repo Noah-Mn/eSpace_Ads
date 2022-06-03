@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,7 @@ public class Budget extends Fragment {
     private MaterialCardView custom;
     private Calendar calendar;
     private int currentHour, currentMinute;
-    private long amountPrFrequency, amountPrView, amounts;
+    private long amountPrFrequency, amountPrView, amounts, customAmounts;
     private TimePickerDialog timePickerDialog;
     private String startingDate, endingDate, startingTime, endingTime;
     private DatePickerDialog datePickerDialog;
@@ -123,9 +124,8 @@ public class Budget extends Fragment {
             if (position == amountValues.length - 1) {
                 custom.setVisibility(View.VISIBLE);
                 /***<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<keeps giving an error>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ****/
-                long value = Long.parseLong(Objects.requireNonNull(customAmount.getText()).toString());
-                budgetModel.setAmount(value);
-
+                long value1 = amountValues[amountValues.length-1];
+                budgetModel.setAmount(value1);
 //                    Toast.makeText(getContext(), "Entered"+value, Toast.LENGTH_SHORT).show();
 
 //                   will set value here
@@ -327,6 +327,7 @@ public class Budget extends Fragment {
         amounts = budgetModel.getAmount();
         amountPrFrequency = budgetModel.getFrequency();
         amountPrView = budgetModel.getStrategy();
+        customAmounts = Long.parseLong(customAmount.getText().toString());
     }
 
     public void calculateAmounts() throws ParseException {
@@ -334,6 +335,12 @@ public class Budget extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
         Date date1 = sdf.parse(startingDate);
         Date date2 = sdf.parse(endingDate);
+
+        if (amounts == 0){
+            amounts = customAmounts;
+            /**      <<<<<<<<<<<<<<<<<<<<<<<<<<<Do something with the amount here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   **/
+//            Toast.makeText(getContext(), "Cu"+amounts, Toast.LENGTH_SHORT).show();
+        }
 
         long amountPrDay = 5000L;
         long amountPrWeek = 4000L;
