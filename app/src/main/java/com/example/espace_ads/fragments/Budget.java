@@ -1,5 +1,7 @@
 package com.example.espace_ads.fragments;
 
+import static java.lang.Long.parseLong;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -41,7 +43,7 @@ public class Budget extends Fragment {
     private MaterialSpinner frequencySp, amountSp, amountPerViewSp;
     private MaterialTextView totalConv, totalConvPrDay, totalAmount, totalAmountPrDay, totalConversionsPerDay, totalAmountPerDay;
     private TextInputEditText customAmount, startTime, endTime, startDate, endDate;
-    private MaterialCardView custom;
+    private MaterialCardView custom, payButton, btnCalculate;
     private Calendar calendar;
     private int currentHour, currentMinute;
     private long amountPrFrequency, amountPrView, amounts, customAmounts;
@@ -77,7 +79,7 @@ public class Budget extends Fragment {
         custom = view.findViewById(R.id.custom);
         startTime = view.findViewById(R.id.editText_time);
         endTime = view.findViewById(R.id.editText_end_time);
-        MaterialCardView btnCalculate = view.findViewById(R.id.calculate_btn);
+        btnCalculate = view.findViewById(R.id.calculate_btn);
         startDate = view.findViewById(R.id.editText_date);
         endDate = view.findViewById(R.id.editText_end_date);
         totalConv = view.findViewById(R.id.conversions_number);
@@ -86,6 +88,7 @@ public class Budget extends Fragment {
         totalAmountPrDay = view.findViewById(R.id.total_money_per_day);
         totalConversionsPerDay = view.findViewById(R.id.total_conversions_per_day);
         totalAmountPerDay = view.findViewById(R.id.total_amount_per_day);
+        payButton = view.findViewById(R.id.pay_btn);
 
 
         setAmountSpinner(view);
@@ -93,6 +96,12 @@ public class Budget extends Fragment {
         setAmountPerViewSpinner(view);
         loadTimePicker();
         datePicker();
+        listeners();
+
+        return view;
+    }
+
+    private void listeners() {
 
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +116,27 @@ public class Budget extends Fragment {
             }
         });
 
-        return view;
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getInfo();
+                if (amounts == 0) {
+                    customAmounts = parseLong(Objects.requireNonNull(customAmount.getText()).toString());
+                    if (String.valueOf(customAmounts).equals("")) {
+                        Toast.makeText(getContext(), "Please fill the values", Toast.LENGTH_LONG).show();
+                    }
+                    amounts = customAmounts;
+                    /**      <<<<<<<<<<<<<<<<<<<<<<<<<<<Do something with the amount here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   **/
+                    Toast.makeText(getContext(), "Custom " + amounts, Toast.LENGTH_SHORT).show();
+                } else {
+                    if (String.valueOf(amounts).equals("")) {
+                        Toast.makeText(getContext(), "Please fill all values", Toast.LENGTH_SHORT).show();
+                    }
+                    Toast.makeText(getContext(), "Amount " + amounts, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     public void setAmountSpinner(View view) {
@@ -124,7 +153,7 @@ public class Budget extends Fragment {
             if (position == amountValues.length - 1) {
                 custom.setVisibility(View.VISIBLE);
                 /***<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<keeps giving an error>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ****/
-                long value1 = amountValues[amountValues.length-1];
+                long value1 = amountValues[amountValues.length - 1];
                 budgetModel.setAmount(value1);
 //                    Toast.makeText(getContext(), "Entered"+value, Toast.LENGTH_SHORT).show();
 
@@ -144,6 +173,7 @@ public class Budget extends Fragment {
             public void onNothingSelected(MaterialSpinner spinner) {
 //                if nothing selected default is position 0
                 long value = amountValues[0];
+                budgetModel.setAmount(value);
             }
         });
         amountSp.setFocusable(false);
@@ -327,7 +357,6 @@ public class Budget extends Fragment {
         amounts = budgetModel.getAmount();
         amountPrFrequency = budgetModel.getFrequency();
         amountPrView = budgetModel.getStrategy();
-        customAmounts = Long.parseLong(customAmount.getText().toString());
     }
 
     public void calculateAmounts() throws ParseException {
@@ -335,12 +364,6 @@ public class Budget extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
         Date date1 = sdf.parse(startingDate);
         Date date2 = sdf.parse(endingDate);
-
-        if (amounts == 0){
-            amounts = customAmounts;
-            /**      <<<<<<<<<<<<<<<<<<<<<<<<<<<Do something with the amount here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   **/
-//            Toast.makeText(getContext(), "Cu"+amounts, Toast.LENGTH_SHORT).show();
-        }
 
         long amountPrDay = 5000L;
         long amountPrWeek = 4000L;
@@ -357,6 +380,14 @@ public class Budget extends Fragment {
         long monthsBetween = daysBetween / 28;
 
 //        Toast.makeText(getContext(), "Days" + daysBetween, Toast.LENGTH_SHORT).show();
+
+//        if (amounts == 0) {
+//            amounts = customAmounts;
+//            /**      <<<<<<<<<<<<<<<<<<<<<<<<<<<Do something with the amount here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   **/
+//            Toast.makeText(getContext(), "Custom " + amounts, Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(getContext(), "Amount " + amounts, Toast.LENGTH_SHORT).show();
+//        }
 
         if (frequency == 1) {
             long Total = amountPrDay * strategy * daysBetween;
