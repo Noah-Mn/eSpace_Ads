@@ -58,8 +58,6 @@ public class LogIn extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
         logEmailAddress = Objects.requireNonNull(binding.loginEmail.getText()).toString();
         logPassword = Objects.requireNonNull(binding.loginPassword.getText()).toString();
-//        userPassword = logPassword;
-//        driverPassword = logPassword;
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(logEmailAddress).matches()){
             binding.materialLogEmail.setError("Please enter a valid email address");

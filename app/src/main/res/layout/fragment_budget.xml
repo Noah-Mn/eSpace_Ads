@@ -329,14 +329,16 @@
                     android:id="@+id/editText_end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
+                    android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_backg"
                     android:focusableInTouchMode="false"
-                    android:hint="  End time"
+                    android:hint="End time"
                     android:inputType="time"
                     android:padding="5dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
+                    android:textAlignment="textEnd"
                     android:textColor="#B0FFFFFF"
                     android:textColorHint="#B0FFFFFF"
                     android:textSize="13sp"
@@ -364,12 +366,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="5dp"
                     android:padding="3dp"
                     android:text="Calculate"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -591,19 +595,22 @@
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/overview">
+                app:layout_constraintTop_toBottomOf="@id/overview"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="5dp"
                     android:padding="3dp"
                     android:text="Pay"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
             </com.google.android.material.card.MaterialCardView>
 

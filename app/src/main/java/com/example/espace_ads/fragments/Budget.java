@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,13 +22,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.espace_ads.R;
+import com.example.espace_ads.models.BudgetModel;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textview.MaterialTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -37,18 +37,20 @@ import java.util.concurrent.TimeUnit;
 
 public class Budget extends Fragment {
 
-    MaterialSpinner frequencySp, amountSp, amountPerViewSp;
-    TextInputEditText customAmount, startTime, endTime, startDate, endDate;
-    MaterialCardView custom, btnCalculate;
+    private MaterialSpinner frequencySp, amountSp, amountPerViewSp;
+    private MaterialTextView totalConv, totalConvPrDay, totalAmount, totalAmountPrDay, totalConversionsPerDay, totalAmountPerDay;
+    private TextInputEditText customAmount, startTime, endTime, startDate, endDate;
+    private MaterialCardView custom;
     private Calendar calendar;
-    private int currentHour;
-    private int currentMinute;
+    private int currentHour, currentMinute;
+    private long amountPrFrequency, amountPrView, amounts;
     private TimePickerDialog timePickerDialog;
-    String startingDate, endingDate, startingTime, endingTime;
+    private String startingDate, endingDate, startingTime, endingTime;
     private DatePickerDialog datePickerDialog;
     private OnFragmentInteractionListener mListener;
     final int REQUEST_CODE = 11;
     final int REQUEST_CODE_2 = 10;
+    BudgetModel budgetModel = new BudgetModel();
 
     public Budget() {
         // Required empty public constructor
@@ -74,10 +76,15 @@ public class Budget extends Fragment {
         custom = view.findViewById(R.id.custom);
         startTime = view.findViewById(R.id.editText_time);
         endTime = view.findViewById(R.id.editText_end_time);
-        btnCalculate = view.findViewById(R.id.calculate_btn);
+        MaterialCardView btnCalculate = view.findViewById(R.id.calculate_btn);
         startDate = view.findViewById(R.id.editText_date);
         endDate = view.findViewById(R.id.editText_end_date);
-
+        totalConv = view.findViewById(R.id.conversions_number);
+        totalAmount = view.findViewById(R.id.total_money);
+        totalConvPrDay = view.findViewById(R.id.conversions_number_per_day);
+        totalAmountPrDay = view.findViewById(R.id.total_money_per_day);
+        totalConversionsPerDay = view.findViewById(R.id.total_conversions_per_day);
+        totalAmountPerDay = view.findViewById(R.id.total_amount_per_day);
 
 
         setAmountSpinner(view);
@@ -91,7 +98,7 @@ public class Budget extends Fragment {
             public void onClick(View v) {
                 getInfo();
                 try {
-                    calculateDays();
+                    calculateAmounts();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -113,21 +120,23 @@ public class Budget extends Fragment {
 
         amountSp.setOnItemSelectedListener((view1, position, id, item) -> {
 
-                if (position == amountValues.length - 1) {
-                    custom.setVisibility(View.VISIBLE);
-                    /***<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<keeps giving an error>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ****/
-//                    long value = Integer.parseInt(customAmount.getText().toString());
+            if (position == amountValues.length - 1) {
+                custom.setVisibility(View.VISIBLE);
+                /***<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<keeps giving an error>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ****/
+                long value = Long.parseLong(Objects.requireNonNull(customAmount.getText()).toString());
+                budgetModel.setAmount(value);
+
 //                    Toast.makeText(getContext(), "Entered"+value, Toast.LENGTH_SHORT).show();
 
-
 //                   will set value here
-                } else {
-                    custom.setVisibility(View.GONE);
-                   long value = amountValues[position];
-                    Toast.makeText(getContext(), "Selected"+value, Toast.LENGTH_SHORT).show();
+            } else {
+                custom.setVisibility(View.GONE);
+                long value = amountValues[position];
+                budgetModel.setAmount(value);
+//                    Toast.makeText(getContext(), "Selected"+value, Toast.LENGTH_SHORT).show();
 
-                   /*******else another value here********/
-                }
+                /*******else another value here********/
+            }
 
         });
         amountSp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
@@ -144,8 +153,8 @@ public class Budget extends Fragment {
     public void setFrequencySpinner(View view) {
 
         String[] frequency = new String[]{"Daily", "Weekly", "Monthly"};
-//        these values are in hours to be changed if need be
-        long[] values = new long[]{24L,168L, 672L};
+//        these values are in MKW to be changed if need be
+        long[] values = new long[]{1L, 7L, 28L};
 
         ArrayAdapter<String> frequencyAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, frequency);
         frequencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -153,15 +162,17 @@ public class Budget extends Fragment {
 //        frequencySp.setFocusedByDefault(true);
         frequencySp.setOnItemSelectedListener((view1, position, id, item) -> {
 
-                long value = values[position];
-                Toast.makeText(getContext(), "Selected"+value, Toast.LENGTH_SHORT).show();
+            long value = values[position];
+            budgetModel.setFrequency(value);
+//                Toast.makeText(getContext(), "Selected"+value, Toast.LENGTH_SHORT).show();
 
         });
         frequencySp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
             @Override
             public void onNothingSelected(MaterialSpinner spinner) {
                 long value = values[0];
-                Toast.makeText(getContext(), "Selected" + value, Toast.LENGTH_SHORT).show();
+                budgetModel.setFrequency(value);
+//                Toast.makeText(getContext(), "Selected" + value, Toast.LENGTH_SHORT).show();
             }
         });
         frequencySp.setFocusable(false);
@@ -169,16 +180,27 @@ public class Budget extends Fragment {
 
     public void setAmountPerViewSpinner(View view) {
 
-        ArrayList<String> amountPerView = new ArrayList<>();
+        String[] amountPerView = new String[]{"Views- MKW5/view", "Targeted Views- MKW10/view", "Interaction- MKW15/view", "Targeted Interaction- MKW20/view"};
 
-        amountPerView.add("Views- MKW5/view");
-        amountPerView.add("Targeted Views- MKW10/view");
-        amountPerView.add("Interaction- MKW15/view");
-        amountPerView.add("Targeted Interaction- MKW20/view");
+        long[] values = new long[]{5L, 10L, 15L, 20L};
 
         ArrayAdapter<String> amountPerViewAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, amountPerView);
         amountPerViewAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         amountPerViewSp.setAdapter(amountPerViewAdapter);
+        amountPerViewSp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                long value = values[position];
+                budgetModel.setStrategy(value);
+            }
+        });
+        amountPerViewSp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                long value = values[0];
+                budgetModel.setStrategy(value);
+            }
+        });
         amountPerViewSp.setFocusable(false);
     }
 
@@ -228,13 +250,13 @@ public class Budget extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void datePicker(){
+    public void datePicker() {
         disableSoftInputFromAppearing(startTime, startDate);
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
+                final FragmentManager fm = ((AppCompatActivity) getActivity()).getSupportFragmentManager();
 //                 create the datePickerFragment
                 AppCompatDialogFragment newFragment = new DatePickerFragment();
                 // set the targetFragment to receive the results, specifying the request code
@@ -247,7 +269,7 @@ public class Budget extends Fragment {
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
+                final FragmentManager fm = ((AppCompatActivity) getActivity()).getSupportFragmentManager();
 //                 create the datePickerFragment
                 AppCompatDialogFragment newFragment = new DatePickerFragment();
                 // set the targetFragment to receive the results, specifying the request code
@@ -266,22 +288,11 @@ public class Budget extends Fragment {
             String selectedDate = data.getStringExtra("selectedDate");
             // set the value of the editText
             startDate.setText(selectedDate);
-        }else if (requestCode == REQUEST_CODE_2 && resultCode == Activity.RESULT_OK){
+        } else if (requestCode == REQUEST_CODE_2 && resultCode == Activity.RESULT_OK) {
             String selectedDate = data.getStringExtra("selectedDate");
             endDate.setText(selectedDate);
         }
     }
-
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {
@@ -307,24 +318,68 @@ public class Budget extends Fragment {
             date.setFocusable(false);
         }
     }
-    public void getInfo(){
+
+    public void getInfo() {
         startingTime = Objects.requireNonNull(startTime.getText()).toString();
         endingTime = Objects.requireNonNull(endTime.getText()).toString();
         startingDate = Objects.requireNonNull(startDate.getText()).toString();
         endingDate = Objects.requireNonNull(endDate.getText()).toString();
+        amounts = budgetModel.getAmount();
+        amountPrFrequency = budgetModel.getFrequency();
+        amountPrView = budgetModel.getStrategy();
     }
-    public void calculateDays() throws ParseException {
+
+    public void calculateAmounts() throws ParseException {
         getInfo();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
         Date date1 = sdf.parse(startingDate);
         Date date2 = sdf.parse(endingDate);
 
+        long amountPrDay = 5000L;
+        long amountPrWeek = 4000L;
+        long amountPrMonth = 3500L;
+        long frequency = budgetModel.getFrequency();
+        long totalAmountInvested = budgetModel.getAmount();
+        long strategy = budgetModel.getStrategy();
+
         assert date1 != null;
         assert date2 != null;
         long difference = Math.abs(date2.getTime() - date1.getTime());
         long daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+        long weeksBetween = daysBetween / 7;
+        long monthsBetween = daysBetween / 28;
 
-        Toast.makeText(getContext(), "Days" + daysBetween, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Days" + daysBetween, Toast.LENGTH_SHORT).show();
+
+        if (frequency == 1) {
+            long Total = amountPrDay * strategy * daysBetween;
+            long TotalPrDay = amountPrDay * strategy;
+//            Toast.makeText(getContext(), "Total"+Total, Toast.LENGTH_SHORT).show();
+            totalConv.setText(String.valueOf(daysBetween));
+            totalAmount.setText(String.valueOf(Total));
+            totalAmountPrDay.setText(String.valueOf(TotalPrDay));
+            totalConvPrDay.setText("1");
+        } else if (frequency == 7) {
+            long Total = amountPrWeek * strategy * weeksBetween;
+            long TotalPrWeek = amountPrWeek * strategy;
+//            Toast.makeText(getContext(), "Total"+Total, Toast.LENGTH_SHORT).show();
+            totalConv.setText(String.valueOf(weeksBetween));
+            totalAmount.setText(String.valueOf(Total));
+            totalAmountPrDay.setText(String.valueOf(TotalPrWeek));
+            totalConvPrDay.setText("1");
+            totalConversionsPerDay.setText("Total Conversions/week:");
+            totalAmountPerDay.setText("Total Amount/week:");
+        } else if (frequency == 28) {
+            long Total = amountPrMonth * strategy * monthsBetween;
+            long TotalPrMonth = amountPrMonth * strategy;
+//            Toast.makeText(getContext(), "Total"+Total, Toast.LENGTH_SHORT).show();
+            totalConv.setText(String.valueOf(monthsBetween));
+            totalAmount.setText(String.valueOf(Total));
+            totalAmountPrDay.setText(String.valueOf(TotalPrMonth));
+            totalConvPrDay.setText("1");
+            totalConversionsPerDay.setText("Total Conversions/month:");
+            totalAmountPerDay.setText("Total Amount/month:");
+        }
 
     }
 

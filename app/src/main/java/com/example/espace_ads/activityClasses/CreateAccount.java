@@ -76,13 +76,6 @@ public class CreateAccount extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         String ids = documentReference.getId();
-//                        UserModel sender = new UserModel(ids);
-//
-//                        Log.d(TAG, "Inserted successfully");
-//                        sender.setSenderID(ids);
-//                        preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
-//                        preferenceManager.putString(Constants.KEY_PASSENGER_NAME, firstName + " " + lastName);
-//                        userModel.setName(firstName + " " + lastName);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

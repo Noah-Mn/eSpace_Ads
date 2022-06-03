@@ -323,17 +323,6 @@ public class Ad_Creative extends Fragment {
             intent.putExtra("audioUri", audioUri.toString());
             startActivity(intent);
 
-//            mediaPlayer = new MediaPlayer();
-//            try {
-//                mediaPlayer.setDataSource(getContext(), audioUri);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }try {
-//                mediaPlayer.prepare();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            mediaPlayer.start();
         }
     }
 
