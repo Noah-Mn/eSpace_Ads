@@ -46,7 +46,9 @@ public class Budget extends Fragment {
     private MaterialCardView custom, payButton, btnCalculate;
     private Calendar calendar;
     private int currentHour, currentMinute;
-    private long amountPrFrequency, amountPrView, amounts, customAmounts;
+    private long amountPrFrequency, amountPrView, amounts;
+    private long customAmounts = 0L;
+    private String convertAmount;
     private TimePickerDialog timePickerDialog;
     private String startingDate, endingDate, startingTime, endingTime;
     private DatePickerDialog datePickerDialog;
@@ -121,9 +123,12 @@ public class Budget extends Fragment {
             public void onClick(View v) {
                 getInfo();
                 if (amounts == 0) {
-                    customAmounts = parseLong(Objects.requireNonNull(customAmount.getText()).toString());
-                    if (String.valueOf(customAmounts).equals("")) {
-                        Toast.makeText(getContext(), "Please fill the values", Toast.LENGTH_LONG).show();
+                    
+                    if (convertAmount.matches("")){
+                        Toast.makeText(getContext(), "Please fill the Amount field", Toast.LENGTH_SHORT).show();
+                        return;
+                    }else {
+                    customAmounts = parseLong(convertAmount);
                     }
                     amounts = customAmounts;
                     /**      <<<<<<<<<<<<<<<<<<<<<<<<<<<Do something with the amount here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   **/
@@ -190,21 +195,27 @@ public class Budget extends Fragment {
         frequencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         frequencySp.setAdapter(frequencyAdapter);
 //        frequencySp.setFocusedByDefault(true);
-        frequencySp.setOnItemSelectedListener((view1, position, id, item) -> {
 
-            long value = values[position];
-            budgetModel.setFrequency(value);
+        if (frequencySp != null) {
+            frequencySp.setOnItemSelectedListener((view1, position, id, item) -> {
+
+                long value = values[position];
+                budgetModel.setFrequency(value);
 //                Toast.makeText(getContext(), "Selected"+value, Toast.LENGTH_SHORT).show();
 
-        });
-        frequencySp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-            @Override
-            public void onNothingSelected(MaterialSpinner spinner) {
-                long value = values[0];
-                budgetModel.setFrequency(value);
+            });
+            frequencySp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+                @Override
+                public void onNothingSelected(MaterialSpinner spinner) {
+                    long value = values[0];
+                    budgetModel.setFrequency(value);
 //                Toast.makeText(getContext(), "Selected" + value, Toast.LENGTH_SHORT).show();
-            }
-        });
+                }
+            });
+        }else {
+            Toast.makeText(getContext(), "Please fill the field", Toast.LENGTH_SHORT).show();
+        }
+
         frequencySp.setFocusable(false);
     }
 
@@ -217,20 +228,25 @@ public class Budget extends Fragment {
         ArrayAdapter<String> amountPerViewAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, amountPerView);
         amountPerViewAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         amountPerViewSp.setAdapter(amountPerViewAdapter);
-        amountPerViewSp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                long value = values[position];
-                budgetModel.setStrategy(value);
-            }
-        });
-        amountPerViewSp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-            @Override
-            public void onNothingSelected(MaterialSpinner spinner) {
-                long value = values[0];
-                budgetModel.setStrategy(value);
-            }
-        });
+        
+        if (amountPerViewSp != null) {
+            amountPerViewSp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                    long value = values[position];
+                    budgetModel.setStrategy(value);
+                }
+            });
+            amountPerViewSp.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+                @Override
+                public void onNothingSelected(MaterialSpinner spinner) {
+                    long value = values[0];
+                    budgetModel.setStrategy(value);
+                }
+            });
+        }else{
+            Toast.makeText(getContext(), "Please fill the field", Toast.LENGTH_SHORT).show();
+        }
         amountPerViewSp.setFocusable(false);
     }
 
@@ -357,6 +373,7 @@ public class Budget extends Fragment {
         amounts = budgetModel.getAmount();
         amountPrFrequency = budgetModel.getFrequency();
         amountPrView = budgetModel.getStrategy();
+        convertAmount = customAmount.getText().toString();
     }
 
     public void calculateAmounts() throws ParseException {
