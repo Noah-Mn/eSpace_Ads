@@ -364,6 +364,23 @@
                     android:orientation="horizontal"
                     android:clipToPadding="false"/>
 
+                <ProgressBar
+                    android:id="@+id/progress_live"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/if_no_live"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="No live campaigns"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
             </FrameLayout>
 
             <com.google.android.material.textview.MaterialTextView

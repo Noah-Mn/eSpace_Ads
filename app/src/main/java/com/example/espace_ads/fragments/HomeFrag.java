@@ -49,7 +49,7 @@ import com.mig35.carousellayoutmanager.CarouselLayoutManager;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class HomeFlag extends Fragment{
+public class HomeFrag extends Fragment{
 
     RecyclerView liveCampaignRecycleView, recentCampaignRecyclerView, blogsRecyclerView;
     FirebaseFirestore db;
@@ -93,7 +93,7 @@ public class HomeFlag extends Fragment{
         dropdown = view.findViewById(R.id.drop_down);
 
         getUserData();
-//        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFlag.this).commit());
+//        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFrag.this).commit());
 
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override

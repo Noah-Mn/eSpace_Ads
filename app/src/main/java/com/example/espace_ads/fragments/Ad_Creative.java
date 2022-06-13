@@ -28,8 +28,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import com.example.espace_ads.AudioEditorClasses.RingdroidEditActivity;
 import com.example.espace_ads.R;
-import com.example.espace_ads.activityClasses.SongTrimmer;
 import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -220,6 +220,13 @@ public class Ad_Creative extends Fragment {
             }
         });
 
+        musicChooser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), RingdroidEditActivity.class));
+            }
+        });
+
         mobileApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,12 +239,12 @@ public class Ad_Creative extends Fragment {
             }
         });
 
-        musicChooser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseSong();
-            }
-        });
+//        musicChooser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                chooseSong();
+//            }
+//        });
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -317,13 +324,13 @@ public class Ad_Creative extends Fragment {
             videoView.setVisibility(View.VISIBLE);
             videoView.setVideoURI(videoUri);
         }
-        if (requestCode == CHOOSE_SONG && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            audioUri = data.getData();
-            Intent intent = new Intent(getContext(), SongTrimmer.class);
-            intent.putExtra("audioUri", audioUri.toString());
-            startActivity(intent);
-
-        }
+//        if (requestCode == CHOOSE_SONG && resultCode == RESULT_OK && data != null && data.getData() != null) {
+//            audioUri = data.getData();
+//            Intent intent = new Intent(getContext(), SongEditor.class);
+//            intent.putExtra("audioUri", audioUri.toString());
+//            startActivity(intent);
+//
+//        }
     }
 
     private String getFileExtension(Uri uri) {

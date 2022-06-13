@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="../../../../layout/custom_preview.xml" value="0.22" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/drawable/background_image_small.xml" value="0.182" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/drawable/backgroundsmall.xml" value="0.182" />
         <entry key="..\:/Users/bsc_com_09_17/StudioProjects/eSpace_Ads/app/src/main/res/drawable/custom_expandable.xml" value="0.157" />
@@ -23,6 +23,8 @@
         <entry key="app/src/main/res/drawable/background_rounded.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable/backgroundsmall.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable/custom_expandable.xml" value="0.1795" />
+        <entry key="app/src/main/res/drawable/marker_left.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/marker_right.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/navigate_next_24.xml" value="0.1795" />
         <entry key="app/src/main/res/drawable/text_input.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/text_input_backg.xml" value="0.1795" />
@@ -31,13 +33,18 @@
         <entry key="app/src/main/res/layout/activity_create_campaign.xml" value="0.15670289855072464" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_song_editor.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_song_trimmer.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_song_trimmer2.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/layout/after_save_action.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/blog_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/choose_contact.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/layout/file_save.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_ads.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_budget.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_business_profile_buy.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_business_profile_store.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_business_profile_store.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_create_new.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_drafts.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_duplicates.xml" value="0.16979166666666667" />
@@ -50,15 +57,20 @@
         <entry key="app/src/main/res/layout/list_group.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/live_campaign_layout.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/media_select.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/media_select_row.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/notification_50k_people.xml" value="0.25" />
         <entry key="app/src/main/res/layout/recent_campaign_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/record_audio.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/simple_spinner_item.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/testimonials_and_tips_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/edit_options.xml" value="0.33" />
         <entry key="app/src/main/res/menu/menu_item.xml" value="0.11296296296296296" />
+        <entry key="app/src/main/res/menu/select_options.xml" value="0.11296296296296296" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

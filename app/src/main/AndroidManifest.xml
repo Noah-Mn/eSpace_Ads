@@ -17,13 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ESpace_Ads">
         <activity
-            android:name=".activityClasses.SongTrimmer"
-            android:exported="false" />
-        <activity
             android:name=".activityClasses.CreateAccount"
             android:exported="false" />
         <activity
             android:name=".activityClasses.LogIn"
+            android:exported="false" />
+        <activity
+            android:name=".AudioEditorClasses.RingdroidEditActivity"
             android:exported="false" />
         <activity
             android:name=".activityClasses.CreateCampaign"

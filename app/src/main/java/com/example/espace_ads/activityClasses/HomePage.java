@@ -6,19 +6,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.databinding.ActivityHomePageBinding;
 import com.example.espace_ads.fragments.Ads;
-import com.example.espace_ads.fragments.HomeFlag;
+import com.example.espace_ads.fragments.HomeFrag;
 import com.example.espace_ads.fragments.Menu;
 import com.example.espace_ads.fragments.Notifications;
 import com.example.espace_ads.fragments.Statistics;
@@ -39,7 +36,7 @@ public class HomePage extends AppCompatActivity {
 
         binding.bottomNavView.setBackground(null);
         binding.bottomNavView.getMenu().getItem(2).setEnabled(false);
-        replaceFragments(new HomeFlag());
+        replaceFragments(new HomeFrag());
         listeners();
     }
 
@@ -52,7 +49,7 @@ public class HomePage extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.home:
-                        replaceFragments(new HomeFlag());
+                        replaceFragments(new HomeFrag());
                         break;
                     case R.id.statistics:
                         replaceFragments(new Statistics());
@@ -103,7 +100,7 @@ public class HomePage extends AppCompatActivity {
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
         if (count == 0){
-            replaceFragments(new HomeFlag());
+            replaceFragments(new HomeFrag());
         }else {
             getSupportFragmentManager().popBackStack("Home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }

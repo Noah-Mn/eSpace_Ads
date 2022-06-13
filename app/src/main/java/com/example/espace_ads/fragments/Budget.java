@@ -123,20 +123,16 @@ public class Budget extends Fragment {
             public void onClick(View v) {
                 getInfo();
                 if (amounts == 0) {
-                    
-                    if (convertAmount.matches("")){
+                    if (convertAmount.matches("")) {
                         Toast.makeText(getContext(), "Please fill the Amount field", Toast.LENGTH_SHORT).show();
                         return;
-                    }else {
-                    customAmounts = parseLong(convertAmount);
+                    } else {
+                        customAmounts = parseLong(convertAmount);
                     }
                     amounts = customAmounts;
                     /**      <<<<<<<<<<<<<<<<<<<<<<<<<<<Do something with the amount here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   **/
                     Toast.makeText(getContext(), "Custom " + amounts, Toast.LENGTH_SHORT).show();
                 } else {
-                    if (String.valueOf(amounts).equals("")) {
-                        Toast.makeText(getContext(), "Please fill all values", Toast.LENGTH_SHORT).show();
-                    }
                     Toast.makeText(getContext(), "Amount " + amounts, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -212,7 +208,7 @@ public class Budget extends Fragment {
 //                Toast.makeText(getContext(), "Selected" + value, Toast.LENGTH_SHORT).show();
                 }
             });
-        }else {
+        } else {
             Toast.makeText(getContext(), "Please fill the field", Toast.LENGTH_SHORT).show();
         }
 
@@ -228,7 +224,7 @@ public class Budget extends Fragment {
         ArrayAdapter<String> amountPerViewAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_item, amountPerView);
         amountPerViewAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         amountPerViewSp.setAdapter(amountPerViewAdapter);
-        
+
         if (amountPerViewSp != null) {
             amountPerViewSp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
                 @Override
@@ -244,7 +240,7 @@ public class Budget extends Fragment {
                     budgetModel.setStrategy(value);
                 }
             });
-        }else{
+        } else {
             Toast.makeText(getContext(), "Please fill the field", Toast.LENGTH_SHORT).show();
         }
         amountPerViewSp.setFocusable(false);
