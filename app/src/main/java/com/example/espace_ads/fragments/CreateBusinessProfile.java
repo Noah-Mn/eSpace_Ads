@@ -7,60 +7,69 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.espace_ads.R;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textview.MaterialTextView;
+import com.makeramen.roundedimageview.RoundedImageView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateBusinessProfile#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CreateBusinessProfile extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    View view;
+    LinearLayout socialMediaProfiles, socialMedia;
+    TextInputEditText textCompanyName, textCompanyType, textCompanyDescription, companyURL;
+    MaterialCardView addProfileLinks;
+    ImageView imageView;
+    RoundedImageView roundedImageView, coverImage, companyLogo;
 
     public CreateBusinessProfile() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateBusinessProfile.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CreateBusinessProfile newInstance(String param1, String param2) {
-        CreateBusinessProfile fragment = new CreateBusinessProfile();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_business_profile, container, false);
+       view = inflater.inflate(R.layout.fragment_create_business_profile, container, false);
+       socialMedia = view.findViewById(R.id.social_media);
+       socialMediaProfiles = view.findViewById(R.id.social_media_profiles);
+       coverImage = view.findViewById(R.id.cover_image);
+       companyLogo = view.findViewById(R.id.add_logo);
+       textCompanyName = view.findViewById(R.id.text_company_name);
+       textCompanyType = view.findViewById(R.id.text_company_type);
+       textCompanyDescription = view.findViewById(R.id.company_description);
+       companyURL = view.findViewById(R.id.company_url);
+       addProfileLinks = view.findViewById(R.id.add_profile_links);
+       imageView = view.findViewById(R.id.cover_pic);
+       roundedImageView = view.findViewById(R.id.image_logo);
+
+
+       listeners();
+       return view;
     }
+
+    private void listeners(){
+        coverImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        companyLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
 }
