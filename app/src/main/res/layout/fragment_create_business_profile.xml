@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#E6151414"
     tools:context=".fragments.CreateBusinessProfile">
 
@@ -21,6 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
@@ -28,11 +29,10 @@
                 android:text="Create Business Profile"
                 android:textColor="@color/white"
                 android:textSize="19sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_goneMarginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:textStyle="bold"/>
+                app:layout_goneMarginStart="20dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/business_profile_card"
@@ -50,83 +50,102 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/no_cover_pic"/>
+                    android:src="@drawable/no_cover_pic" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/add_cover_pic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:layout_gravity="center"
                     android:text="Upload cover pic"
-                    android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:layout_gravity="center"/>
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/profile_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="-40dp"
-                android:background="@drawable/background_rounded"
-                android:elevation="20dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintTop_toBottomOf="@id/business_profile_card"
-                app:layout_constraintEnd_toEndOf="@id/business_profile_card"
-                android:layout_marginEnd="35dp"
-                app:riv_oval="true">
-
-            <com.google.android.material.textview.MaterialTextView
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:text="Upload logo"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                android:layout_gravity="center"/>
+                android:layout_marginTop="-40dp"
+                android:layout_marginEnd="35dp"
+                android:elevation="20dp"
+                app:layout_constraintEnd_toEndOf="@id/business_profile_card"
+                app:layout_constraintTop_toBottomOf="@id/business_profile_card">
 
-            </com.makeramen.roundedimageview.RoundedImageView>
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/background_rounded"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/no_logo"
+                    app:riv_oval="true" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/add_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Logo"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_image"
+                    app:layout_constraintStart_toStartOf="@+id/profile_image"
+                    app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/business_name_layout"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/business_profile_card"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@id/logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/business_profile_card">
 
-                <com.google.android.material.textview.MaterialTextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_business_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Orzora"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_goneMarginStart="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
                     android:layout_marginTop="0dp"
-                    android:textStyle="bold"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Beverage Company"
+                    android:background="@drawable/text_input_backg"
+                    android:editable="true"
+                    android:gravity="center"
+                    android:hint="Company name"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textAlignment="center"
-                    android:layout_marginTop="2dp"
+                    android:textColor="#FFFFFFFF"
+                    android:textColorHint="#FFFFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:textColor="#66FFFFFF"/>
+                    android:background="@drawable/text_input_backg"
+                    android:editable="true"
+                    android:hint="Type of Company"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textAlignment="center"
+                    android:textColor="#66FFFFFF"
+                    android:textColorHint="#FFFFFFFF" />
 
 
             </LinearLayout>
@@ -135,133 +154,300 @@
                 android:id="@+id/business_bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/business_name_layout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/business_name_layout">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/text_business_bio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
                     android:ellipsize="end"
                     android:gravity="center"
                     android:text="Bio"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_goneMarginStart="20dp"
-                    android:layout_marginTop="0dp"
-                    android:textStyle="bold"/>
+                    app:layout_goneMarginStart="20dp" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Orzora is a beverage company specialized in coffee manufacturing, 100% juice... "
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
-                    android:textColor="#66FFFFFF"/>
+                    android:background="@drawable/text_input_backg"
+                    android:editable="true"
+                    android:hint="Brief description of your company..."
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#66FFFFFF"
+                    android:textColorHint="#66FFFFFF" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="www.noah.com"
-                    android:textAlignment="center"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="2dp"
-                    android:textColor="#3E6FFF"/>
+                    android:background="@drawable/text_input_backg"
+                    android:editable="true"
+                    android:hint="Company URL"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textAlignment="center"
+                    android:textColor="#66FFFFFF"
+                    android:textColorHint="#66FFFFFF" />
             </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_social_media"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:text="Social Media"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/business_bio"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/business_bio" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/add_profile_links"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#3BFFFFFF"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="@id/text_social_media"
+                app:layout_constraintTop_toBottomOf="@id/text_social_media">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="3dp"
+                    android:text="Add profile links"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:id="@+id/social_media_profiles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_profile_links">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:text="Target social media"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginStart="20dp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Facebook"
+                    android:textColor="#68FFFFFF"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/twitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Twitter"
+                    android:textColor="#68FFFFFF"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instagram"
+                    android:textColor="#68FFFFFF"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/linkedin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Linkedin"
+                    android:textColor="#68FFFFFF"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_facebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/text_input_backg"
+                    android:hint="Facebook profile link"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:textColor="#68FFFFFF"
+                    android:textColorHint="#68FFFFFF"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_twitter"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/text_input_backg"
+                    android:hint="Twitter profile link"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:textColor="#68FFFFFF"
+                    android:textColorHint="#68FFFFFF"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_instagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/text_input_backg"
+                    android:hint="Instagram profile link"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:textColor="#68FFFFFF"
+                    android:textColorHint="#68FFFFFF"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_linkedin"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/text_input_backg"
+                    android:hint="Linkedin profile link"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:textColor="#68FFFFFF"
+                    android:textColorHint="#68FFFFFF"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/social_media"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginStart="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:padding="5dp"
-                app:layout_constraintTop_toBottomOf="@id/text_social_media">
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_profile_links">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/twitter"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    app:cardCornerRadius="5dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/twitter"/>
+                        android:src="@drawable/twitter" />
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/instagram"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    app:cardCornerRadius="5dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
                         android:background="#D8000000"
-                        android:src="@drawable/instagram"/>
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/instagram" />
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/facebook"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    app:cardCornerRadius="5dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/facebook"/>
+                        android:src="@drawable/facebook" />
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/linkedin"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    app:cardCornerRadius="5dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/linkedin"/>
+                        android:src="@drawable/linkedin" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -271,28 +457,28 @@
                 android:id="@+id/text_reviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:text="Reviews"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/social_media"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toBottomOf="@id/social_media_profiles" />
 
             <LinearLayout
                 android:id="@+id/review_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginStart="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:padding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_reviews">
 
 
@@ -301,30 +487,30 @@
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:scaleType="centerCrop"
-                    app:riv_oval="true"
                     android:background="@drawable/background_rounded"
-                    android:src="@drawable/img1"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img1"
+                    app:riv_oval="true" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:scaleType="centerCrop"
-                    app:riv_oval="true"
                     android:background="@drawable/background_rounded"
-                    android:src="@drawable/img3"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img3"
+                    app:riv_oval="true" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:scaleType="centerCrop"
-                    app:riv_oval="true"
                     android:background="@drawable/background_rounded"
-                    android:src="@drawable/img2"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img2"
+                    app:riv_oval="true" />
 
             </LinearLayout>
 
@@ -332,33 +518,33 @@
                 android:id="@+id/text_store"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:text="Store"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/review_list"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toBottomOf="@id/review_list" />
 
             <GridView
                 android:id="@+id/stores_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:overScrollMode="never"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                tools:listitem="@layout/grid_item"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
+                android:layout_marginBottom="10dp"
+                android:numColumns="4"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_store"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:numColumns="4"/>
+                tools:listitem="@layout/grid_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
