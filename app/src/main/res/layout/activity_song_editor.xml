@@ -16,12 +16,12 @@
             android:layout_height="0px"
             android:layout_weight="1">
 
-            <com.semantive.waveformandroid.waveform.view.WaveformView
+            <com.example.espace_ads.AudioEditorClasses.WaveformView
                 android:id="@+id/waveform"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
 
-            <com.semantive.waveformandroid.waveform.view.MarkerView
+            <com.example.espace_ads.AudioEditorClasses.MarkerView
                 android:id="@+id/startmarker"
                 android:nextFocusDown="@+id/endmarker"
                 android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                 android:src="@drawable/marker_left"
                 android:contentDescription="start_marker" />
 
-            <com.semantive.waveformandroid.waveform.view.MarkerView
+            <com.example.espace_ads.AudioEditorClasses.MarkerView
                 android:id="@+id/endmarker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

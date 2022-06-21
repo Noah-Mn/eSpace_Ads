@@ -12,6 +12,9 @@ import android.widget.GridView;
 import com.example.espace_ads.R;
 import com.example.espace_ads.adapters.GridAdapter;
 import com.example.espace_ads.models.ItemsModel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,7 @@ public class BusinessProfileStore extends Fragment {
     ArrayList<ItemsModel> items = new ArrayList<ItemsModel>();
     View view;
     GridView gridView;
+    DatabaseReference databaseReference;
 
     public BusinessProfileStore() {
         // Required empty public constructor
@@ -39,6 +43,9 @@ public class BusinessProfileStore extends Fragment {
         view = inflater.inflate(R.layout.fragment_business_profile_store, container, false);
         gridView = view.findViewById(R.id.stores_list);
 //        items = getItemsList()
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child();
+
         gridView.setAdapter(new GridAdapter(getContext(), items));
         
         return view;

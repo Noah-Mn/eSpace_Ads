@@ -56,13 +56,12 @@ import java.util.Arrays;
  * an audio file or using an intent to record a new one, and then
  * launches RingdroidEditActivity from here.
  */
-public class RingdroidSelectActivity
-    extends ListActivity
-    implements LoaderManager.LoaderCallbacks<Cursor>
+public class RingdroidSelectActivity extends ListActivity implements LoaderManager.LoaderCallbacks<Cursor>
 {
     private SearchView mFilter;
     private SimpleCursorAdapter mAdapter;
     private boolean mWasGetContentIntent;
+    String audio;
     private boolean mShowAll;
     private Cursor mInternalCursor;
     private Cursor mExternalCursor;
@@ -87,6 +86,7 @@ public class RingdroidSelectActivity
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setContentView(R.layout.media_select);
 
         mShowAll = false;
 
@@ -104,12 +104,14 @@ public class RingdroidSelectActivity
             return;
         }
 
-        Intent intent = getIntent();
+        Intent intent = new Intent();
+        intent.setType("audio/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+
         mWasGetContentIntent = intent.getAction().equals(
                 Intent.ACTION_GET_CONTENT);
-
         // Inflate our UI from its XML layout description.
-        setContentView(R.layout.media_select);
+
 
         try {
             mAdapter = new SimpleCursorAdapter(

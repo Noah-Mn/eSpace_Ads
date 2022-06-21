@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -608,4 +609,5 @@ public class WaveformView extends View {
                     (int) (mValuesByZoomLevel[mZoomLevel][i] * halfHeight);
         }
     }
+
 }

@@ -74,6 +74,7 @@ public class RingdroidEditActivity extends Activity
     private SoundFile mSoundFile;
     private File mFile;
     private String mFilename;
+    private Uri audioName;
     private String mArtist;
     private String mTitle;
     private int mNewFileKind;
@@ -156,9 +157,11 @@ public class RingdroidEditActivity extends Activity
         // GET_CONTENT intent, then we shouldn't display a "saved"
         // message when the user saves, we should just return whatever
         // they create.
-        mWasGetContentIntent = intent.getBooleanExtra("was_get_content_intent", false);
+//        mWasGetContentIntent = intent.getBooleanExtra("was_get_content_intent", false);
 
-        mFilename = intent.getData().toString().replaceFirst("file://", "").replaceAll("%20", " ");
+        mFilename = intent.getStringExtra("audioUri");
+        audioName = Uri.parse(mFilename);
+
         mSoundFile = null;
         mKeyDown = false;
 
@@ -168,11 +171,12 @@ public class RingdroidEditActivity extends Activity
 
         mHandler.postDelayed(mTimerRunnable, 100);
 
-        if (!mFilename.equals("record")) {
-            loadFromFile();
-        } else {
-            recordAudio();
-        }
+//        if (!mFilename.equals("record")) {
+//            loadFromFile();
+//        } else {
+//            recordAudio();
+//        }
+        loadFromFile();
     }
 
     private void closeThread(Thread thread) {
@@ -559,7 +563,7 @@ public class RingdroidEditActivity extends Activity
 
         enableDisableButtons();
 
-        mWaveformView = (WaveformView)findViewById(R.id.waveform);
+        mWaveformView = findViewById(R.id.waveform);
         mWaveformView.setListener(this);
 
         mInfo = (TextView)findViewById(R.id.info);
@@ -591,6 +595,7 @@ public class RingdroidEditActivity extends Activity
 
         updateDisplay();
     }
+
 
     private void loadFromFile() {
         mFile = new File(mFilename);
@@ -698,6 +703,7 @@ public class RingdroidEditActivity extends Activity
         mLoadSoundFileThread.start();
     }
 
+/**
     private void recordAudio() {
         mFile = null;
         mTitle = null;
@@ -803,6 +809,7 @@ public class RingdroidEditActivity extends Activity
         };
         mRecordAudioThread.start();
     }
+**/
 
     private void finishOpeningSoundFile() {
         mWaveformView.setSoundFile(mSoundFile);
