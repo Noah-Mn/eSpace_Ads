@@ -60,17 +60,17 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/background_rounded_business"
-                android:layout_marginEnd="3dp"
-                android:scaleType="centerCrop"
-                android:padding="8dp"
-                android:tint="@color/white"
-                android:elevation="10dp"
-                app:layout_constraintBottom_toBottomOf="@id/business_profile_card"
                 android:layout_marginStart="-20dp"
+                android:layout_marginEnd="3dp"
                 android:layout_marginBottom="40dp"
-                app:layout_constraintEnd_toEndOf="@id/business_profile_card"
+                android:background="@drawable/background_rounded_business"
+                android:elevation="10dp"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/camera"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/business_profile_card"
+                app:layout_constraintEnd_toEndOf="@id/business_profile_card"
                 app:riv_oval="true" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -98,15 +98,15 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/background_rounded_business"
-                    android:scaleType="centerCrop"
-                    android:padding="8dp"
-                    android:tint="@color/white"
-                    android:elevation="10dp"
-                    app:layout_constraintBottom_toBottomOf="@id/image_logo"
                     android:layout_marginStart="-30dp"
-                    app:layout_constraintStart_toEndOf="@id/image_logo"
+                    android:background="@drawable/background_rounded_business"
+                    android:elevation="10dp"
+                    android:padding="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/camera"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@id/image_logo"
+                    app:layout_constraintStart_toEndOf="@id/image_logo"
                     app:riv_oval="true" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -132,11 +132,11 @@
                     android:editable="true"
                     android:hint="Company name"
                     android:maxLines="1"
-                    android:textColorHint="#66FFFFFF"
-                    android:textSize="13sp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     android:textColor="#FFFFFFFF"
+                    android:textColorHint="#66FFFFFF"
+                    android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -148,12 +148,12 @@
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/text_input_backg"
                     android:editable="true"
-                    android:textColorHint="#66FFFFFF"
                     android:hint="Type of Company"
                     android:paddingStart="10dp"
-                    android:textSize="13sp"
                     android:paddingEnd="10dp"
-                    android:textColor="#66FFFFFF"/>
+                    android:textColor="#66FFFFFF"
+                    android:textColorHint="#66FFFFFF"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
@@ -196,10 +196,10 @@
                     android:editable="true"
                     android:hint="Brief description of your company..."
                     android:paddingStart="10dp"
-                    android:textSize="13sp"
                     android:paddingEnd="10dp"
                     android:textColor="#66FFFFFF"
-                    android:textColorHint="#66FFFFFF" />
+                    android:textColorHint="#66FFFFFF"
+                    android:textSize="13sp" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/company_url"
@@ -212,9 +212,9 @@
                     android:hint="Company URL"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:textSize="13sp"
                     android:textColor="#66FFFFFF"
-                    android:textColorHint="#66FFFFFF" />
+                    android:textColorHint="#66FFFFFF"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
@@ -557,8 +557,35 @@
                 app:layout_constraintTop_toBottomOf="@id/text_store"
                 tools:listitem="@layout/grid_item" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/add_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#3BFFFFFF"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stores_list">
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="3dp"
+                    android:text="Add items to store"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 

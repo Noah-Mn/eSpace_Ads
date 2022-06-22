@@ -42,6 +42,7 @@
         <entry key="app/src/main/res/layout/choose_contact.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/file_save.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_add_item_to_store.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/fragment_ads.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_budget.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_business_profile_buy.xml" value="0.33" />

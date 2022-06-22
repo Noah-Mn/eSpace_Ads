@@ -1,8 +1,14 @@
 package com.example.espace_ads.models;
 
+import android.net.Uri;
+
 public class ItemsModel {
-    String images, description;
+    String name, description;
     int prices;
+    Uri productImage;
+
+    public ItemsModel() {
+    }
 
     public String getDescription() {
         return description;
@@ -20,11 +26,19 @@ public class ItemsModel {
         this.prices = prices;
     }
 
-    public String getImages() {
-        return images;
+    public String getName() {
+        return name;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Uri getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(Uri productImage) {
+        this.productImage = productImage;
     }
 }
