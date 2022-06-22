@@ -57,13 +57,13 @@
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/cover_image"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/background_rounded_business"
                 android:layout_marginEnd="3dp"
                 android:scaleType="centerCrop"
-                android:padding="5dp"
+                android:padding="8dp"
                 android:tint="@color/white"
                 android:elevation="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/business_profile_card"
@@ -95,12 +95,12 @@
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/add_logo"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/background_rounded_business"
                     android:scaleType="centerCrop"
-                    android:padding="5dp"
+                    android:padding="8dp"
                     android:tint="@color/white"
                     android:elevation="10dp"
                     app:layout_constraintBottom_toBottomOf="@id/image_logo"
@@ -130,14 +130,13 @@
                     android:layout_marginTop="0dp"
                     android:background="@drawable/text_input_backg"
                     android:editable="true"
-                    android:gravity="center"
                     android:hint="Company name"
                     android:maxLines="1"
+                    android:textColorHint="#66FFFFFF"
+                    android:textSize="13sp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:textAlignment="center"
                     android:textColor="#FFFFFFFF"
-                    android:textColorHint="#FFFFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -149,12 +148,12 @@
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/text_input_backg"
                     android:editable="true"
+                    android:textColorHint="#66FFFFFF"
                     android:hint="Type of Company"
                     android:paddingStart="10dp"
+                    android:textSize="13sp"
                     android:paddingEnd="10dp"
-                    android:textAlignment="center"
-                    android:textColor="#66FFFFFF"
-                    android:textColorHint="#FFFFFFFF" />
+                    android:textColor="#66FFFFFF"/>
 
 
             </LinearLayout>
@@ -197,6 +196,7 @@
                     android:editable="true"
                     android:hint="Brief description of your company..."
                     android:paddingStart="10dp"
+                    android:textSize="13sp"
                     android:paddingEnd="10dp"
                     android:textColor="#66FFFFFF"
                     android:textColorHint="#66FFFFFF" />
@@ -212,7 +212,7 @@
                     android:hint="Company URL"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:textAlignment="center"
+                    android:textSize="13sp"
                     android:textColor="#66FFFFFF"
                     android:textColorHint="#66FFFFFF" />
             </LinearLayout>
@@ -287,7 +287,7 @@
                     app:layout_goneMarginStart="20dp" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/facebook"
+                    android:id="@+id/check_facebook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Facebook"
@@ -295,7 +295,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/twitter"
+                    android:id="@+id/check_twitter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Twitter"
@@ -303,7 +303,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/instagram"
+                    android:id="@+id/check_instagram"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Instagram"
@@ -311,7 +311,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/linkedin"
+                    android:id="@+id/check_linkedin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Linkedin"

@@ -1,5 +1,6 @@
 package com.example.espace_ads.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -57,6 +58,7 @@ public class CreateBusinessProfile extends Fragment {
     }
 
     private void listeners(){
+        coverImage.setColorFilter(Color.WHITE);
         coverImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +66,7 @@ public class CreateBusinessProfile extends Fragment {
             }
         });
 
+        companyLogo.setColorFilter(Color.WHITE);
         companyLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

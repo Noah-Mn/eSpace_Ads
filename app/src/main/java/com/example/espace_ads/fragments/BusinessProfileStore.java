@@ -44,7 +44,7 @@ public class BusinessProfileStore extends Fragment {
         gridView = view.findViewById(R.id.stores_list);
 //        items = getItemsList()
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child();
+//        databaseReference = FirebaseDatabase.getInstance().getReference().child();
 
         gridView.setAdapter(new GridAdapter(getContext(), items));
         
