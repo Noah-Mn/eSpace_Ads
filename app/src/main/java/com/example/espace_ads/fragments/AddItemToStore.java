@@ -84,7 +84,7 @@ public class AddItemToStore extends Fragment {
         addItem = view.findViewById(R.id.add_item);
         itemsModel = new ItemsModel();
         progressBar = view.findViewById(R.id.content_loading_progressbar);
-        storageReference = FirebaseStorage.getInstance().getReference("Items Images");
+        storageReference = FirebaseStorage.getInstance().getReference("Items Images").child("Noah");
 
         listeners();
 

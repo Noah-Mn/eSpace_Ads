@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,9 +23,20 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.espace_ads.R;
 import com.example.espace_ads.adapters.GridAdapter;
 import com.example.espace_ads.models.ItemsModel;
+import com.example.espace_ads.models.Post;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -38,6 +51,10 @@ public class CreateBusinessProfile extends Fragment {
     MaterialCheckBox facebook, twitter, instagram, linkedin;
     GridView gridView;
     GridAdapter gridAdapter;
+    DatabaseReference reference;
+    Task<Uri> storageReference;
+    int i = 0;
+    String[] images;
     private Uri coverImagePath, logoPath;
     private RoundedImageView roundedImageView, coverImage, companyLogo;
     private int PICK_COVER_REQUEST = 1;
@@ -80,11 +97,48 @@ public class CreateBusinessProfile extends Fragment {
         addItems = view.findViewById(R.id.add_items);
         gridView = view.findViewById(R.id.stores_list);
 
-
-        gridAdapter =  new GridAdapter(getContext(), items);
-        gridView.setAdapter(gridAdapter);
-
         listeners();
+
+
+
+        storageReference = FirebaseStorage.getInstance().getReference("Items Images").child("Noah").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                images[i] = String.valueOf(uri);
+                gridAdapter = new GridAdapter(images, getContext());
+                gridView.setAdapter(gridAdapter);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(getContext(), "Failed to get images", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        reference = FirebaseDatabase.getInstance().getReference("Store Items");
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+//                    if (i<19){
+//                        Post post = dataSnapshot.getValue(Post.class);
+//
+//                        assert post != null;
+//                        images[i] = String.valueOf(post.getImgPUrl());
+//                        i++;
+//
+//                    }
+//                }
+//                gridAdapter = new GridAdapter(images, getContext());
+//                gridView.setAdapter(gridAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         return view;
     }
 
