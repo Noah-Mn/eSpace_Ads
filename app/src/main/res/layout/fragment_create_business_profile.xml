@@ -541,21 +541,39 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/review_list" />
 
-            <GridView
-                android:id="@+id/stores_list"
+            <LinearLayout
+                android:id="@+id/grid_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="10dp"
-                android:numColumns="4"
-                android:overScrollMode="never"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_store"
-                tools:listitem="@layout/grid_item" />
+                app:layout_constraintTop_toBottomOf="@id/text_store">
+
+                <GridView
+                    android:id="@+id/stores_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:horizontalSpacing="4dp"
+                    android:numColumns="4"
+                    android:overScrollMode="never"
+                    android:verticalSpacing="4dp"
+                    tools:listitem="@layout/grid_item" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:visibility="gone" />
+            </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/add_items"
@@ -569,7 +587,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/stores_list">
+                app:layout_constraintTop_toBottomOf="@id/grid_layout">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"

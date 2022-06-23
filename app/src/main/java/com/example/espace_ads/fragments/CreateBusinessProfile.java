@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.example.espace_ads.R;
 import com.example.espace_ads.adapters.GridAdapter;
 import com.example.espace_ads.models.ItemsModel;
 import com.example.espace_ads.models.Post;
+import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -40,6 +42,7 @@ import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateBusinessProfile extends Fragment {
 
@@ -52,14 +55,14 @@ public class CreateBusinessProfile extends Fragment {
     GridView gridView;
     GridAdapter gridAdapter;
     DatabaseReference reference;
-    Task<Uri> storageReference;
-    int i = 0;
-    String[] images;
-    private Uri coverImagePath, logoPath;
     private RoundedImageView roundedImageView, coverImage, companyLogo;
-    private int PICK_COVER_REQUEST = 1;
-    private int PICK_LOGO_REQUEST = 2;
+    private final int PICK_COVER_REQUEST = 1;
+    private final int PICK_LOGO_REQUEST = 2;
     ArrayList<ItemsModel> items = new ArrayList<>();
+    private ProgressBar mProgressBar;
+    private ArrayList<Upload> mGridData;
+    private final String FEED_URL = "http://javatechig.com/?json=get_recent_posts&count=45";
+
 
     public CreateBusinessProfile() {
         // Required empty public constructor
@@ -96,42 +99,34 @@ public class CreateBusinessProfile extends Fragment {
         editTextTwitter = view.findViewById(R.id.editText_twitter);
         addItems = view.findViewById(R.id.add_items);
         gridView = view.findViewById(R.id.stores_list);
+        mProgressBar = view.findViewById(R.id.progressBar);
 
         listeners();
 
+        //Initialize with empty data
+        mGridData = new ArrayList<>();
+        gridAdapter = new GridAdapter(getContext(), R.layout.grid_item, mGridData);
+        gridView.setAdapter(gridAdapter);
 
-
-        storageReference = FirebaseStorage.getInstance().getReference("Items Images").child("Noah").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        reference = FirebaseDatabase.getInstance().getReference("Store Items");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(Uri uri) {
-                images[i] = String.valueOf(uri);
-                gridAdapter = new GridAdapter(images, getContext());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+
+                    Upload upload = postSnapshot.getValue(Upload.class);
+                    uploadList.add(upload);
+                }
+                gridAdapter = new GridAdapter(uploadList, getContext());
                 gridView.setAdapter(gridAdapter);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
 
-                Toast.makeText(getContext(), "Failed to get images", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-//        reference = FirebaseDatabase.getInstance().getReference("Store Items");
-//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-//                    if (i<19){
-//                        Post post = dataSnapshot.getValue(Post.class);
 //
-//                        assert post != null;
-//                        images[i] = String.valueOf(post.getImgPUrl());
-//                        i++;
-//
-//                    }
-//                }
-//                gridAdapter = new GridAdapter(images, getContext());
-//                gridView.setAdapter(gridAdapter);
 //            }
 //
 //            @Override
@@ -237,12 +232,12 @@ public class CreateBusinessProfile extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_COVER_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            coverImagePath = data.getData();
+            Uri coverImagePath = data.getData();
             imageView.setImageURI(coverImagePath);
         }
 
         if (requestCode == PICK_LOGO_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            logoPath = data.getData();
+            Uri logoPath = data.getData();
             roundedImageView.setImageURI(logoPath);
         }
     }
