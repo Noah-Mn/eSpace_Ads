@@ -541,7 +541,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/review_list" />
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/grid_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -551,7 +551,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_store">
 
-                <GridView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/stores_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -559,11 +559,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="10dp"
-                    android:horizontalSpacing="4dp"
-                    android:numColumns="4"
-                    android:overScrollMode="never"
-                    android:verticalSpacing="4dp"
-                    tools:listitem="@layout/grid_item" />
+                    android:overScrollMode="never" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -573,7 +569,7 @@
                     android:layout_marginTop="5dp"
                     android:paddingBottom="5dp"
                     android:visibility="gone" />
-            </LinearLayout>
+            </FrameLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/add_items"

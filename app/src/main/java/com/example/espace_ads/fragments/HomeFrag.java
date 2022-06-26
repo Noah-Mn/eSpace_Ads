@@ -1,5 +1,6 @@
 package com.example.espace_ads.fragments;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.espace_ads.R;
+import com.example.espace_ads.activityClasses.LogIn;
 import com.example.espace_ads.adapters.BlogsAdapter;
 import com.example.espace_ads.adapters.LiveCampaignAdapter;
 import com.example.espace_ads.adapters.RecentCampaignAdapter;
@@ -40,6 +42,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -47,6 +51,7 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.mig35.carousellayoutmanager.CarouselLayoutManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class HomeFrag extends Fragment{
@@ -108,7 +113,8 @@ public class HomeFrag extends Fragment{
                             case R.id.logout:
 
                                 /**    logout to be implemented here   **/
-                                Toast.makeText(getContext(), "Logout", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "Logout", Toast.LENGTH_SHORT).show();
+                                logout();
                                 break;
                         }
                         return true;
@@ -246,6 +252,11 @@ public class HomeFrag extends Fragment{
         String emailAddress;
         emailAddress = currentUser.getEmail();
         return emailAddress;
+    }
+
+    public void logout(){
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getContext(), LogIn.class));
     }
 
 }

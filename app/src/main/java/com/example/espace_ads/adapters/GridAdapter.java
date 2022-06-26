@@ -1,75 +1,89 @@
 package com.example.espace_ads.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
-import androidx.appcompat.widget.AppCompatImageView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.espace_ads.R;
-import com.example.espace_ads.models.Upload;
+import com.example.espace_ads.databinding.GridItemBinding;
+import com.example.espace_ads.models.ItemsModel;
 import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
-public class GridAdapter extends ArrayAdapter<Upload> {
+public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewHolder> {
+    ArrayList<ItemsModel> itemsModels;
+    Context context;
+    private ItemClickListener mClickListener;
 
-    private final Context mContext;
-    private final int layoutResourceId;
-    private ArrayList<Upload> uploads = new ArrayList<Upload>();
+    public GridAdapter(ArrayList<ItemsModel> itemsModels, Context context) {
+        this.itemsModels = itemsModels;
+        this.context = context;
 
-    public GridAdapter(Context mContext, int layoutResourceId, ArrayList<Upload> uploads) {
-        super(mContext, layoutResourceId, uploads);
-        this.layoutResourceId = layoutResourceId;
-        this.mContext = mContext;
-        this.uploads = uploads;
     }
 
-
-    /**
-     * Updates grid data and refresh grid items.
-     * @param mGridData
-     */
-    public void setGridData(ArrayList<Upload> mGridData) {
-        this.uploads = mGridData;
-        notifyDataSetChanged();
+    @NonNull
+    @Override
+    public GridAdapter.StoreItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        GridItemBinding gridItemBinding = GridItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new StoreItemViewHolder(gridItemBinding);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        ViewHolder holder;
-
-        if (row == null) {
-            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
-            holder = new ViewHolder();
-//            holder.titleTextView = (TextView) row.findViewById(R.id.grid_item_title);
-            holder.imageView = (AppCompatImageView) row.findViewById(R.id.grid_item_image);
-            row.setTag(holder);
-        } else {
-            holder = (ViewHolder) row.getTag();
+    public void onBindViewHolder(@NonNull StoreItemViewHolder holder, int position) {
+        ItemsModel itemsModel = itemsModels.get(position);
+        try {
+            URL url = new URL(itemsModel.getProductImage());
+            Picasso.with(context).load(String.valueOf(url)).into(holder.binding.gridItemImage);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
 
-        Upload item = uploads.get(position);
-//        holder.titleTextView.setText(Html.fromHtml(item.getTitle()));
 
-        Picasso.with(mContext).load(item.getImageUrl()).into(holder.imageView);
-        return row;
     }
 
-    static class ViewHolder {
-//        TextView titleTextView;
-        AppCompatImageView imageView;
+    @Override
+    public int getItemCount() {
+        return itemsModels.size();
     }
 
+    class StoreItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        GridItemBinding binding;
+
+        public StoreItemViewHolder(@NonNull GridItemBinding gridItemBinding) {
+            super(gridItemBinding.getRoot());
+            binding = gridItemBinding;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(mClickListener != null){
+                mClickListener.onItemClick(v, getAdapterPosition());
+            }
+        }
+    }
+
+//    String getItem(int id) {
+//        return itemsModels[id];
+//    }
+
+    // allows clicks events to be caught
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void setStoreItemsList(ArrayList<ItemsModel> itemsList) {
+        this.itemsModels = itemsList;
+        notifyDataSetChanged();
+    }
 }

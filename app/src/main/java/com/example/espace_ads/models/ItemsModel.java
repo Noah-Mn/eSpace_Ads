@@ -5,9 +5,17 @@ import android.net.Uri;
 public class ItemsModel {
     String name, description;
     int prices;
-    Uri productImage;
+    String productImage;
 
     public ItemsModel() {
+    }
+
+    public ItemsModel(String name, int prices, String description, String productImage) {
+        this.name = name;
+        this.prices = prices;
+        this.description = description;
+        this.productImage = productImage;
+
     }
 
     public String getDescription() {
@@ -34,11 +42,11 @@ public class ItemsModel {
         this.name = name;
     }
 
-    public Uri getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(Uri productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 }

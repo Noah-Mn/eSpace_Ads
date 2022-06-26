@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -20,31 +19,31 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.adapters.GridAdapter;
 import com.example.espace_ads.models.ItemsModel;
-import com.example.espace_ads.models.Post;
 import com.example.espace_ads.models.Upload;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class CreateBusinessProfile extends Fragment {
+public class CreateBusinessProfile extends Fragment implements GridAdapter.ItemClickListener{
 
     View view;
     LinearLayout socialMediaProfiles, socialMedia;
@@ -52,16 +51,18 @@ public class CreateBusinessProfile extends Fragment {
     MaterialCardView addProfileLinks, addItems;
     ImageView imageView;
     MaterialCheckBox facebook, twitter, instagram, linkedin;
-    GridView gridView;
+    RecyclerView gridView;
     GridAdapter gridAdapter;
     DatabaseReference reference;
+    FirebaseFirestore db;
+    FirebaseUser currentUser;
     private RoundedImageView roundedImageView, coverImage, companyLogo;
     private final int PICK_COVER_REQUEST = 1;
     private final int PICK_LOGO_REQUEST = 2;
     ArrayList<ItemsModel> items = new ArrayList<>();
     private ProgressBar mProgressBar;
     private ArrayList<Upload> mGridData;
-    private final String FEED_URL = "http://javatechig.com/?json=get_recent_posts&count=45";
+//    private final String FEED_URL = "http://javatechig.com/?json=get_recent_posts&count=45";
 
 
     public CreateBusinessProfile() {
@@ -100,33 +101,61 @@ public class CreateBusinessProfile extends Fragment {
         addItems = view.findViewById(R.id.add_items);
         gridView = view.findViewById(R.id.stores_list);
         mProgressBar = view.findViewById(R.id.progressBar);
+        db = FirebaseFirestore.getInstance();
+
 
         listeners();
 
         //Initialize with empty data
         mGridData = new ArrayList<>();
-        gridAdapter = new GridAdapter(getContext(), R.layout.grid_item, mGridData);
-        gridView.setAdapter(gridAdapter);
+//        gridAdapter = new GridAdapter(getContext(), R.layout.grid_item, mGridData);
+//        gridView.setAdapter(gridAdapter);
 
+
+        gridAdapter = new GridAdapter(items, getContext());
+        gridAdapter.setClickListener(this);
         reference = FirebaseDatabase.getInstance().getReference("Store Items");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+        gridView.setHasFixedSize(true);
+        gridView.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        gridView.setAdapter(gridAdapter);
+//        gridView.addOnItemTouchListener(new RecyclerI);
 
-                    Upload upload = postSnapshot.getValue(Upload.class);
-                    uploadList.add(upload);
-                }
-                gridAdapter = new GridAdapter(uploadList, getContext());
-                gridView.setAdapter(gridAdapter);
-            }
+        db.collection("Store Items")
+                .whereEqualTo("Email Address", getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-//
+                        if (task.isSuccessful() && task.getResult() != null) {
+
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                String name = documentSnapshot.getString("Item Name");
+                                int price = Math.toIntExact(documentSnapshot.getLong("Item Price"));
+                                String description = documentSnapshot.getString("Item Description");
+                                String downloadUri = documentSnapshot.getString("DownloadUri");
+                                ItemsModel itemsModel = new ItemsModel(name, price, description, downloadUri);
+                                items.add(itemsModel);
+                            }
+                            if (items.size() > 0) {
+                                gridAdapter.setStoreItemsList(items);
+                                mProgressBar.setVisibility(View.GONE);
+//                                liveCampaign.setVisibility(View.GONE);
+                            } else {
+//                                liveCampaign.setVisibility(View.VISIBLE);
+                                mProgressBar.setVisibility(View.GONE);
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
+                    }
+                });
 //            }
 //
 //            @Override
@@ -138,13 +167,30 @@ public class CreateBusinessProfile extends Fragment {
     }
 
     private void listeners() {
-        coverImage.setColorFilter(Color.WHITE);
-        coverImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseCoverImage();
-            }
-        });
+
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Upload upload = (Upload) parent.getItemAtPosition(position);
+//                BusinessProfileBuy businessProfileBuy = new BusinessProfileBuy();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("image", upload.getImageUrl());
+//                businessProfileBuy.setArguments(bundle);
+//                FragmentManager fragmentManager = getFragmentManager();
+//                assert getFragmentManager() != null;
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container, businessProfileBuy);
+//                fragmentTransaction.addToBackStack("Home");
+//                fragmentTransaction.commit();
+//            }
+//        });
+//        coverImage.setColorFilter(Color.WHITE);
+//        coverImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                chooseCoverImage();
+//            }
+//        });
 
         companyLogo.setColorFilter(Color.WHITE);
         companyLogo.setOnClickListener(new View.OnClickListener() {
@@ -250,4 +296,25 @@ public class CreateBusinessProfile extends Fragment {
         fragmentTransaction.commit();
     }
 
+    public String getEmail() {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String emailAddress;
+        emailAddress = currentUser.getEmail();
+        return emailAddress;
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        ItemsModel itemsModel = items.get(position);
+        BusinessProfileBuy businessProfileBuy = new BusinessProfileBuy();
+                Bundle bundle = new Bundle();
+                bundle.putString("image", itemsModel.getProductImage());
+                businessProfileBuy.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+                assert getFragmentManager() != null;
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, businessProfileBuy);
+                fragmentTransaction.addToBackStack("Home");
+                fragmentTransaction.commit();
+    }
 }
