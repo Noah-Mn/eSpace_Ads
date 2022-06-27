@@ -239,7 +239,7 @@ public class AddItemToStore extends Fragment {
                                 public void run() {
                                     progressBar.setProgress(0);
                                     progressBar.setVisibility(View.GONE);
-                                    replaceFragments(new CreateBusinessProfile());
+                                    replaceFragments(new BusinessProfileStore());
                                 }
                             }, 500);
 //                            Toast.makeText(getContext(), "Image Upload successful", Toast.LENGTH_LONG).show();

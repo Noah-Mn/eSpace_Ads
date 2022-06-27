@@ -43,8 +43,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
-public class CreateBusinessProfile extends Fragment implements GridAdapter.ItemClickListener{
-
+public class CreateBusinessProfile extends Fragment {
     View view;
     LinearLayout socialMediaProfiles, socialMedia;
     TextInputEditText textCompanyName, textCompanyType, textCompanyDescription, companyURL, editTextFacebook, editTextTwitter, editTextInstagram, editTextLinkedin;
@@ -112,8 +111,25 @@ public class CreateBusinessProfile extends Fragment implements GridAdapter.ItemC
 //        gridView.setAdapter(gridAdapter);
 
 
-        gridAdapter = new GridAdapter(items, getContext());
-        gridAdapter.setClickListener(this);
+        gridAdapter = new GridAdapter(items, getContext(), new GridAdapter.OnItemClickListener(){
+
+            @Override
+            public void OnItemClick(ItemsModel item) {
+                BusinessProfileBuy businessProfileBuy = new BusinessProfileBuy();
+                Bundle bundle = new Bundle();
+                bundle.putString("image", item.getProductImage());
+                bundle.putString("descrip", item.getDescription());
+                bundle.putInt("price", item.getPrices());
+                bundle.putString("productName", item.getName());
+                businessProfileBuy.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+                assert getFragmentManager() != null;
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, businessProfileBuy);
+                fragmentTransaction.addToBackStack("Home");
+                fragmentTransaction.commit();
+            }
+        });
         reference = FirebaseDatabase.getInstance().getReference("Store Items");
         gridView.setHasFixedSize(true);
         gridView.setLayoutManager(new GridLayoutManager(getContext(), 4));
@@ -287,6 +303,7 @@ public class CreateBusinessProfile extends Fragment implements GridAdapter.ItemC
             roundedImageView.setImageURI(logoPath);
         }
     }
+
     private void replaceFragments(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         assert fragmentManager != null;
@@ -303,18 +320,5 @@ public class CreateBusinessProfile extends Fragment implements GridAdapter.ItemC
         return emailAddress;
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        ItemsModel itemsModel = items.get(position);
-        BusinessProfileBuy businessProfileBuy = new BusinessProfileBuy();
-                Bundle bundle = new Bundle();
-                bundle.putString("image", itemsModel.getProductImage());
-                businessProfileBuy.setArguments(bundle);
-                FragmentManager fragmentManager = getFragmentManager();
-                assert getFragmentManager() != null;
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, businessProfileBuy);
-                fragmentTransaction.addToBackStack("Home");
-                fragmentTransaction.commit();
-    }
+
 }

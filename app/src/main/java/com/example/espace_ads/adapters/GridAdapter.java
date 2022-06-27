@@ -17,14 +17,19 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewHolder> {
-    ArrayList<ItemsModel> itemsModels;
-    Context context;
-    private ItemClickListener mClickListener;
 
-    public GridAdapter(ArrayList<ItemsModel> itemsModels, Context context) {
+    public interface OnItemClickListener {
+        void OnItemClick(ItemsModel item);
+    }
+
+    private ArrayList<ItemsModel> itemsModels;
+    private final Context context;
+    private final OnItemClickListener listener;
+
+    public GridAdapter(ArrayList<ItemsModel> itemsModels, Context context, OnItemClickListener listener) {
         this.itemsModels = itemsModels;
         this.context = context;
-
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,13 +41,14 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
 
     @Override
     public void onBindViewHolder(@NonNull StoreItemViewHolder holder, int position) {
-        ItemsModel itemsModel = itemsModels.get(position);
-        try {
-            URL url = new URL(itemsModel.getProductImage());
-            Picasso.with(context).load(String.valueOf(url)).into(holder.binding.gridItemImage);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+//        ItemsModel itemsModel = itemsModels.get(position);
+        holder.bind(itemsModels.get(position), listener);
+//        try {
+//            URL url = new URL(itemsModel.getProductImage());
+//            Picasso.with(context).load(String.valueOf(url)).into(holder.binding.gridItemImage);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
 
 
     }
@@ -52,7 +58,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
         return itemsModels.size();
     }
 
-    class StoreItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class StoreItemViewHolder extends RecyclerView.ViewHolder {
 
         GridItemBinding binding;
 
@@ -61,11 +67,20 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
             binding = gridItemBinding;
         }
 
-        @Override
-        public void onClick(View v) {
-            if(mClickListener != null){
-                mClickListener.onItemClick(v, getAdapterPosition());
+        public void bind(final ItemsModel itemsModel, final OnItemClickListener onItemClickListener) {
+            try {
+                URL url = new URL(itemsModel.getProductImage());
+                Picasso.with(context).load(String.valueOf(url)).into(binding.gridItemImage);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
             }
+
+            binding.gridItemImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.OnItemClick(itemsModel);
+                }
+            });
         }
     }
 
@@ -74,13 +89,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
 //    }
 
     // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
+//    public void setClickListener(ItemClickListener itemClickListener) {
+//        this.mClickListener = itemClickListener;
+//    }
 
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
+//    public interface ItemClickListener {
+//        void onItemClick(View view, int position);
+//    }
 
     public void setStoreItemsList(ArrayList<ItemsModel> itemsList) {
         this.itemsModels = itemsList;

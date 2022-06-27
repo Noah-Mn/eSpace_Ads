@@ -52,6 +52,7 @@
         <entry key="app/src/main/res/layout/fragment_drafts.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_duplicates.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_home_flag.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home_frag.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_statistics.xml" value="0.25" />

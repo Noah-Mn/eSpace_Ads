@@ -2,65 +2,63 @@ package com.example.espace_ads.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.espace_ads.R;
+import com.google.android.material.textview.MaterialTextView;
+import com.squareup.picasso.Picasso;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BusinessProfileBuy#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class BusinessProfileBuy extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    View view;
+    private AppCompatImageView productImage;
+    private MaterialTextView itemName, itemPrice, itemDescr;
 
     public BusinessProfileBuy() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BusinessProfileBuy.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BusinessProfileBuy newInstance(String param1, String param2) {
-        BusinessProfileBuy fragment = new BusinessProfileBuy();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        String productName = getArguments().getString("productName");
+        String description = getArguments().getString("descrip");
+        String image = getArguments().getString("image");
+        int price = getArguments().getInt("price");
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_business_profile_buy, container, false);
+        view = inflater.inflate(R.layout.fragment_business_profile_buy, container, false);
+        productImage = view.findViewById(R.id.product_image);
+        itemPrice = view.findViewById(R.id.text_item_price);
+        itemName = view.findViewById(R.id.text_item_name);
+        itemDescr = view.findViewById(R.id.text_product_description);
+
+        try {
+            URL url = new URL(image);
+            Picasso.with(getContext()).load(String.valueOf(url)).into(productImage);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        itemPrice.setText("MKW "+ price);
+        itemName.setText(productName);
+        itemDescr.setText(description);
+
+        return view;
     }
 }
