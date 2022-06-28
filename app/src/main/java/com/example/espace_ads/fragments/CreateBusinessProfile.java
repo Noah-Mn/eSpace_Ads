@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.espace_ads.R;
-import com.example.espace_ads.models.ItemsModel;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -57,7 +56,7 @@ public class CreateBusinessProfile extends Fragment {
     View view;
     LinearLayout socialMediaProfiles, socialMedia;
     TextInputEditText textCompanyName, textCompanyType, textCompanyDescription, companyURL, editTextFacebook, editTextTwitter, editTextInstagram, editTextLinkedin;
-    MaterialCardView saveBusinessProfile, addProfileLinks;
+    MaterialCardView saveBusinessProfile, addProfileLinks, cardFacebook, cardInstagram, cardTwitter, cardLinkedin;
     AppCompatImageView imageView;
     MaterialCheckBox facebook, twitter, instagram, linkedin;
     FirebaseFirestore firebaseFirestore;
@@ -106,6 +105,10 @@ public class CreateBusinessProfile extends Fragment {
         editTextInstagram = view.findViewById(R.id.editText_instagram);
         editTextLinkedin = view.findViewById(R.id.editText_linkedin);
         editTextTwitter = view.findViewById(R.id.editText_twitter);
+        cardFacebook = view.findViewById(R.id.facebook);
+        cardInstagram = view.findViewById(R.id.instagram);
+        cardLinkedin = view.findViewById(R.id.linkedin);
+        cardTwitter = view.findViewById(R.id.twitter);
         mProgressBar = view.findViewById(R.id.progressBar);
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("Business Profile Images").child(getEmail());
@@ -128,8 +131,12 @@ public class CreateBusinessProfile extends Fragment {
                                 String companyUrl = documentSnapshot.getString("Company Url");
                                 String companyCoverImage = documentSnapshot.getString("CoverImageUri");
                                 String companyLogo = documentSnapshot.getString("LogoUri");
+                                String facebookProfile = documentSnapshot.getString("Facebook Profile");
+                                String linkedinProfile = documentSnapshot.getString("Linkedin Profile");
+                                String instagramProfile = documentSnapshot.getString("Instagram Profile");
+                                String twitterProfile = documentSnapshot.getString("Twitter Profile");
 
-                                if (companyName != null && description != null && companyType != null && companyUrl != null && companyCoverImage != null && companyLogo != null){
+                                if (companyName != null && description != null && companyType != null && companyUrl != null && companyCoverImage != null && companyLogo != null) {
 
                                     try {
                                         URL coverUrl = new URL(companyCoverImage);
@@ -149,6 +156,54 @@ public class CreateBusinessProfile extends Fragment {
                                     textCompanyDescription.setText(description);
                                     companyURL.setText(companyUrl);
 
+                                    if (facebookProfile != null) {
+                                        socialMedia.setVisibility(View.VISIBLE);
+                                        cardFacebook.setVisibility(View.VISIBLE);
+                                        facebook.setChecked(true);
+                                        socialMediaProfiles.setVisibility(View.GONE);
+                                    } else {
+                                        socialMedia.setVisibility(View.VISIBLE);
+                                        cardFacebook.setVisibility(View.GONE);
+                                        facebook.setChecked(false);
+                                        socialMediaProfiles.setVisibility(View.GONE);
+                                    }
+
+                                    if (twitterProfile != null) {
+                                        socialMedia.setVisibility(View.VISIBLE);
+                                        cardTwitter.setVisibility(View.VISIBLE);
+                                        twitter.setChecked(true);
+                                        socialMediaProfiles.setVisibility(View.GONE);
+                                    } else {
+                                        socialMedia.setVisibility(View.VISIBLE);
+                                        cardTwitter.setVisibility(View.GONE);
+                                        twitter.setChecked(false);
+                                        socialMediaProfiles.setVisibility(View.GONE);
+                                    }
+
+                                    if (instagramProfile != null) {
+                                        socialMedia.setVisibility(View.VISIBLE);
+                                        cardInstagram.setVisibility(View.VISIBLE);
+                                        instagram.setChecked(true);
+                                        socialMediaProfiles.setVisibility(View.GONE);
+                                    } else {
+                                        socialMedia.setVisibility(View.VISIBLE);
+                                        cardInstagram.setVisibility(View.GONE);
+                                        instagram.setChecked(false);
+                                        socialMediaProfiles.setVisibility(View.GONE);
+                                    }
+
+                                    if (linkedinProfile != null) {
+                                        socialMedia.setVisibility(View.VISIBLE);
+                                        cardLinkedin.setVisibility(View.VISIBLE);
+                                        linkedin.setChecked(true);
+                                        socialMediaProfiles.setVisibility(View.GONE);
+                                    } else {
+                                        socialMedia.setVisibility(View.VISIBLE);
+                                        cardLinkedin.setVisibility(View.GONE);
+                                        linkedin.setChecked(false);
+                                        socialMediaProfiles.setVisibility(View.GONE);
+                                    }
+
                                 }
 
                             }
@@ -161,7 +216,7 @@ public class CreateBusinessProfile extends Fragment {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -241,7 +296,7 @@ public class CreateBusinessProfile extends Fragment {
             @Override
             public void onClick(View v) {
                 setItemsToDatabase();
-                displaySavedData();
+                setSocialMedia();
             }
         });
     }
@@ -429,7 +484,55 @@ public class CreateBusinessProfile extends Fragment {
 
     }
 
-    private void displaySavedData() {
+    private void setSocialMedia() {
+        if (facebook.isChecked() && !Objects.requireNonNull(editTextFacebook.getText()).toString().matches("")) {
+            socialMedia.setVisibility(View.VISIBLE);
+            cardFacebook.setVisibility(View.VISIBLE);
+            facebook.setChecked(true);
+            socialMediaProfiles.setVisibility(View.GONE);
+        } else {
+            socialMedia.setVisibility(View.VISIBLE);
+            cardFacebook.setVisibility(View.GONE);
+            facebook.setChecked(false);
+            socialMediaProfiles.setVisibility(View.GONE);
+        }
+
+        if (twitter.isChecked() && !Objects.requireNonNull(editTextTwitter.getText()).toString().matches("")) {
+            socialMedia.setVisibility(View.VISIBLE);
+            cardTwitter.setVisibility(View.VISIBLE);
+            twitter.setChecked(true);
+            socialMediaProfiles.setVisibility(View.GONE);
+        } else {
+            socialMedia.setVisibility(View.VISIBLE);
+            cardTwitter.setVisibility(View.GONE);
+            twitter.setChecked(false);
+            socialMediaProfiles.setVisibility(View.GONE);
+        }
+
+        if (instagram.isChecked() && !Objects.requireNonNull(editTextInstagram.getText()).toString().matches("")) {
+            socialMedia.setVisibility(View.VISIBLE);
+            cardInstagram.setVisibility(View.VISIBLE);
+            instagram.setChecked(true);
+            socialMediaProfiles.setVisibility(View.GONE);
+        } else {
+            socialMedia.setVisibility(View.VISIBLE);
+            cardInstagram.setVisibility(View.GONE);
+            instagram.setChecked(false);
+            socialMediaProfiles.setVisibility(View.GONE);
+        }
+
+        if (linkedin.isChecked() && !Objects.requireNonNull(editTextLinkedin.getText()).toString().matches("")) {
+            socialMedia.setVisibility(View.VISIBLE);
+            cardLinkedin.setVisibility(View.VISIBLE);
+            linkedin.setChecked(true);
+            socialMediaProfiles.setVisibility(View.GONE);
+        } else {
+            socialMedia.setVisibility(View.VISIBLE);
+            cardLinkedin.setVisibility(View.GONE);
+            linkedin.setChecked(false);
+            socialMediaProfiles.setVisibility(View.GONE);
+        }
 
     }
+
 }
