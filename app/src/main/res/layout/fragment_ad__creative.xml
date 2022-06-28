@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6151414"
+    android:overScrollMode="never"
     tools:context=".fragments.Ad_Creative">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         android:paddingBottom="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout

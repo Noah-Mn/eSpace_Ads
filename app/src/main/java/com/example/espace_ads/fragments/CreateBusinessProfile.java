@@ -56,7 +56,7 @@ public class CreateBusinessProfile extends Fragment {
     View view;
     LinearLayout socialMediaProfiles, socialMedia;
     TextInputEditText textCompanyName, textCompanyType, textCompanyDescription, companyURL, editTextFacebook, editTextTwitter, editTextInstagram, editTextLinkedin;
-    MaterialCardView saveBusinessProfile, addProfileLinks, cardFacebook, cardInstagram, cardTwitter, cardLinkedin;
+    MaterialCardView saveBusinessProfile, addProfileLinks, cardFacebook, cardInstagram, cardTwitter, cardLinkedin, editBusinessProfile;
     AppCompatImageView imageView;
     MaterialCheckBox facebook, twitter, instagram, linkedin;
     FirebaseFirestore firebaseFirestore;
@@ -111,6 +111,7 @@ public class CreateBusinessProfile extends Fragment {
         cardTwitter = view.findViewById(R.id.twitter);
         mProgressBar = view.findViewById(R.id.progressBar);
         firebaseFirestore = FirebaseFirestore.getInstance();
+        editBusinessProfile = view.findViewById(R.id.edit_business_pro);
         storageReference = FirebaseStorage.getInstance().getReference("Business Profile Images").child(getEmail());
 
         listeners();
@@ -155,8 +156,11 @@ public class CreateBusinessProfile extends Fragment {
                                     textCompanyType.setText(companyType);
                                     textCompanyDescription.setText(description);
                                     companyURL.setText(companyUrl);
+                                    saveBusinessProfile.setVisibility(View.GONE);
+                                    editBusinessProfile.setVisibility(View.VISIBLE);
 
-                                    if (facebookProfile != null) {
+                                    assert facebookProfile != null;
+                                    if (!facebookProfile.matches("")) {
                                         socialMedia.setVisibility(View.VISIBLE);
                                         cardFacebook.setVisibility(View.VISIBLE);
                                         facebook.setChecked(true);
@@ -168,7 +172,8 @@ public class CreateBusinessProfile extends Fragment {
                                         socialMediaProfiles.setVisibility(View.GONE);
                                     }
 
-                                    if (twitterProfile != null) {
+                                    assert twitterProfile != null;
+                                    if (!twitterProfile.matches("")) {
                                         socialMedia.setVisibility(View.VISIBLE);
                                         cardTwitter.setVisibility(View.VISIBLE);
                                         twitter.setChecked(true);
@@ -180,7 +185,8 @@ public class CreateBusinessProfile extends Fragment {
                                         socialMediaProfiles.setVisibility(View.GONE);
                                     }
 
-                                    if (instagramProfile != null) {
+                                    assert instagramProfile != null;
+                                    if (!instagramProfile.matches("")) {
                                         socialMedia.setVisibility(View.VISIBLE);
                                         cardInstagram.setVisibility(View.VISIBLE);
                                         instagram.setChecked(true);
@@ -192,7 +198,8 @@ public class CreateBusinessProfile extends Fragment {
                                         socialMediaProfiles.setVisibility(View.GONE);
                                     }
 
-                                    if (linkedinProfile != null) {
+                                    assert linkedinProfile != null;
+                                    if (!linkedinProfile.matches("")) {
                                         socialMedia.setVisibility(View.VISIBLE);
                                         cardLinkedin.setVisibility(View.VISIBLE);
                                         linkedin.setChecked(true);

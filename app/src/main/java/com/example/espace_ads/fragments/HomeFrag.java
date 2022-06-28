@@ -38,8 +38,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.mig35.carousellayoutmanager.CarouselLayoutManager;
+import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class HomeFrag extends Fragment{
@@ -48,14 +52,15 @@ public class HomeFrag extends Fragment{
     FirebaseFirestore db;
     FirebaseUser currentUser;
     String name;
-    MaterialTextView username, liveCampaign, recentCampaign;
+    MaterialTextView username, liveCampaign, numberVisits, numberEngagements, numberSells, recentCampaign;
     ProgressBar liveCampaignProgressBar, recentCampaignProgressBar;
     private final String TAG = "Home Fragment";
     ArrayList<LiveCampaignModel> liveCampaignModelList = new ArrayList<>();
     ArrayList<RecentCampaignModel> recentCampaignModelList = new ArrayList<>();
     ArrayList<BlogsModel> blogsModelArrayList = new ArrayList<>();
     View view;
-    AppCompatImageView dropdown;
+    AppCompatImageView dropdown, coverImage;
+    RoundedImageView logo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,11 @@ public class HomeFrag extends Fragment{
         recentCampaignProgressBar.setVisibility(View.VISIBLE);
         blogsRecyclerView = view.findViewById(R.id.blogs_list);
         dropdown = view.findViewById(R.id.drop_down);
+        coverImage = view.findViewById(R.id.business_cover_image);
+        logo = view.findViewById(R.id.profile_image);
+        numberVisits = view.findViewById(R.id.text_visits_2);
+        numberEngagements = view.findViewById(R.id.text_engagements_2);
+        numberSells = view.findViewById(R.id.text_sells_2);
 
         getUserData();
 //        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFrag.this).commit());
@@ -205,6 +215,65 @@ public class HomeFrag extends Fragment{
 
         /**      <<<<<<<<<<<<<<<<<<<<<<<<<<get blogs from somewhere here>>>>>>>>>>>>>>>>>>>    **/
 
+
+
+//        get business data from database
+
+        db.collection("Business Profile")
+                .whereEqualTo("Email Address", getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful() && task.getResult() != null) {
+
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                int visitsNumber = Math.toIntExact(documentSnapshot.getLong("Visits"));
+                                int sellsNumber = Math.toIntExact(documentSnapshot.getLong("Sells"));
+                                int engagementsNumber = Math.toIntExact(documentSnapshot.getLong("Engagements"));
+
+                                String companyCoverImage = documentSnapshot.getString("CoverImageUri");
+                                String companyLogo = documentSnapshot.getString("LogoUri");
+
+                                assert companyCoverImage != null;
+                                if (!companyCoverImage.matches("")) {
+                                    assert companyLogo != null;
+                                    if (!companyLogo.matches("")) {
+
+                                        try {
+                                            URL coverUrl = new URL(companyCoverImage);
+                                            Picasso.with(getContext()).load(String.valueOf(coverUrl)).into(coverImage);
+                                        } catch (MalformedURLException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            URL logoUrl = new URL(companyLogo);
+                                            Picasso.with(getContext()).load(String.valueOf(logoUrl)).into(logo);
+                                        } catch (MalformedURLException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        numberVisits.setText(String.valueOf(visitsNumber));
+                                        numberEngagements.setText(String.valueOf(engagementsNumber));
+                                        numberSells.setText(String.valueOf(sellsNumber));
+
+                                    }
+                                }
+
+                            }
+
+                        } else {
+                            Toast.makeText(getContext(), "Failed to get data", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
         return view;
     }
 

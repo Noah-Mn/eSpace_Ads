@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6151414"
+    android:overScrollMode="never"
     tools:context=".fragments.CreateBusinessProfile">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         android:paddingBottom="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/no_cover_pic" />
+                    android:src="@drawable/loading_image" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -90,7 +92,7 @@
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/background_rounded"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/no_logo"
+                    android:src="@drawable/loading_image"
                     app:riv_oval="true" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
@@ -490,6 +492,35 @@
                     android:layout_marginEnd="5dp"
                     android:padding="3dp"
                     android:text="Save business profile"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/edit_business_pro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#3BFFFFFF"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/social_media_profiles">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="3dp"
+                    android:text="Edit business profile"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="14sp"/>

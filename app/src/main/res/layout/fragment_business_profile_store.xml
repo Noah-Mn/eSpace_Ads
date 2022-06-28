@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#E6151414"
+    android:overScrollMode="never"
     tools:context=".fragments.BusinessProfileStore">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:paddingBottom="?attr/actionBarSize"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:paddingBottom="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -21,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
@@ -28,11 +31,10 @@
                 android:text="@string/business_profile"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_goneMarginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:textStyle="bold"/>
+                app:layout_goneMarginStart="20dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/business_profile_card"
@@ -44,13 +46,16 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/grow_your_business"
                 app:cardCornerRadius="13dp"
-                app:layout_constraintTop_toBottomOf="@id/text_business_profile">
+                app:layout_constraintTop_toBottomOf="@id/text_business_profile"
+                app:strokeColor="#777777"
+                app:strokeWidth="1dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/cover_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/smoothies"/>
+                    android:src="@drawable/loading_image" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -60,31 +65,32 @@
                 android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="-40dp"
+                android:layout_marginEnd="35dp"
                 android:background="@drawable/background_rounded"
                 android:elevation="20dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/orzora_black"
-                app:layout_constraintTop_toBottomOf="@id/business_profile_card"
+                android:src="@drawable/loading_image"
                 app:layout_constraintEnd_toEndOf="@id/business_profile_card"
-                android:layout_marginEnd="35dp"
+                app:layout_constraintTop_toBottomOf="@id/business_profile_card"
                 app:riv_oval="true" />
 
             <LinearLayout
                 android:id="@+id/business_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/business_profile_card"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/business_profile_card">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/text_business_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
@@ -92,20 +98,20 @@
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_goneMarginStart="20dp"
-                    android:layout_marginTop="0dp"
-                    android:textStyle="bold"/>
+                    app:layout_goneMarginStart="20dp" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/company_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Beverage Company"
-                    android:textAlignment="center"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="5dp"
-                    android:textColor="#66FFFFFF"/>
+                    android:text="Beverage Company"
+                    android:textAlignment="center"
+                    android:textColor="#66FFFFFF" />
 
 
             </LinearLayout>
@@ -114,133 +120,148 @@
                 android:id="@+id/business_bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/business_name_layout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/business_name_layout">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/text_business_bio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
                     android:ellipsize="end"
                     android:gravity="center"
                     android:text="Bio"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_goneMarginStart="20dp"
-                    android:layout_marginTop="0dp"
-                    android:textStyle="bold"/>
+                    app:layout_goneMarginStart="20dp" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/company_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Orzora is a beverage company specialized in coffee manufacturing, 100% juice... "
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
-                    android:textColor="#66FFFFFF"/>
+                    android:text="Orzora is a beverage company specialized in coffee manufacturing, 100% juice... "
+                    android:textColor="#66FFFFFF" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/company_url"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:text="www.noah.com"
                     android:textAlignment="center"
-                    android:layout_marginBottom="2dp"
-                    android:textColor="#3E6FFF"/>
+                    android:textColor="#3E6FFF" />
             </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_social_media"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:text="Social Media"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/business_bio"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"/>
+                android:id="@+id/text_social_media"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="Social Media"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/business_bio" />
 
             <LinearLayout
                 android:id="@+id/social_media"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginStart="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:padding="5dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_social_media">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/twitter"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="5dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/twitter"/>
+                        android:src="@drawable/twitter" />
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/instagram"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="5dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
                         android:background="#D8000000"
-                        android:src="@drawable/instagram"/>
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/instagram" />
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/facebook"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="5dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/facebook"/>
+                        android:src="@drawable/facebook" />
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/linkedin"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="5dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/linkedin"/>
+                        android:src="@drawable/linkedin" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -250,60 +271,60 @@
                 android:id="@+id/text_reviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:text="Reviews"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/social_media"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toBottomOf="@id/social_media" />
 
             <LinearLayout
                 android:id="@+id/review_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginStart="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:padding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_reviews">
 
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:scaleType="centerCrop"
-                        app:riv_oval="true"
-                        android:background="@drawable/background_rounded"
-                        android:src="@drawable/img1"/>
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/background_rounded"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img1"
+                    app:riv_oval="true" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:scaleType="centerCrop"
-                    app:riv_oval="true"
                     android:background="@drawable/background_rounded"
-                    android:src="@drawable/img3"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img3"
+                    app:riv_oval="true" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:scaleType="centerCrop"
-                    app:riv_oval="true"
                     android:background="@drawable/background_rounded"
-                    android:src="@drawable/img2"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img2"
+                    app:riv_oval="true" />
 
             </LinearLayout>
 
@@ -311,25 +332,25 @@
                 android:id="@+id/text_store"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:text="Store"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/review_list"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toBottomOf="@id/review_list" />
 
             <FrameLayout
                 android:id="@+id/grid_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_store">
@@ -364,17 +385,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/grid_layout">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:padding="3dp"
-                android:text="Add items to store"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="3dp"
+                    android:text="Add items to store"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
             </com.google.android.material.card.MaterialCardView>
 

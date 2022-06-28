@@ -6,11 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6151414"
+    android:overScrollMode="never"
     tools:context=".fragments.HomeFrag">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         android:paddingBottom="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -226,12 +228,14 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="0dp">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/business_cover_image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:contentDescription="smoothies"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/smoothies" />
+                            android:src="@drawable/loading_image" />
+
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.makeramen.roundedimageview.RoundedImageView
@@ -244,7 +248,7 @@
                         android:background="@drawable/background_rounded"
                         android:elevation="20dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/orzora_black"
+                        android:src="@drawable/loading_image"
                         app:riv_oval="true" />
 
                     <com.google.android.material.card.MaterialCardView

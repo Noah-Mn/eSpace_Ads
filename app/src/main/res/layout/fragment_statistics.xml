@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#E6151414"
+    android:overScrollMode="never"
     tools:context=".fragments.Statistics">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         android:paddingBottom="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,18 +35,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-             <com.google.android.material.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/people_reached"
                 android:layout_width="match_parent"
                 android:layout_height="185dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
-                app:cardElevation="0dp"
                 android:backgroundTint="#1DFFFFFF"
                 android:scaleType="centerCrop"
                 android:src="@drawable/grow_your_business"
                 app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:layout_constraintTop_toBottomOf="@id/text_name">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,75 +61,73 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="35dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         android:background="@drawable/backg_users"
                         android:padding="8dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_baseline_group_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:riv_oval="true" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="People Reached"
                         android:layout_marginStart="10dp"
-                        android:textStyle="bold"
+                        android:text="People Reached"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                        app:layout_constraintStart_toEndOf="@id/image_people"
-                        app:layout_constraintTop_toTopOf="@id/image_people"
-                        app:layout_constraintBottom_toBottomOf="@id/image_people"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/image_people"
+                        app:layout_constraintStart_toEndOf="@id/image_people"
+                        app:layout_constraintTop_toTopOf="@id/image_people" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="29dp"
                         android:layout_height="29dp"
                         android:layout_marginTop="7dp"
-                        android:tint="#68000000"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="7dp"
-                        android:src="@drawable/ic_outline_info_24"/>
+                        android:src="@drawable/ic_outline_info_24"
+                        android:tint="#68000000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/number_people"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/number_people"
-                        app:layout_constraintTop_toBottomOf="@id/image_people"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                        android:text="29,000"
-                        android:layout_marginTop="10dp"
                         android:layout_marginStart="20dp"
-                        app:layout_constraintStart_toStartOf="@id/image_people"
+                        android:layout_marginTop="10dp"
+                        android:text="29,000"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                         android:textColor="@color/white"
-                        />
+                        app:layout_constraintStart_toStartOf="@id/image_people"
+                        app:layout_constraintTop_toBottomOf="@id/image_people" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:id="@+id/divider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginBottom="10dp"
                         app:dividerColor="#9CFFFFFF"
-                        app:layout_constraintTop_toBottomOf="@id/number_people"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/number_people" />
+
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/divider"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:text="Reaching people helps you build brand awareness"
-                        />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -140,10 +140,10 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="#1DFFFFFF"
-                app:cardElevation="0dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/grow_your_business"
                 app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:layout_constraintTop_toBottomOf="@id/people_reached">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -158,74 +158,72 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="35dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         android:background="@drawable/backg_like"
                         android:padding="8dp"
                         android:src="@drawable/ic_baseline_thumb_up_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:riv_oval="true" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Post Engagements"
                         android:layout_marginStart="10dp"
-                        android:textStyle="bold"
+                        android:text="Post Engagements"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                        app:layout_constraintStart_toEndOf="@id/image_engagements"
-                        app:layout_constraintTop_toTopOf="@id/image_engagements"
-                        app:layout_constraintBottom_toBottomOf="@id/image_engagements"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/image_engagements"
+                        app:layout_constraintStart_toEndOf="@id/image_engagements"
+                        app:layout_constraintTop_toTopOf="@id/image_engagements" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="29dp"
                         android:layout_height="29dp"
                         android:layout_marginTop="7dp"
-                        android:tint="#68000000"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="7dp"
-                        android:src="@drawable/ic_outline_info_24"/>
+                        android:src="@drawable/ic_outline_info_24"
+                        android:tint="#68000000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/number_engagements"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/number_engagements"
-                        app:layout_constraintTop_toBottomOf="@id/image_engagements"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                        android:text="29,000"
-                        android:layout_marginTop="10dp"
                         android:layout_marginStart="20dp"
-                        app:layout_constraintStart_toStartOf="@id/image_engagements"
+                        android:layout_marginTop="10dp"
+                        android:text="29,000"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                         android:textColor="@color/white"
-                        />
+                        app:layout_constraintStart_toStartOf="@id/image_engagements"
+                        app:layout_constraintTop_toBottomOf="@id/image_engagements" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:id="@+id/divider1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginBottom="10dp"
                         app:dividerColor="#9CFFFFFF"
-                        app:layout_constraintTop_toBottomOf="@id/number_engagements"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/number_engagements" />
+
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/divider1"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:text="Promotions relevant to the people who see then build engagement"
-                        />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider1" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -240,9 +238,9 @@
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="#1DFFFFFF"
                 android:scaleType="centerCrop"
-                app:cardElevation="0dp"
                 android:src="@drawable/grow_your_business"
                 app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:layout_constraintTop_toBottomOf="@id/post_engagements">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -257,74 +255,73 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="35dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         android:background="@drawable/backg_click"
                         android:elevation="20dp"
-                        android:scaleType="centerCrop"
                         android:padding="8dp"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_baseline_touch_app_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:riv_oval="true" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Link Clicks"
                         android:layout_marginStart="10dp"
-                        android:textStyle="bold"
+                        android:text="Link Clicks"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                        app:layout_constraintStart_toEndOf="@id/image_clicks"
-                        app:layout_constraintTop_toTopOf="@id/image_clicks"
-                        app:layout_constraintBottom_toBottomOf="@id/image_clicks"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/image_clicks"
+                        app:layout_constraintStart_toEndOf="@id/image_clicks"
+                        app:layout_constraintTop_toTopOf="@id/image_clicks" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="29dp"
                         android:layout_height="29dp"
                         android:layout_marginTop="7dp"
-                        android:tint="#68000000"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="7dp"
-                        android:src="@drawable/ic_outline_info_24"/>
+                        android:src="@drawable/ic_outline_info_24"
+                        android:tint="#68000000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/number_clicks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/number_clicks"
-                        app:layout_constraintTop_toBottomOf="@id/image_clicks"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                        android:text="29,000"
-                        android:layout_marginTop="10dp"
                         android:layout_marginStart="20dp"
-                        app:layout_constraintStart_toStartOf="@id/image_clicks"
+                        android:layout_marginTop="10dp"
+                        android:text="29,000"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                         android:textColor="@color/white"
-                        />
+                        app:layout_constraintStart_toStartOf="@id/image_clicks"
+                        app:layout_constraintTop_toBottomOf="@id/image_clicks" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:id="@+id/divider2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginBottom="10dp"
                         app:dividerColor="#9CFFFFFF"
-                        app:layout_constraintTop_toBottomOf="@id/number_clicks"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/number_clicks" />
+
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="Link clicks take people to your store front. Good ads get clicks"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/divider2"
-                        android:text="Link clicks take people to your store front. Good ads get clicks"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -346,8 +343,8 @@
                 android:id="@+id/live_campaigns"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -359,10 +356,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:clipToPadding="false"
                     android:orientation="horizontal"
-                    android:clipToPadding="false"/>
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <ProgressBar
                     android:id="@+id/progress_live"
@@ -403,8 +400,8 @@
                 android:layout_height="420dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
                 android:backgroundTint="#19FFFFFF"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
@@ -418,14 +415,14 @@
                         android:id="@+id/world_map"
                         android:layout_width="match_parent"
                         android:layout_height="190dp"
-                        app:cardElevation="0dp"
-                        app:cardCornerRadius="20dp">
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
                             android:padding="5dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/world_map" />
                     </com.google.android.material.card.MaterialCardView>
 
@@ -444,23 +441,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/hustling"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="35dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="35dp"
+                        android:layout_marginBottom="10dp"
                         android:orientation="vertical"
-                        android:overScrollMode="ifContentScrolls"
-                        android:layout_marginBottom="10dp">
+                        android:overScrollMode="ifContentScrolls">
 
-                            <ExpandableListView
-                                android:id="@+id/expandable_list_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:divider="@null"
-                                android:nestedScrollingEnabled="true"
-                                android:transcriptMode="alwaysScroll"
-                                android:groupIndicator="@drawable/custom_expandable"
-                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-                                android:layoutDirection="ltr" />
+                        <ExpandableListView
+                            android:id="@+id/expandable_list_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:divider="@null"
+                            android:groupIndicator="@drawable/custom_expandable"
+                            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                            android:layoutDirection="ltr"
+                            android:nestedScrollingEnabled="true"
+                            android:transcriptMode="alwaysScroll" />
 
                     </LinearLayout>
 
@@ -486,13 +483,13 @@
                 android:layout_height="195dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
                 android:backgroundTint="#1DFFFFFF"
                 android:scaleType="centerCrop"
-                app:cardElevation="0dp"
                 android:src="@drawable/grow_your_business"
                 app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:layout_constraintTop_toBottomOf="@id/text_demographics">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -502,11 +499,11 @@
                     <com.github.mikephil.charting.charts.HorizontalBarChart
                         android:id="@+id/chart1"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="10dp"
                         android:layout_height="65dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.github.mikephil.charting.charts.HorizontalBarChart
                         android:id="@+id/chart2"
@@ -514,9 +511,9 @@
                         android:layout_height="80dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
