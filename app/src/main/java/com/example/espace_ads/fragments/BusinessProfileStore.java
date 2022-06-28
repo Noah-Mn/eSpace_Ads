@@ -2,6 +2,7 @@ package com.example.espace_ads.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -36,6 +38,7 @@ import com.squareup.picasso.Picasso;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BusinessProfileStore extends Fragment {
 
@@ -90,7 +93,7 @@ public class BusinessProfileStore extends Fragment {
         });
 
 
-        gridAdapter = new GridAdapter(items, getContext(), new GridAdapter.OnItemClickListener(){
+        gridAdapter = new GridAdapter(items, getContext(), new GridAdapter.OnItemClickListener() {
 
             @Override
             public void OnItemClick(ItemsModel item) {
@@ -107,6 +110,30 @@ public class BusinessProfileStore extends Fragment {
                 fragmentTransaction.replace(R.id.container, businessProfileBuy);
                 fragmentTransaction.addToBackStack("Home");
                 fragmentTransaction.commit();
+            }
+        }, new GridAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean OnItemLongClick(ItemsModel item) {
+                PopupMenu popupMenu = new PopupMenu(Objects.requireNonNull(getContext()), gridView);
+                popupMenu.getMenuInflater().inflate(R.menu.grid_item_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.edit:
+                                Toast.makeText(getContext(), "Edit clicked", Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.delete:
+                                Toast.makeText(getContext(), "Delete clicked", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+
+                        return true;
+                    }
+                });
+                popupMenu.show();
+
+                return true;
             }
         });
         reference = FirebaseDatabase.getInstance().getReference("Store Items");

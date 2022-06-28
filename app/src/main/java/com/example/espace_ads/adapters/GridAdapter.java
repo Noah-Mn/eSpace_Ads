@@ -22,14 +22,20 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
         void OnItemClick(ItemsModel item);
     }
 
+    public interface OnItemLongClickListener{
+        boolean OnItemLongClick(ItemsModel item);
+    }
+
     private ArrayList<ItemsModel> itemsModels;
     private final Context context;
     private final OnItemClickListener listener;
+    private final OnItemLongClickListener longClickListener;
 
-    public GridAdapter(ArrayList<ItemsModel> itemsModels, Context context, OnItemClickListener listener) {
+    public GridAdapter(ArrayList<ItemsModel> itemsModels, Context context, OnItemClickListener listener, OnItemLongClickListener longClickListener) {
         this.itemsModels = itemsModels;
         this.context = context;
         this.listener = listener;
+        this.longClickListener = longClickListener;
     }
 
     @NonNull
@@ -42,7 +48,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
     @Override
     public void onBindViewHolder(@NonNull StoreItemViewHolder holder, int position) {
 //        ItemsModel itemsModel = itemsModels.get(position);
-        holder.bind(itemsModels.get(position), listener);
+        holder.bind(itemsModels.get(position), listener, longClickListener);
 //        try {
 //            URL url = new URL(itemsModel.getProductImage());
 //            Picasso.with(context).load(String.valueOf(url)).into(holder.binding.gridItemImage);
@@ -67,7 +73,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
             binding = gridItemBinding;
         }
 
-        public void bind(final ItemsModel itemsModel, final OnItemClickListener onItemClickListener) {
+        public void bind(final ItemsModel itemsModel, final OnItemClickListener onItemClickListener, final OnItemLongClickListener onItemLongClickListener) {
             try {
                 URL url = new URL(itemsModel.getProductImage());
                 Picasso.with(context).load(String.valueOf(url)).into(binding.gridItemImage);
@@ -81,21 +87,17 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
                     onItemClickListener.OnItemClick(itemsModel);
                 }
             });
+
+            binding.gridItemImage.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemLongClickListener.OnItemLongClick(itemsModel);
+                    return true;
+                }
+            });
         }
+
     }
-
-//    String getItem(int id) {
-//        return itemsModels[id];
-//    }
-
-    // allows clicks events to be caught
-//    public void setClickListener(ItemClickListener itemClickListener) {
-//        this.mClickListener = itemClickListener;
-//    }
-
-//    public interface ItemClickListener {
-//        void onItemClick(View view, int position);
-//    }
 
     public void setStoreItemsList(ArrayList<ItemsModel> itemsList) {
         this.itemsModels = itemsList;
