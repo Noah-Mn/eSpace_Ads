@@ -22,8 +22,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.espace_ads.R;
+import com.example.espace_ads.algorithms.DocumentIDGenerator;
 import com.example.espace_ads.models.ItemsModel;
-import com.example.espace_ads.models.Upload;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,8 +37,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -58,18 +56,17 @@ public class AddItemToStore extends Fragment {
     private ImageView itemPic;
     private TextInputEditText itemPrice, itemName, itemDesc;
     private MaterialCardView addItem;
-    private int PICK_ITEM_IMAGE = 3;
+    private final int PICK_ITEM_IMAGE = 3;
     private Uri itemImagePath;
     private ItemsModel itemsModel;
-    ArrayList<ItemsModel> itemsModels = new ArrayList<>();
     private FirebaseFirestore firebaseFirestore;
     private StorageReference storageReference;
     private DatabaseReference reference;
     private StorageTask<UploadTask.TaskSnapshot> uploadTask;
     private ProgressBar progressBar;
     FirebaseUser currentUser;
-    String filePath;
-    Map config;
+    String docID = DocumentIDGenerator.generateRandomString(20);
+
 
     public AddItemToStore() {
         // Required empty public constructor
@@ -92,10 +89,9 @@ public class AddItemToStore extends Fragment {
         itemPrice = view.findViewById(R.id.editText_item_price);
         itemDesc = view.findViewById(R.id.editText_item_desc);
         addItem = view.findViewById(R.id.add_item);
-        itemsModel= new ItemsModel();
+        itemsModel = new ItemsModel();
         progressBar = view.findViewById(R.id.content_loading_progressbar);
         storageReference = FirebaseStorage.getInstance().getReference("Store Items Images").child(getEmail());
-
 
         listeners();
 //        configCloudinary();
@@ -116,7 +112,16 @@ public class AddItemToStore extends Fragment {
             public void onClick(View v) {
                 addItem.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                setItemsToDatabase();
+                if (!Objects.requireNonNull(itemPrice.getText()).toString().trim().matches("")
+                        && !Objects.requireNonNull(itemName.getText()).toString().trim().matches("")
+                        && !Objects.requireNonNull(itemDesc.getText()).toString().trim().matches("")) {
+                    setItemsToDatabase();
+                } else {
+                    Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    addItem.setVisibility(View.VISIBLE);
+                }
+
 //                uploadToCloudinary(filePath);
 
             }
@@ -130,14 +135,15 @@ public class AddItemToStore extends Fragment {
         startActivityForResult(intent, PICK_ITEM_IMAGE);
     }
 // not useful for now but might be used at some point
+
     /**
-    private void configCloudinary() {
-        config = new HashMap();
-        config.put("cloud_name", "doxgcbrlz");
-        config.put("api_key", "364564726645171");
-        config.put("api_secret", "u1mEEHzOdglDH_usbekyIT4DrjI");
-        MediaManager.init(Objects.requireNonNull(getContext()), config);
-    }
+     * private void configCloudinary() {
+     * config = new HashMap();
+     * config.put("cloud_name", "doxgcbrlz");
+     * config.put("api_key", "364564726645171");
+     * config.put("api_secret", "u1mEEHzOdglDH_usbekyIT4DrjI");
+     * MediaManager.init(Objects.requireNonNull(getContext()), config);
+     * }
      */
 
     @Override
@@ -154,54 +160,46 @@ public class AddItemToStore extends Fragment {
     }
 
     /**
-    private void uploadToCloudinary(String filePath) {
-        Log.d("A", "sign up uploadToCloudinary- ");
-        MediaManager.get().upload(filePath).callback(new UploadCallback() {
-            @Override
-            public void onStart(String requestId) {
-//                mText.setText("start");
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onProgress(String requestId, long bytes, long totalBytes) {
-//                mText.setText("Uploading... ");
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onSuccess(String requestId, Map resultData) {
-//                mText.setText("image URL: " + resultData.get("url").toString());
-                progressBar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onError(String requestId, ErrorInfo error) {
-//                mText.setText("error " + error.getDescription());
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(getContext(), "Error: "+ error.getDescription(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onReschedule(String requestId, ErrorInfo error) {
-//                mText.setText("Reshedule " + error.getDescription());
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(getContext(), "Error: "+error.getDescription(), Toast.LENGTH_SHORT).show();
-            }
-        }).dispatch();
-    }
-
-    private String getRealPathFromUri(Uri imageUri, Activity activity) {
-        Cursor cursor = activity.getContentResolver().query(imageUri, null, null, null, null);
-
-        if (cursor == null) {
-            return imageUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(idx);
-        }
-    }
+     * private void uploadToCloudinary(String filePath) {
+     * Log.d("A", "sign up uploadToCloudinary- ");
+     * MediaManager.get().upload(filePath).callback(new UploadCallback() {
+     *
+     * @Override public void onStart(String requestId) {
+     * //                mText.setText("start");
+     * progressBar.setVisibility(View.VISIBLE);
+     * }
+     * @Override public void onProgress(String requestId, long bytes, long totalBytes) {
+     * //                mText.setText("Uploading... ");
+     * progressBar.setVisibility(View.VISIBLE);
+     * }
+     * @Override public void onSuccess(String requestId, Map resultData) {
+     * //                mText.setText("image URL: " + resultData.get("url").toString());
+     * progressBar.setVisibility(View.GONE);
+     * }
+     * @Override public void onError(String requestId, ErrorInfo error) {
+     * //                mText.setText("error " + error.getDescription());
+     * progressBar.setVisibility(View.GONE);
+     * Toast.makeText(getContext(), "Error: "+ error.getDescription(), Toast.LENGTH_SHORT).show();
+     * }
+     * @Override public void onReschedule(String requestId, ErrorInfo error) {
+     * //                mText.setText("Reshedule " + error.getDescription());
+     * progressBar.setVisibility(View.GONE);
+     * Toast.makeText(getContext(), "Error: "+error.getDescription(), Toast.LENGTH_SHORT).show();
+     * }
+     * }).dispatch();
+     * }
+     * <p>
+     * private String getRealPathFromUri(Uri imageUri, Activity activity) {
+     * Cursor cursor = activity.getContentResolver().query(imageUri, null, null, null, null);
+     * <p>
+     * if (cursor == null) {
+     * return imageUri.getPath();
+     * } else {
+     * cursor.moveToFirst();
+     * int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+     * return cursor.getString(idx);
+     * }
+     * }
      */
 
     private void replaceFragments(Fragment fragment) {
@@ -227,7 +225,7 @@ public class AddItemToStore extends Fragment {
 
         reference = FirebaseDatabase.getInstance().getReference("Store Items");
         if (itemImagePath != null) {
-            StorageReference fileReference = storageReference.child(System.currentTimeMillis()+"."+getFileExtension(itemImagePath));
+            StorageReference fileReference = storageReference.child(docID+".image");
 
             uploadTask = fileReference.putFile(itemImagePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -242,24 +240,7 @@ public class AddItemToStore extends Fragment {
                                     replaceFragments(new BusinessProfileStore());
                                 }
                             }, 500);
-//                            Toast.makeText(getContext(), "Image Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(Objects.requireNonNull(itemName.getText()).toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
-
-//                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                @Override
-//                                public void onSuccess(Uri uri) {
-//                                    itemsModel.setProductImage(uri.toString());
-//                                }
-//                            }).addOnFailureListener(new OnFailureListener() {
-//                                @Override
-//                                public void onFailure(@NonNull Exception e) {
-//                                    Toast.makeText(getContext(), "Error: "+e, Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
-
-                            String uploadId = reference.push().getKey();
-                            reference.child(uploadId).setValue(upload);
-//                            itemsModel.setProductImage(taskSnapshot.getStorage().getDownloadUrl().toString());
+//
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -279,7 +260,7 @@ public class AddItemToStore extends Fragment {
             uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task task) throws Exception {
-                    if (!task.isComplete()){
+                    if (!task.isComplete()) {
                         throw Objects.requireNonNull(task.getException());
                     }
                     return fileReference.getDownloadUrl();
@@ -287,29 +268,34 @@ public class AddItemToStore extends Fragment {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
 
                         firebaseFirestore = FirebaseFirestore.getInstance();
                         Map<String, Object> Item = new HashMap<>();
+
 
                         Item.put("Item Name", itemsName);
                         Item.put("Item Price", itemsPrice);
                         Item.put("Item Description", itemsDesc);
                         Item.put("Email Address", getEmail());
                         Item.put("DownloadUri", downloadUri);
+                        Item.put("File Path", docID);
 
                         firebaseFirestore.collection("Store Items")
-                                .add(Item)
-                                .addOnSuccessListener(documentReference -> Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show())
-                                .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show());
-                    }else {
+                                .document(docID)
+                                .set(Item)
+                                .addOnSuccessListener(documentReference -> {
+//                                    Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    } else {
                         Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
-            Toast.makeText(getContext(), "No file selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please select a file!", Toast.LENGTH_SHORT).show();
         }
 
 //        String downloadUri = itemsModel.getProductImage().trim();
@@ -318,8 +304,10 @@ public class AddItemToStore extends Fragment {
     public String getEmail() {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String emailAddress;
+        assert currentUser != null;
         emailAddress = currentUser.getEmail();
         return emailAddress;
     }
+
 
 }

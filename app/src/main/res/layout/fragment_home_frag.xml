@@ -59,6 +59,7 @@
                 android:layout_marginTop="5dp"
                 android:src="@drawable/down_arrow"
                 android:tint="@color/white"
+                android:focusableInTouchMode="false"
                 app:layout_constraintBottom_toBottomOf="@id/text_name"
                 app:layout_constraintStart_toEndOf="@id/text_name"
                 app:layout_constraintTop_toTopOf="@id/text_name" />

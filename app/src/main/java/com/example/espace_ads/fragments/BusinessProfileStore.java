@@ -1,10 +1,13 @@
 package com.example.espace_ads.fragments;
 
+import android.content.ContentResolver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import com.example.espace_ads.adapters.GridAdapter;
 import com.example.espace_ads.models.ItemsModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
@@ -32,6 +36,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -54,6 +60,8 @@ public class BusinessProfileStore extends Fragment {
     AppCompatImageView imageView;
     RoundedImageView roundedImageView;
     LinearLayout socialMedia;
+    StorageReference storageReference;
+
 
     public BusinessProfileStore() {
         // Required empty public constructor
@@ -84,6 +92,7 @@ public class BusinessProfileStore extends Fragment {
         cardInstagram = view.findViewById(R.id.instagram);
         cardLinkedin = view.findViewById(R.id.linkedin);
         cardTwitter = view.findViewById(R.id.twitter);
+        storageReference = FirebaseStorage.getInstance().getReference("Store Items Images").child(getEmail());
 
         addItems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,18 +122,56 @@ public class BusinessProfileStore extends Fragment {
             }
         }, new GridAdapter.OnItemLongClickListener() {
             @Override
-            public boolean OnItemLongClick(ItemsModel item) {
+            public boolean OnItemLongClick(ItemsModel itemsModel) {
                 PopupMenu popupMenu = new PopupMenu(Objects.requireNonNull(getContext()), gridView);
                 popupMenu.getMenuInflater().inflate(R.menu.grid_item_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()){
                             case R.id.edit:
-                                Toast.makeText(getContext(), "Edit clicked", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "Edit clicked", Toast.LENGTH_SHORT).show();
+
+                                EditStoreItem editStoreItem = new EditStoreItem();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("image", itemsModel.getProductImage());
+                                bundle.putString("descrip", itemsModel.getDescription());
+                                bundle.putInt("price", itemsModel.getPrices());
+                                bundle.putString("productName", itemsModel.getName());
+                                editStoreItem.setArguments(bundle);
+                                FragmentManager fragmentManager = getFragmentManager();
+                                assert getFragmentManager() != null;
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.container, editStoreItem);
+                                fragmentTransaction.addToBackStack("Home");
+                                fragmentTransaction.commit();
                                 break;
+
                             case R.id.delete:
-                                Toast.makeText(getContext(), "Delete clicked", Toast.LENGTH_SHORT).show();
+                                StorageReference reference = storageReference.child(itemsModel.getFilePath()+".image");
+                                reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getContext(), "Error: failed to delete item", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                db.collection("Store Items").document(itemsModel.getFilePath()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(getContext(), "Item deleted from database", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+//                                Toast.makeText(getContext(), "Delete clicked", Toast.LENGTH_SHORT).show();
                                 break;
                         }
 
@@ -156,7 +203,8 @@ public class BusinessProfileStore extends Fragment {
                                 int price = Math.toIntExact(documentSnapshot.getLong("Item Price"));
                                 String description = documentSnapshot.getString("Item Description");
                                 String downloadUri = documentSnapshot.getString("DownloadUri");
-                                ItemsModel itemsModel = new ItemsModel(name, price, description, downloadUri);
+                                String filePath = documentSnapshot.getString("File Path");
+                                ItemsModel itemsModel = new ItemsModel(name, price, description, downloadUri, filePath);
                                 items.add(itemsModel);
                             }
                             if (items.size() > 0) {
@@ -277,6 +325,12 @@ public class BusinessProfileStore extends Fragment {
 
 
         return view;
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = (getActivity()).getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
     public String getEmail() {

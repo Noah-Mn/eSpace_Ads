@@ -46,7 +46,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class HomeFrag extends Fragment{
+public class HomeFrag extends Fragment {
 
     RecyclerView liveCampaignRecycleView, recentCampaignRecyclerView, blogsRecyclerView;
     FirebaseFirestore db;
@@ -107,7 +107,7 @@ public class HomeFrag extends Fragment{
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
                             case R.id.logout:
 
                                 /**    logout to be implemented here   **/
@@ -216,7 +216,6 @@ public class HomeFrag extends Fragment{
         /**      <<<<<<<<<<<<<<<<<<<<<<<<<<get blogs from somewhere here>>>>>>>>>>>>>>>>>>>    **/
 
 
-
 //        get business data from database
 
         db.collection("Business Profile")
@@ -305,15 +304,16 @@ public class HomeFrag extends Fragment{
                     }
                 });
     }
+
     public String getEmail() {
         String emailAddress;
         emailAddress = currentUser.getEmail();
         return emailAddress;
     }
 
-    public void logout(){
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(getContext(), LogIn.class));
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getContext(), LogIn.class));
     }
 
 }
