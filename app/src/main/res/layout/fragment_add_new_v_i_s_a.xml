@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#E6151414"
+    android:overScrollMode="never"
+    tools:context=".fragments.AddNewVISA">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_billing_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Billing Methods"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/billing_methods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_billing_method"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/visa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/visa"
+                    android:layout_gravity="center"/>
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/visa_radioButton"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mastercard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/mastercard"
+                    android:layout_gravity="center"/>
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/visa_radioButton"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/card_number"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/text_input_backg"
+            android:hint="Card Number"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:inputType="number"
+            android:textColor="#66FFFFFF"
+            android:textColorHint="#66FFFFFF"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/billing_methods"/>
+
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/card_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/card_expiration_date"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/text_input_backg"
+                android:hint="Card expiration date     "
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="#66FFFFFF"
+                android:inputType="text"
+                android:textColorHint="#66FFFFFF"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@id/billing_methods" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/verification_code"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/text_input_backg"
+                android:hint="Card verification code      "
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:inputType="number"
+                android:textColor="#66FFFFFF"
+                android:textColorHint="#66FFFFFF"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@id/billing_methods" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="#1A48FF"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/relative_layout"
+            >
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp"
+                android:text=" Save "
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

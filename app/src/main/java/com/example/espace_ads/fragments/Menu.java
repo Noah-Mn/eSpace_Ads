@@ -29,7 +29,7 @@ public class Menu extends Fragment {
     FirebaseUser currentUser;
     MaterialTextView username;
     String name;
-    ConstraintLayout businessProfile;
+    ConstraintLayout businessProfile, bank;
 
     public Menu() {
         // Required empty public constructor
@@ -50,6 +50,7 @@ public class Menu extends Fragment {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         username = view.findViewById(R.id.text_name);
         businessProfile = view.findViewById(R.id.business_profile);
+        bank = view.findViewById(R.id.bank);
         getUserData();
 
         listeners();
@@ -61,6 +62,13 @@ public class Menu extends Fragment {
             @Override
             public void onClick(View v) {
                 replaceFragments(new CreateBusinessProfile());
+            }
+        });
+
+        bank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               replaceFragments(new BankDetails());
             }
         });
     }
