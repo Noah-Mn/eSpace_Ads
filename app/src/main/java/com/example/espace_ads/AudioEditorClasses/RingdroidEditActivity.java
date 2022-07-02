@@ -1184,10 +1184,10 @@ public class RingdroidEditActivity extends Activity
         }
 
         // Turn the title into a filename
-        String filename = "";
+        StringBuilder filename = new StringBuilder();
         for (int i = 0; i < title.length(); i++) {
             if (Character.isLetterOrDigit(title.charAt(i))) {
-                filename += title.charAt(i);
+                filename.append(title.charAt(i));
             }
         }
 

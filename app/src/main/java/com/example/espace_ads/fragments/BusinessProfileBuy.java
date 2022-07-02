@@ -1,5 +1,7 @@
 package com.example.espace_ads.fragments;
 
+import static com.squareup.picasso.Picasso.*;
+
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatImageView;
@@ -16,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 public class BusinessProfileBuy extends Fragment {
     View view;
@@ -36,7 +39,7 @@ public class BusinessProfileBuy extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String productName = getArguments().getString("productName");
+        String productName = Objects.requireNonNull(getArguments()).getString("productName");
         String description = getArguments().getString("descrip");
         String image = getArguments().getString("image");
         int price = getArguments().getInt("price");

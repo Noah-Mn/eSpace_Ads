@@ -16,6 +16,8 @@
 
 package com.example.espace_ads.AudioEditorClasses.soundfile;
 
+import androidx.annotation.NonNull;
+
 class Atom {  // note: latest versions of spec simply call it 'box' instead of 'atom'.
     private int mSize;  // includes atom header (8 bytes)
     private int mType;
@@ -173,24 +175,25 @@ class Atom {  // note: latest versions of spec simply call it 'box' instead of '
     }
 
     // Used for debugging purpose only.
+    @NonNull
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         byte[] atom_bytes = getBytes();
 
         for (int i = 0; i < atom_bytes.length; i++) {
             if(i % 8 == 0 && i > 0) {
-                str += '\n';
+                str.append('\n');
             }
-            str += String.format("0x%02X", atom_bytes[i]);
+            str.append(String.format("0x%02X", atom_bytes[i]));
             if (i < atom_bytes.length - 1) {
-                str += ',';
+                str.append(',');
                 if (i % 8 < 7) {
-                    str += ' ';
+                    str.append(' ');
                 }
             }
         }
-        str += '\n';
-        return str;
+        str.append('\n');
+        return str.toString();
     }
 }
 
@@ -260,10 +263,11 @@ public class MP4Header {
         return new MP4Header(sampleRate, numChannels, frame_size, bitrate).mHeader;
     }
 
+    @NonNull
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         if (mHeader == null) {
-            return str;
+            return str.toString();
         }
         int num_32bits_per_lines = 8;
         int count = 0;
@@ -271,16 +275,16 @@ public class MP4Header {
             boolean break_line = count > 0 && count % (num_32bits_per_lines * 4) == 0;
             boolean insert_space = count > 0 && count % 4 == 0 && !break_line;
             if (break_line) {
-                str += '\n';
+                str.append('\n');
             }
             if (insert_space) {
-                str += ' ';
+                str.append(' ');
             }
-            str += String.format("%02X", b);
+            str.append(String.format("%02X", b));
             count++;
         }
 
-        return str;
+        return str.toString();
     }
 
     private void setHeader() {

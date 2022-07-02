@@ -89,7 +89,7 @@ public class CreateAccount extends AppCompatActivity {
 
     private void performSignUp() {
 
-        ProgressDialog progressDialog = new ProgressDialog(this);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Signing up please wait...");
         progressDialog.setTitle("UserSignup");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -143,9 +143,9 @@ public class CreateAccount extends AppCompatActivity {
     }
     private boolean validateForm(){
         valid = false;
-        email = binding.emailAddress.getText().toString().trim();
-        password = Objects.requireNonNull(binding.password.getText().toString());
-        confirmPassword = Objects.requireNonNull(binding.textConfirmPassword.getText().toString());
+        email = Objects.requireNonNull(binding.emailAddress.getText()).toString().trim();
+        password = Objects.requireNonNull(Objects.requireNonNull(binding.password.getText()).toString());
+        confirmPassword = Objects.requireNonNull(Objects.requireNonNull(binding.textConfirmPassword.getText()).toString());
         name = Objects.requireNonNull(binding.fullName.getText()).toString();
 
         try{

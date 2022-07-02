@@ -102,11 +102,20 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MKW "
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                        android:textColor="#0B7BB0"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/account_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                        android:textColor="@color/white"
+                        android:textColor="#0B7BB0"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 

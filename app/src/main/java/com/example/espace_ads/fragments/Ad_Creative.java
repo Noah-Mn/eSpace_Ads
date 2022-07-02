@@ -256,7 +256,7 @@ public class Ad_Creative extends Fragment {
                         Uri imageUri = result.getData().getData();
                         try {
 
-                            InputStream inputStream = (getActivity()).getContentResolver().openInputStream(imageUri);
+                            InputStream inputStream = (Objects.requireNonNull(getActivity())).getContentResolver().openInputStream(imageUri);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
                             encodedImage = encodeImage(bitmap);
@@ -329,7 +329,7 @@ public class Ad_Creative extends Fragment {
     }
 
     private String getFileExtension(Uri uri) {
-        ContentResolver contentResolver = (getActivity()).getContentResolver();
+        ContentResolver contentResolver = (Objects.requireNonNull(getActivity())).getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
     }
@@ -353,10 +353,10 @@ public class Ad_Creative extends Fragment {
                                 }
                             }, 500);
                             Toast.makeText(getContext(), "Image Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(headline.getText().toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
+                            Upload upload = new Upload(Objects.requireNonNull(headline.getText()).toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
 
                             String uploadId = reference.push().getKey();
-                            reference.child(uploadId).setValue(upload);
+                            reference.child(Objects.requireNonNull(uploadId)).setValue(upload);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -426,7 +426,7 @@ public class Ad_Creative extends Fragment {
     }
 
     private String getVideoExtension(Uri uri) {
-        ContentResolver contentResolver = (getActivity()).getContentResolver();
+        ContentResolver contentResolver = (Objects.requireNonNull(getActivity())).getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
     }
@@ -449,10 +449,10 @@ public class Ad_Creative extends Fragment {
                                 }
                             }, 500);
                             Toast.makeText(getContext(), "Video Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(headline.getText().toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
+                            Upload upload = new Upload(Objects.requireNonNull(headline.getText()).toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
 
                             String uploadId = reference.push().getKey();
-                            reference.child(uploadId).setValue(upload);
+                            reference.child(Objects.requireNonNull(uploadId)).setValue(upload);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

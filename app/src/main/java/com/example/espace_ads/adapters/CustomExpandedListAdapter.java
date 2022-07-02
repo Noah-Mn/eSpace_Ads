@@ -11,6 +11,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class CustomExpandedListAdapter extends BaseExpandableListAdapter {
 
@@ -31,7 +32,7 @@ public class CustomExpandedListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int listPosition) {
-        return this.expandableListDetails.get(this.expandableListTitle.get(listPosition)).size();
+        return Objects.requireNonNull(this.expandableListDetails.get(this.expandableListTitle.get(listPosition))).size();
     }
 
     @Override
@@ -41,7 +42,7 @@ public class CustomExpandedListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int listPosition, int expandedListPosition) {
-        return this.expandableListDetails.get(this.expandableListTitle.get(listPosition)).get(expandedListPosition);
+        return Objects.requireNonNull(this.expandableListDetails.get(this.expandableListTitle.get(listPosition))).get(expandedListPosition);
     }
 
     @Override

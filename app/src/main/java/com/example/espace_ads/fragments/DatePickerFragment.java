@@ -8,16 +8,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class DatePickerFragment extends AppCompatDialogFragment implements DatePickerDialog.OnDateSetListener{
 
     final String TAG = "DatePickerFragment";
     final Calendar c = Calendar.getInstance();
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -40,7 +43,7 @@ public class DatePickerFragment extends AppCompatDialogFragment implements DateP
 
         Log.d(TAG, "onDateSet: " + selectedDate);
         // send date back to the target fragment
-        getTargetFragment().onActivityResult(
+        Objects.requireNonNull(getTargetFragment()).onActivityResult(
                 getTargetRequestCode(),
                 Activity.RESULT_OK,
                 new Intent().putExtra("selectedDate", selectedDate)

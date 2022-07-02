@@ -298,7 +298,7 @@ public class Budget extends Fragment {
             @Override
             public void onClick(View v) {
 
-                final FragmentManager fm = ((AppCompatActivity) getActivity()).getSupportFragmentManager();
+                final FragmentManager fm = ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportFragmentManager();
 //                 create the datePickerFragment
                 AppCompatDialogFragment newFragment = new DatePickerFragment();
                 // set the targetFragment to receive the results, specifying the request code
@@ -311,7 +311,7 @@ public class Budget extends Fragment {
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FragmentManager fm = ((AppCompatActivity) getActivity()).getSupportFragmentManager();
+                final FragmentManager fm = ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportFragmentManager();
 //                 create the datePickerFragment
                 AppCompatDialogFragment newFragment = new DatePickerFragment();
                 // set the targetFragment to receive the results, specifying the request code
@@ -369,7 +369,7 @@ public class Budget extends Fragment {
         amounts = budgetModel.getAmount();
         amountPrFrequency = budgetModel.getFrequency();
         amountPrView = budgetModel.getStrategy();
-        convertAmount = customAmount.getText().toString();
+        convertAmount = Objects.requireNonNull(customAmount.getText()).toString();
     }
 
     public void calculateAmounts() throws ParseException {

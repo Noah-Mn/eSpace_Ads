@@ -355,7 +355,7 @@ public class CreateBusinessProfile extends Fragment {
     }
 
     private String getFileExtension(Uri uri) {
-        ContentResolver contentResolver = (getActivity()).getContentResolver();
+        ContentResolver contentResolver = (Objects.requireNonNull(getActivity())).getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
     }

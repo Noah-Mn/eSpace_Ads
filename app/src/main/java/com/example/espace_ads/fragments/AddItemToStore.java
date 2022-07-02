@@ -83,14 +83,14 @@ public class AddItemToStore extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_item_to_store, container, false);
-        addItemPic = view.findViewById(R.id.add_item_pic);
-        itemPic = view.findViewById(R.id.item_pic);
-        itemName = view.findViewById(R.id.editText_item_name);
-        itemPrice = view.findViewById(R.id.editText_item_price);
-        itemDesc = view.findViewById(R.id.editText_item_desc);
-        addItem = view.findViewById(R.id.add_item);
+        addItemPic = (MaterialTextView) view.findViewById(R.id.add_item_pic);
+        itemPic = (ImageView) view.findViewById(R.id.item_pic);
+        itemName = (TextInputEditText) view.findViewById(R.id.editText_item_name);
+        itemPrice = (TextInputEditText) view.findViewById(R.id.editText_item_price);
+        itemDesc = (TextInputEditText) view.findViewById(R.id.editText_item_desc);
+        addItem = (MaterialCardView) view.findViewById(R.id.add_item);
         itemsModel = new ItemsModel();
-        progressBar = view.findViewById(R.id.content_loading_progressbar);
+        progressBar = (ProgressBar) view.findViewById(R.id.content_loading_progressbar);
         storageReference = FirebaseStorage.getInstance().getReference("Store Items Images").child(getEmail());
 
         listeners();
@@ -219,13 +219,13 @@ public class AddItemToStore extends Fragment {
 
     private void setItemsToDatabase() {
 
-        String itemsName = Objects.requireNonNull(itemName.getText()).toString().trim();
-        int itemsPrice = Integer.parseInt(Objects.requireNonNull(itemPrice.getText()).toString().trim());
-        String itemsDesc = Objects.requireNonNull(itemDesc.getText()).toString().trim();
+        final String itemsName = Objects.requireNonNull(itemName.getText()).toString().trim();
+        final int itemsPrice = Integer.parseInt(Objects.requireNonNull(itemPrice.getText()).toString().trim());
+        final String itemsDesc = Objects.requireNonNull(itemDesc.getText()).toString().trim();
 
         reference = FirebaseDatabase.getInstance().getReference("Store Items");
         if (itemImagePath != null) {
-            StorageReference fileReference = storageReference.child(docID+".image");
+            final StorageReference fileReference = storageReference.child(docID+".image");
 
             uploadTask = fileReference.putFile(itemImagePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -285,10 +285,18 @@ public class AddItemToStore extends Fragment {
                         firebaseFirestore.collection("Store Items")
                                 .document(docID)
                                 .set(Item)
-                                .addOnSuccessListener(documentReference -> {
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void documentReference) {
 //                                    Toast.makeText(getContext(), "Data has been saved", Toast.LENGTH_SHORT).show();
+                                    }
                                 })
-                                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     } else {
                         Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }

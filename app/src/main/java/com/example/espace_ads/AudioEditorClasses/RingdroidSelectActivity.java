@@ -565,7 +565,7 @@ public class RingdroidSelectActivity extends ListActivity implements LoaderManag
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         ArrayList<String> selectionArgsList = new ArrayList<String>();
-        String selection;
+        StringBuilder selection;
         Uri baseUri;
         String[] projection;
 
@@ -583,41 +583,40 @@ public class RingdroidSelectActivity extends ListActivity implements LoaderManag
         }
 
         if (mShowAll) {
-            selection = "(_DATA LIKE ?)";
+            selection = new StringBuilder("(_DATA LIKE ?)");
             selectionArgsList.add("%");
         } else {
-            selection = "(";
+            selection = new StringBuilder("(");
             for (String extension : SoundFile.getSupportedExtensions()) {
                 selectionArgsList.add("%." + extension);
                 if (selection.length() > 1) {
-                    selection += " OR ";
+                    selection.append(" OR ");
                 }
-                selection += "(_DATA LIKE ?)";
+                selection.append("(_DATA LIKE ?)");
             }
-            selection += ")";
+            selection.append(")");
 
-            selection = "(" + selection + ") AND (_DATA NOT LIKE ?)";
+            selection = new StringBuilder("(" + selection + ") AND (_DATA NOT LIKE ?)");
             selectionArgsList.add("%espeak-data/scratch%");
         }
 
         String filter = args != null ? args.getString("filter") : null;
         if (filter != null && filter.length() > 0) {
             filter = "%" + filter + "%";
-            selection =
-                "(" + selection + " AND " +
-                "((TITLE LIKE ?) OR (ARTIST LIKE ?) OR (ALBUM LIKE ?)))";
+            selection = new StringBuilder("(" + selection + " AND " +
+                    "((TITLE LIKE ?) OR (ARTIST LIKE ?) OR (ALBUM LIKE ?)))");
             selectionArgsList.add(filter);
             selectionArgsList.add(filter);
             selectionArgsList.add(filter);
         }
 
         String[] selectionArgs =
-                selectionArgsList.toArray(new String[selectionArgsList.size()]);
+                selectionArgsList.toArray(new String[0]);
         return new CursorLoader(
                 this,
                 baseUri,
                 projection,
-                selection,
+                selection.toString(),
                 selectionArgs,
                 MediaStore.Audio.Media.DEFAULT_SORT_ORDER
                 );

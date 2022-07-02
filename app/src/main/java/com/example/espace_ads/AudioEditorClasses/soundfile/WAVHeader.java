@@ -16,6 +16,8 @@
 
 package com.example.espace_ads.AudioEditorClasses.soundfile;
 
+import androidx.annotation.NonNull;
+
 public class WAVHeader {
     private byte[] mHeader;          // the complete header.
     private int mSampleRate;         // sampling frequency in Hz (e.g. 44100).
@@ -40,6 +42,7 @@ public class WAVHeader {
         return new WAVHeader(sampleRate, numChannels, numSamples).mHeader;
     }
 
+    @NonNull
     public String toString() {
         String str = "";
         if (mHeader == null) {

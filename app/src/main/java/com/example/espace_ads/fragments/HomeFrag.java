@@ -28,6 +28,7 @@ import com.example.espace_ads.adapters.RecentCampaignAdapter;
 import com.example.espace_ads.models.BlogsModel;
 import com.example.espace_ads.models.LiveCampaignModel;
 import com.example.espace_ads.models.RecentCampaignModel;
+import com.example.espace_ads.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -61,6 +62,7 @@ public class HomeFrag extends Fragment {
     View view;
     AppCompatImageView dropdown, coverImage;
     RoundedImageView logo;
+    User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,7 @@ public class HomeFrag extends Fragment {
         numberVisits = view.findViewById(R.id.text_visits_2);
         numberEngagements = view.findViewById(R.id.text_engagements_2);
         numberSells = view.findViewById(R.id.text_sells_2);
+        user = new User();
 
         getUserData();
 //        cardView.setOnClickListener(view1 -> getFragmentManager().beginTransaction().remove(HomeFrag.this).commit());
@@ -242,13 +245,17 @@ public class HomeFrag extends Fragment {
 
                                         try {
                                             URL coverUrl = new URL(companyCoverImage);
-                                            Picasso.with(getContext()).load(String.valueOf(coverUrl)).into(coverImage);
+                                            if (getContext() != null) {
+                                                Picasso.with(getContext()).load(String.valueOf(coverUrl)).into(coverImage);
+                                            }
                                         } catch (MalformedURLException e) {
                                             e.printStackTrace();
                                         }
                                         try {
                                             URL logoUrl = new URL(companyLogo);
-                                            Picasso.with(getContext()).load(String.valueOf(logoUrl)).into(logo);
+                                            if (getContext() != null) {
+                                                Picasso.with(getContext()).load(String.valueOf(logoUrl)).into(logo);
+                                            }
                                         } catch (MalformedURLException e) {
                                             e.printStackTrace();
                                         }
@@ -296,7 +303,8 @@ public class HomeFrag extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 name = document.getString("Full Name");
-                                username.setText(name);
+                                user.setFullName(name);
+                                username.setText(user.getFullName());
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
