@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.example.espace_ads.R;
 import com.example.espace_ads.databinding.ActivityHomePageBinding;
+import com.example.espace_ads.fragments.Ad_Creative;
 import com.example.espace_ads.fragments.Ads;
 import com.example.espace_ads.fragments.HomeFrag;
 import com.example.espace_ads.fragments.Menu;
@@ -38,6 +39,21 @@ public class HomePage extends AppCompatActivity {
         binding.bottomNavView.getMenu().getItem(2).setEnabled(false);
         replaceFragments(new HomeFrag());
         listeners();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            String value = bundle.getString("trimmedVideo");
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Bundle bundle1 = new Bundle();
+            bundle1.putString("trimmedVid", value);
+            Ad_Creative frag = new Ad_Creative();
+            frag.setArguments(bundle1);
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, frag, null);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
     }
 
     private void listeners(){
