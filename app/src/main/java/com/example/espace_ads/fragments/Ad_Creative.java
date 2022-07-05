@@ -34,9 +34,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.espace_ads.AudioEditorClasses.RingdroidEditActivity;
 import com.example.espace_ads.R;
+import com.example.espace_ads.algorithms.DocumentIDGenerator;
 import com.example.espace_ads.audioTrimmer.AddAudio;
 import com.example.espace_ads.models.Upload;
-;
 import com.example.espace_ads.videoTrimmer.TrimActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,12 +55,15 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+;
 
 public class Ad_Creative extends Fragment {
     MaterialCardView media, slideShow, createVideo, saveBtn;
@@ -85,7 +88,7 @@ public class Ad_Creative extends Fragment {
     FirebaseUser currentUser;
     ArrayList<Uri> imageList = new ArrayList<>();
     MediaPlayer mediaPlayer;
-
+    String docID = DocumentIDGenerator.generateRandomString(20);
     private static final int STORAGE_PERMISSION_CODE = 150;
 
     final int Requestcode = 149;
@@ -148,16 +151,11 @@ public class Ad_Creative extends Fragment {
             }
         });
 
-
-
-        if (getArguments() != null){
+        if (getArguments() != null) {
             String value = getArguments().getString("trimmedVid");
             videoView.setVideoURI(Uri.parse(value));
             videoView.setVisibility(View.VISIBLE);
         }
-
-
-
 
         saveBtn.setOnClickListener(v -> {
 
@@ -171,49 +169,48 @@ public class Ad_Creative extends Fragment {
             uploadSlideImages();
             /** ,,,,,,,,,,,,,,,,,,,,,,,,,,,......................................... */
 
-            if (getArguments() != null){
+            if (getArguments() != null) {
 
-            String value = getArguments().getString("trimmedVid");
-            videoUri = Uri.parse(value);
-            StorageReference fileReference = StrVideoRef.child(System.currentTimeMillis() + "." + getVideoExtension(videoUri));
+                String value = getArguments().getString("trimmedVid");
+//            videoUri = Uri.parse(value);
+                StorageReference fileReference = StrVideoRef.child(docID + ".mp4");
 
-            uploadTask = fileReference.putFile(videoUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setProgress(0);
-                                    progressBar.setVisibility(View.GONE);
-                                    videoView.setVisibility(View.GONE);
-                                }
-                            }, 500);
-                            Toast.makeText(getContext(), "Video Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(Objects.requireNonNull(headline.getText()).toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
+                uploadTask = fileReference.putFile(Uri.fromFile(new File(value)))
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setProgress(0);
+                                        progressBar.setVisibility(View.GONE);
+                                        videoView.setVisibility(View.GONE);
+                                    }
+                                }, 500);
+                                Toast.makeText(getContext(), "Video Upload successful", Toast.LENGTH_LONG).show();
+                                Upload upload = new Upload(Objects.requireNonNull(headline.getText()).toString().trim(), taskSnapshot.getStorage().getDownloadUrl().toString());
 
-                            String uploadId = reference.push().getKey();
-                            reference.child(Objects.requireNonNull(uploadId)).setValue(upload);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                            progressBar.setProgress((int) progress);
-                        }
-                    });
-        } else{
-            Toast.makeText(getContext(), "No file found!", Toast.LENGTH_SHORT).show();
-        }
-
+//                            String uploadId = reference.push().getKey();
+//                            reference.child(Objects.requireNonNull(uploadId)).setValue(upload);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                                double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                                progressBar.setProgress((int) progress);
+                            }
+                        });
+            } else {
+                Toast.makeText(getContext(), "No file found!", Toast.LENGTH_SHORT).show();
+            }
 
 
             primText = Objects.requireNonNull(primaryText.getText()).toString();
@@ -251,6 +248,21 @@ public class Ad_Creative extends Fragment {
                     .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show());
         });
 
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                // will edit later
+            }
+        });
+
+        listeners();
+
+        return inflatedView;
+    }
+
+    public void listeners() {
+
+
         media.setOnClickListener(view -> chooseImage());
 
         slideShow.setOnClickListener(view -> chooseMultipleImages());
@@ -262,35 +274,6 @@ public class Ad_Creative extends Fragment {
                 startActivity(intent);
             }
         });
-
-//        createVideo.setOnClickListener(v -> chooseVideo());
-//        createVideo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.READ_EXTERNAL_STORAGE) +
-//                        ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-//                    Toast.makeText(getContext(), "You have already granted this permission!",
-//                            Toast.LENGTH_SHORT).show();
-//                    Database.loadAllVideos(getContext(), new MycompleteListener() {
-//                        @Override
-//                        public void OnSuccess() {
-//                            progressBar.setVisibility(View.VISIBLE);
-//                            startActivity(new Intent(getContext(), LoadAllExistingVideos.class));
-//
-//                        }
-//
-//                        @Override
-//                        public void OnFailure() {
-//
-//                        }
-//                    });
-//                } else {
-//                    requestStoragePermission();
-//                }
-//
-//            }
-//        });
 
         website.setOnClickListener(view -> {
             if (website.isChecked()) {
@@ -338,14 +321,6 @@ public class Ad_Creative extends Fragment {
             }
         });
 
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                // will edit later
-            }
-        });
-
-        return inflatedView;
     }
 
     private void requestStoragePermission() {
@@ -384,9 +359,7 @@ public class Ad_Creative extends Fragment {
 
                             InputStream inputStream = (Objects.requireNonNull(getActivity())).getContentResolver().openInputStream(imageUri);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-
                             encodedImage = encodeImage(bitmap);
-
 
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
