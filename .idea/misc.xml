@@ -52,6 +52,7 @@
         <entry key="app/src/main/res/layout/alert_convert.xml" value="0.1" />
         <entry key="app/src/main/res/layout/blog_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/choose_contact.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/layout/contact_row.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/file_save.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/fragment_ad__creative.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_add_credit_card_number.xml" value="0.22" />

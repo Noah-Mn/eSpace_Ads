@@ -42,8 +42,6 @@ public class TrimActivity extends AppCompatActivity implements View.OnClickListe
     private MediaController mediaController;
     private EditText edtFixedGap, edtMinGap, edtMinFrom, edtMAxTo;
     private int trimType;
-    FragmentTransaction fragmentTransaction;
-    FragmentManager fragmentManager;
 
     ActivityResultLauncher<Intent> videoTrimResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -117,6 +115,7 @@ public class TrimActivity extends AppCompatActivity implements View.OnClickListe
             TrimVideo.activity(data)
                     .setCompressOption(new CompressOption()) //pass empty constructor for default compress option
                     .start(this, videoTrimResultLauncher);
+
         } else if (trimType == 1) {
             TrimVideo.activity(data)
                     .setTrimType(TrimType.FIXED_DURATION)
@@ -133,7 +132,7 @@ public class TrimActivity extends AppCompatActivity implements View.OnClickListe
             TrimVideo.activity(data)
                     .setTrimType(TrimType.MIN_MAX_DURATION)
                     .setLocal("ar")
-                    .setMinToMax(getEdtValueLong(edtMinFrom), getEdtValueLong(edtMAxTo))
+                    .setMinToMax(20, 30)
                     .start(this, videoTrimResultLauncher);
         }
     }
@@ -151,6 +150,7 @@ public class TrimActivity extends AppCompatActivity implements View.OnClickListe
                 onMinGapTrimClicked();
                 break;
             case R.id.btn_min_max_gap:
+//                get this
                 onMinToMaxTrimClicked();
                 break;
         }
@@ -181,11 +181,11 @@ public class TrimActivity extends AppCompatActivity implements View.OnClickListe
 
     private void onMinToMaxTrimClicked() {
         trimType = 3;
-        if (isEdtTxtEmpty(edtMinFrom))
-            Toast.makeText(this, "Enter min gap duration", Toast.LENGTH_SHORT).show();
-        else if (isEdtTxtEmpty(edtMAxTo))
-            Toast.makeText(this, "Enter max gap duration", Toast.LENGTH_SHORT).show();
-        else if (checkCamStoragePer())
+//        if (isEdtTxtEmpty(edtMinFrom))
+//            Toast.makeText(this, "Enter min gap duration", Toast.LENGTH_SHORT).show();
+//        else if (isEdtTxtEmpty(edtMAxTo))
+//            Toast.makeText(this, "Enter max gap duration", Toast.LENGTH_SHORT).show();
+//        else if (checkCamStoragePer())
             showVideoOptions();
     }
 

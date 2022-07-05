@@ -368,8 +368,8 @@ public class ActVideoTrimmer extends LocalizationActivity {
             seekbar.setGap(minGap).apply();
             lastMaxValue = totalDuration;
         } else if (trimType == 3) {
-            seekbar.setMaxStartValue((float) maxToGap);
-            seekbar.setGap(minFromGap).apply();
+            seekbar.setMaxStartValue((float) 30);
+            seekbar.setGap(20).apply();
             lastMaxValue = maxToGap;
         } else {
             seekbar.setGap(2).apply();

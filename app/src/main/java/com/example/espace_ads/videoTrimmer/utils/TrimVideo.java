@@ -84,6 +84,11 @@ public class TrimVideo {
             return this;
         }
 
+        public ActivityBuilder setMaxDuration(final long maxDuration){
+            options.maxDuration = maxDuration;
+            return this;
+        }
+
         public ActivityBuilder setMinToMax(long min, long max) {
             options.minToMax = new long[]{min, max};
             return this;

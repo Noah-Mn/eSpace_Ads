@@ -6,7 +6,7 @@ public class TrimVideoOptions {
 
     public TrimType trimType = TrimType.DEFAULT;
 
-    public long minDuration, fixedDuration;
+    public long minDuration, fixedDuration, maxDuration;
 
     public boolean hideSeekBar;
 
