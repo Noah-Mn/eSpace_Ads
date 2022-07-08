@@ -49,6 +49,7 @@ public class Statistics extends Fragment {
     MaterialTextView textView;
     RecyclerView liveCampaignListView;
     ArrayList<LiveCampaignModel> liveCampaignModelList = new ArrayList<>();
+    View view;
 
     private static final String STACK_1_LABEL = "78% Females";
     private static final String STACK_2_LABEL = "22% Males";
@@ -72,7 +73,7 @@ public class Statistics extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_statistics, container, false);
+        view = inflater.inflate(R.layout.fragment_statistics, container, false);
         expandableListView = view.findViewById(R.id.expandable_list_view);
 //        expandableListView.setGroupIndicator(R.drawable.custom_expandable);
         db = FirebaseFirestore.getInstance();

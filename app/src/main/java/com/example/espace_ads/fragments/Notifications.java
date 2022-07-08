@@ -1,21 +1,13 @@
 package com.example.espace_ads.fragments;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.espace_ads.R;
+import androidx.fragment.app.Fragment;
 
-import java.util.Objects;
+import com.example.espace_ads.R;
 
 public class Notifications extends Fragment {
 
@@ -40,7 +32,8 @@ public class Notifications extends Fragment {
         notification();
         return view;
     }
-    private void notification(){
+
+    private void notification() {
 
 //        NotificationManager notification = (NotificationManager) Objects.requireNonNull(getActivity()).getSystemService(getActivity().NOTIFICATION_SERVICE);
 ////        int icon = R.drawable.ic_launcher;

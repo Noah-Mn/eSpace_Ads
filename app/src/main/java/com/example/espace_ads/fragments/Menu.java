@@ -30,6 +30,7 @@ public class Menu extends Fragment {
     MaterialTextView username;
     String name;
     ConstraintLayout businessProfile, bank;
+    View view;
 
     public Menu() {
         // Required empty public constructor
@@ -45,7 +46,7 @@ public class Menu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        view = inflater.inflate(R.layout.fragment_menu, container, false);
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         username = view.findViewById(R.id.text_name);

@@ -19,6 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         analytics = FirebaseAnalytics.getInstance(this);
-        new Handler().postDelayed(() -> startActivity(new Intent(MainActivity.this, HomePage.class)), splashTime);
+        new Handler().postDelayed(() -> startActivity(new Intent(MainActivity.this, LogIn.class)), splashTime);
     }
 }

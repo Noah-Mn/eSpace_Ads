@@ -418,7 +418,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="0dp">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="5dp"
