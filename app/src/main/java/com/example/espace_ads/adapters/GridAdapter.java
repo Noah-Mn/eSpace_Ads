@@ -76,7 +76,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.StoreItemViewH
         public void bind(final ItemsModel itemsModel, final OnItemClickListener onItemClickListener, final OnItemLongClickListener onItemLongClickListener) {
             try {
                 URL url = new URL(itemsModel.getProductImage());
-                Picasso.with(context).load(String.valueOf(url)).into(binding.gridItemImage);
+                Picasso.get().load(String.valueOf(url)).into(binding.gridItemImage);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }

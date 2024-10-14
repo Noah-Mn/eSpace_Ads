@@ -53,7 +53,7 @@ public class BusinessProfileBuy extends Fragment {
 
         try {
             URL url = new URL(image);
-            Picasso.with(getContext()).load(String.valueOf(url)).into(productImage);
+            Picasso.get().load(String.valueOf(url)).into(productImage);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

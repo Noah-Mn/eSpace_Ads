@@ -99,7 +99,7 @@ public class EditStoreItem extends Fragment {
 //        set items from database
         try {
             URL url = new URL(image);
-            Picasso.with(getContext()).load(String.valueOf(url)).into(itemPic);
+            Picasso.get().load(String.valueOf(url)).into(itemPic);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

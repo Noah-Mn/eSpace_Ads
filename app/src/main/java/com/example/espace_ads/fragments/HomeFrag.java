@@ -246,7 +246,7 @@ public class HomeFrag extends Fragment {
                                         try {
                                             URL coverUrl = new URL(companyCoverImage);
                                             if (getContext() != null) {
-                                                Picasso.with(getContext()).load(String.valueOf(coverUrl)).into(coverImage);
+                                                Picasso.get().load(String.valueOf(coverUrl)).into(coverImage);
                                             }
                                         } catch (MalformedURLException e) {
                                             e.printStackTrace();
@@ -254,7 +254,7 @@ public class HomeFrag extends Fragment {
                                         try {
                                             URL logoUrl = new URL(companyLogo);
                                             if (getContext() != null) {
-                                                Picasso.with(getContext()).load(String.valueOf(logoUrl)).into(logo);
+                                                Picasso.get().load(String.valueOf(logoUrl)).into(logo);
                                             }
                                         } catch (MalformedURLException e) {
                                             e.printStackTrace();

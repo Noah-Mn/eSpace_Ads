@@ -255,13 +255,13 @@ public class BusinessProfileStore extends Fragment {
 
                                     try {
                                         URL coverUrl = new URL(companyCoverImage);
-                                        Picasso.with(getContext()).load(String.valueOf(coverUrl)).into(imageView);
+                                        Picasso.get().load(String.valueOf(coverUrl)).into(imageView);
                                     } catch (MalformedURLException e) {
                                         e.printStackTrace();
                                     }
                                     try {
                                         URL logoUrl = new URL(companyLogo);
-                                        Picasso.with(getContext()).load(String.valueOf(logoUrl)).into(roundedImageView);
+                                        Picasso.get().load(String.valueOf(logoUrl)).into(roundedImageView);
                                     } catch (MalformedURLException e) {
                                         e.printStackTrace();
                                     }
